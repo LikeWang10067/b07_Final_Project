@@ -3,13 +3,13 @@
 1.Felix Lee  
 2.Keyuan Zhang  
 3.Like Wang  
-4.Ruichen Sun  ***Scrum Master***
+4.Ruichen Sun  ***Scrum Master***  
 5.Runyu Yue  
 
 ---
 ### Communication tools  
 
-**Zoom** for primary meetings
+**Zoom** for primary meetings  
 **Wechat** for quick communications
 
 ---
