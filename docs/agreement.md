@@ -3,7 +3,7 @@
 1.Felix Lee  
 2.Keyuan Zhang  
 3.Like Wang  
-4.Ruichen Sun  ***Scrum Master***  
+4.Ruichen Sun   ***Scrum Master***  
 5.Runyu Yue  
 
 ---
