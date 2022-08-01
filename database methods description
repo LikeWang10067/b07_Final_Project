@@ -1,0 +1,55 @@
+***fake methods***:
+fgetusernull(String username, int password, Consumer<user> callback)
+this function will return a null object regardless of input
+
+fgetuser(String username, int password, Consumer<user> callback)
+this function will return a fake user object regardless of input
+
+fgeteventnull(event a, Consumer<user> callback)
+this function will return a null object regardless of input
+
+fgetevent(event a, Consumer<user> callback)
+this function will return a fake event object regardless of input
+
+fgetvenuenull(venue a, Consumer<venue> callback)
+this function will return a null object regardless of input
+
+fgetvenue(venue a, Consumer<venue> callback)
+this function will return a fake venue regardless of input
+
+***real methods***
+adduser(user a): add a new user to the database
+
+addevent(event a): add a new event to database
+
+addvenue(venue a): add a new venue to database
+
+CheckLogIn(String applicantname, int password,Consumer<user> callback)
+this function will check if the user provided exists and will validate the password
+if pass validation: return a user of the match
+if not: return null
+
+CheckSignUp(String applicantname,int password,Consumer<user> callback)
+this function will check if the user provided not exits in the database
+if it does not exists: this will add the information of the user to the database and return
+that user object
+if it exits: this will not modify the database and will return null
+
+DisplayVenues(Consumer<ArrayList<venue>> callback)
+this function will return an ArrayList<venue> object which contains all the venues
+
+DisplayEventsByVenue(String venuename,Consumer<ArrayList<event>> callback) 
+this function will return an ArrayList of event objects which relates to the venuename provid.
+if the venue is not in the database, it will return an empty arraylist
+
+CheckEventStatus(event a,Consumer<Boolean> callback)
+this function will take in a event object and checks if it can add players in the firebase 
+if the event can still be registered for user, it will return true
+if not: it will return false
+
+GetEventInfo(event a, Consumer<event> callback)
+this function will take in an event object and return a comprehensive of event object in database
+The event can be updated in its reg_num field.
+if it exists in database, it will return the event object store in database
+if not: it will return null
+
