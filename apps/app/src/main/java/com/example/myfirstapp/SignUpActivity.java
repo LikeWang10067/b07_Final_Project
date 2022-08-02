@@ -1,8 +1,8 @@
 package com.example.myfirstapp;
 
-public class SignUpPage {
+public class SignUpActivity {
     user User;
-    public SignUpPage(){}
+    public SignUpActivity(){}
 
     public void Signup(String applicantname, int password) {
         database_operation.CheckSignUp(applicantname, password, (user User) -> {

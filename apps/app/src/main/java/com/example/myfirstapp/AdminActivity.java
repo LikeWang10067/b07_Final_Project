@@ -1,8 +1,8 @@
 package com.example.myfirstapp;
 
-public class AdminPage {
+public class AdminActivity {
     user User;
-    public AdminPage(user User){
+    public AdminActivity(user User){
         this.User = User;
     }
     public void listvenue(){}

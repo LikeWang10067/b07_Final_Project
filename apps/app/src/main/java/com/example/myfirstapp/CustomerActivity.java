@@ -1,8 +1,8 @@
 package com.example.myfirstapp;
 
-public class CustomerPage {
+public class CustomerActivity {
     user User;
-    public CustomerPage(user User){
+    public CustomerActivity(user User){
         this.User = User;
     }
 
