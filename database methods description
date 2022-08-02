@@ -53,3 +53,18 @@ The event can be updated in its reg_num field.
 if it exists in database, it will return the event object store in database
 if not: it will return null
 
+admainAddVenue(String venueName, Consumer<venue> callback)
+This function will take in an venueName and then the admin can add that venue to the database
+if the venue already exits: return null
+if not: return the venue object added
+
+admainAddEvent(event newEvent,Consumer<Integer> callback)
+This function will add an event to the database
+return 0: the venue of the newEvent does not exits
+return 1: the event already exits
+return 2: the event is successfully added
+
+JoinEvent(String username, event target, Consumer<Boolean> callback)
+This function will let a user to join a event
+return false: 3 cases may lead to false: the user does not exists, the event does not exists, the event is full of people
+return true: the user joins the event successfully
