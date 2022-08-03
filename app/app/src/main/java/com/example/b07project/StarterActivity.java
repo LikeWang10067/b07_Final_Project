@@ -33,7 +33,7 @@ public class StarterActivity extends AppCompatActivity implements View.OnClickLi
         btnSignUp.setOnClickListener(this);
     }
 
-    @Override
+    @Overrided
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btnLogin:
