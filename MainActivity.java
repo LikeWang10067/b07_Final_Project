@@ -1,17 +1,18 @@
 package com.example.b07project;
 
+
+
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import org.w3c.dom.Text;
-
-public class StarterActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnLogIn, btnSignUp;
     private String error_message = null;
     private TextView tv_error_message;
@@ -19,7 +20,7 @@ public class StarterActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_starter);
+        setContentView(R.layout.activity_main);
 
         tv_error_message = (TextView) findViewById(R.id.tv_error_message);
         Intent intent = getIntent();
@@ -33,7 +34,7 @@ public class StarterActivity extends AppCompatActivity implements View.OnClickLi
         btnSignUp.setOnClickListener(this);
     }
 
-    @Overrided
+    @Override
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btnLogin:

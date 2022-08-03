@@ -19,8 +19,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btnLogIn = (Button) findViewById(R.id.btnLogIn);
         btnLogIn.setOnClickListener(this);
-        btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(this);
+//        btnBack = (Button) findViewById(R.id.btnBack);
+//        btnBack.setOnClickListener(this);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
     }
@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 LogIn();
                 break;
             case R.id.btnBack:
-                startActivity(new Intent(this, StarterActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -44,6 +44,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(User == null){
                 this.username.setError("User Incorrect or Password Incorrect");
                 this.password.setError("User Incorrect or Password Incorrect");
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("error_message", "User already exist");
+                startActivity(intent);
+
             }
             else if(User.get_admin() == true){
                 Intent intent = new Intent(this, AdminActivity.class);

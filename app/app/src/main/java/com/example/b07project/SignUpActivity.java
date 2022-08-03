@@ -15,12 +15,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_sign_up);
 
         btnSignUp = (Button) findViewById(R.id.btnLogIn);
         btnSignUp.setOnClickListener(this);
-        btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(this);
+//        btnBack = (Button) findViewById(R.id.btnBack);
+//        btnBack.setOnClickListener(this);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
     }
@@ -32,7 +32,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 SignUp();
                 break;
             case R.id.btnBack:
-                startActivity(new Intent(this, StarterActivity.class));
+                startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -43,6 +43,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         database_operation.CheckSignUp(username, num_password, (user User) -> {
             if(User == null){
                 this.username.setError("User already exist");
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("error_message", "User already exist");
+                startActivity(intent);
             }
             else if(User.get_admin() == true){
                 Intent intent = new Intent(this, AdminActivity.class);
