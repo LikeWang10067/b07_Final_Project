@@ -1,4 +1,4 @@
-package com.example.myfirstapp;
+package com.example.b07project;
 
 public class CustomerActivity {
     user User;

@@ -30,9 +30,9 @@ plugins {
 //task clean(type: Delete) {
 //    delete rootProject.buildDir
 //}
-//allprojects {
-//
-////    ...
+allprojects {
+
+//    ...
 //
 //    repositories {
 //
@@ -43,6 +43,6 @@ plugins {
 ////        ...
 //
 //    }
-//
-//}
+
+}
 //

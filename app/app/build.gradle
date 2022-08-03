@@ -45,6 +45,7 @@ apply plugin: 'com.google.gms.google-services'
 
 
 dependencies {
+    implementation 'com.google.firebase:firebase-database:20.0.5'
 
     // Import the Firebase BoM
 
