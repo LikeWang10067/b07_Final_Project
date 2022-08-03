@@ -12,12 +12,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.function.Consumer;
 
 public class database_operation {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean checkDateSequence(String start, String end){
+        LocalDateTime first=LocalDateTime.parse(start);
+        LocalDateTime second = LocalDateTime.parse(end);
+        return first.compareTo(second)>0;
+    }
+
     public static void adduser(user a) {
         DatabaseReference ref = FirebaseDatabase.getInstance()
                 .getReference(); //update URL!!!
@@ -302,6 +310,7 @@ public class database_operation {
         DatabaseReference refU = FirebaseDatabase.getInstance().getReference("User");
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
+//            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -382,6 +391,27 @@ public class database_operation {
         });
     }
 
+    public static void checkEventOverlap(event newEvent,Consumer<Boolean> callback){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    for (DataSnapshot d : task.getResult().getChildren()) {
+                        event test = d.getValue(event.class);
+                        if(test.checkOverlap(newEvent)==true&&test.getVenue().equals(newEvent.getVenue())){
+                            callback.accept(false);
+                        }
+                    }
+                    callback.accept(true);
+                }
+            }
+        });
+    }
+
     public static void admainAddEvent(event newEvent,Consumer<Integer> callback){
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
         DatabaseReference ref1 = FirebaseDatabase.getInstance().getReference("Event");
@@ -407,7 +437,7 @@ public class database_operation {
                                     }
                                 }
                             }
-                            newList.add(newList.hashCode());
+                            newList.add(newEvent.hashCode());
                             test.setEventids(newList);
                             addvenue(test);
                             ref1.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -417,12 +447,8 @@ public class database_operation {
                                     if (!task.isSuccessful()) {
                                         Log.e("firebase", "Error getting data", task.getException());
                                     } else {
-                                            addevent(newEvent);
-                                            callback.accept(2);
-
-
-
-
+                                        addevent(newEvent);
+                                        callback.accept(2);
                                     }
                                 }
 
@@ -439,6 +465,8 @@ public class database_operation {
 
 
     }
+
+
 
 
 
