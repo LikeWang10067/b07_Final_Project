@@ -16,7 +16,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Locale;
 import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class database_operation {
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -686,6 +689,38 @@ public class database_operation {
             }
 
         });
+
+    }
+
+    public static void filterVenue(String input, Consumer<ArrayList<venue>> callback ){
+        String s = input.toLowerCase();
+        String regex = ".*" + s + ".*";
+        Pattern style1 = Pattern.compile(regex);
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    ArrayList<venue> res = new ArrayList<venue>();
+                    for(DataSnapshot d: task.getResult().getChildren()) {
+                        venue test = d.getValue(venue.class);
+                        Matcher m1 = style1.matcher(test.getVenue_name());
+                        if(m1.matches()){
+                            res.add(test);
+                        }
+
+                    }
+                    callback.accept(res);
+
+
+                }
+            }
+
+        });
+
     }
 
 
