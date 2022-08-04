@@ -1,5 +1,10 @@
 package com.example.b07project;
 
+import android.os.Build;
+
+import androidx.annotation.RequiresApi;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class event implements Comparable<event>{
@@ -8,22 +13,22 @@ public class event implements Comparable<event>{
     private int num_players;
     private int reg_num;
     private String venue;
-    private int start;
-    private int end;
-    //    private int id;
+    private LocalDateTime start;
+    private LocalDateTime end;
+//    private int id;
     private ArrayList<String> usernames;
 
 
     public event(){}
-    public event(int num_player,String v,int start,int end){
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public event(int num_player, String v, String start, String end){
         num_players=num_player;
         venue=v;
-        this.start=start;
-        this.end = end;
+        this.start=LocalDateTime.parse(start);
+        this.end = LocalDateTime.parse(end);
         reg_num=0;
-//        id=total_ids;
-//        total_ids++;
     }
+
 
     public void setUsernames(ArrayList<String> id){
         usernames=id;
@@ -33,16 +38,18 @@ public class event implements Comparable<event>{
         this.num_players = num_players;
     }
 
-    public void setEnd(int end) {
-        this.end = end;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setEnd(String end) {
+        this.end = this.end = LocalDateTime.parse(end);;
     }
 
     public void setReg_num(int reg_num) {
         this.reg_num = reg_num;
     }
 
-    public void setStart(int start) {
-        this.start = start;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void setStart(String start) {
+        this.start = LocalDateTime.parse(start);
     }
 
     public void setVenue(String venue) {
@@ -57,11 +64,11 @@ public class event implements Comparable<event>{
         return num_players;
     }
 
-    public int getStart(){
+    public LocalDateTime getStart(){
         return start;
     }
 
-    public int getEnd(){
+    public LocalDateTime getEnd(){
         return end;
     }
     public int getReg_num(){
@@ -76,16 +83,22 @@ public class event implements Comparable<event>{
     }
     @Override
     public int hashCode(){
-        return num_players+venue.hashCode()+start+end;
+        return num_players+venue.hashCode()+start.hashCode()+end.hashCode();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int compareTo(event o) {
-        if(this.start>o.start){
-            return 1;
-        }
-        else if (this.start==o.start)
-            return 0;
-        return -1;
+        return this.start.compareTo(o.start);
+//        if(this.start>o.start){
+//            return 1;
+//        }
+//        else if (this.start==o.start)
+//            return 0;
+//        return -1;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public boolean checkOverlap(event b){
+        return !(this.end.compareTo(b.start)>0||b.end.compareTo(this.start)>0);
     }
 }
