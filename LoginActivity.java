@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText username, password;
-    private Button btnLogIn
+    private Button btnLogIn;
     private Button btnBack;
 
     @Override
@@ -20,8 +20,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btnLogIn = (Button) findViewById(R.id.btnLogIn);
         btnLogIn.setOnClickListener(this);
-        btnBack = (Button) findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(this);
+//        btnBack = (Button) findViewById(R.id.btnBack);
+//        btnBack.setOnClickListener(this);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
     }
@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogIn:
                 LogIn();
                 break;
-            case R.id.btnBack:
-                startActivity(new Intent(this, MainActivity.class));
+//            case R.id.btnBack:
+//                startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String username = this.username.getText().toString().trim();
         String password = this.password.getText().toString();
         int num_password = Integer.valueOf(password);
-        database_operation.CheckSignUp(username, num_password, (user User) -> {
+        database_operation.CheckLogIn(username, num_password, (user User) -> {
             if(User == null){
                 this.username.setError("User Incorrect or Password Incorrect");
                 this.password.setError("User Incorrect or Password Incorrect");

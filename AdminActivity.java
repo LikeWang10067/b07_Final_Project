@@ -16,7 +16,8 @@ import java.util.List;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
     private user User;
-    private Button btnaddvenue, btndeletevenue, btnLogOut;
+    private Button btnaddvenue, btnLogOut;
+//    private Button btndeletevenue;
     private ListView lstvenue;
     private List<venue> allvenue;
     private List<String> string_allvenue;
@@ -40,8 +41,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
         btnaddvenue.setOnClickListener(this);
 
-        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
-        btndeletevenue.setOnClickListener(this);
+//        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
+//        btndeletevenue.setOnClickListener(this);
 
         btnLogOut = (Button) findViewById(R.id.btnLogOut);
         btnLogOut.setOnClickListener(this);
