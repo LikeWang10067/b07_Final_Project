@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -18,16 +19,22 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private Button btnaddvenue, btndeletevenue, btnLogOut;
     private ListView lstvenue;
     private List<venue> allvenue;
+    private List<String> string_allvenue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        allvenue = new ArrayList<venue>();
+        allvenue = new ArrayList<venue>(); string_allvenue = new ArrayList<String>();
         database_operation.DisplayVenues((ArrayList<venue> venue_list) ->{
             allvenue = venue_list;
         });
+
+        for(venue Venue: allvenue){
+            string_allvenue.add(Venue.getVenue_name());
+        }
+
         this.User = (user) getIntent().getSerializableExtra("user");
 
         btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
@@ -40,6 +47,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         btnLogOut.setOnClickListener(this);
 
         lstvenue = (ListView) findViewById(R.id.lstvenue);
+
+        ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+        lstvenue.setAdapter(venueAdapter);
+
         lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
