@@ -18,6 +18,12 @@ fgetvenue(venue a, Consumer<venue> callback)
 this function will return a fake venue regardless of input
 
 ***real methods***
+
+checkDateSequence(String start, String end):
+compares the 2 time string written in LocalDateTime format and check if the start time is before the end time
+return true if start<end
+if not return false
+
 adduser(user a): add a new user to the database
 
 addevent(event a): add a new event to database
@@ -58,8 +64,13 @@ This function will take in an venueName and then the admin can add that venue to
 if the venue already exits: return null
 if not: return the venue object added
 
+checkEventOverlap(event newEvent,Consumer<Boolean> callback)
+This function will check if the newEvent overlaps with the existing event in time and venue
+return true if the events overlaps with another one already in database
+return false if the event does not overlap with any other events
+
 admainAddEvent(event newEvent,Consumer<Integer> callback)
-This function will add an event to the database
+This function will add an event to the database, it should be called when the checkEventOverlap returns false.
 return 0: the venue of the newEvent does not exits
 return 1: the event already exits
 return 2: the event is successfully added
