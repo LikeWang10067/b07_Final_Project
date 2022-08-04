@@ -12,6 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.B07Project"
-        tools:targetApi="31"></application>
+        tools:targetApi="31">
+
+
+        <activity android:name="com.example.b07project.CustomerActivity" />
+        <activity android:name="com.example.b07project.LoginActivity" />
+        <activity android:name="com.example.b07project.AdminActivity" />
+        <activity android:name="com.example.b07project.SignUpActivity" />
+        <activity android:name="com.example.b07project.MainActivity"
+            android:exported="true">
+        android:label="@string/app_name"
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+    </application>
+
 
 </manifest>

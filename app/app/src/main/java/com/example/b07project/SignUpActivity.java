@@ -18,7 +18,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        btnSignUp = (Button) findViewById(R.id.btnLogIn);
+        btnSignUp = (Button) findViewById(R.id.btnSignUp2);
         btnSignUp.setOnClickListener(this);
 //        btnBack = (Button) findViewById(R.id.btnBack);
 //        btnBack.setOnClickListener(this);
@@ -29,7 +29,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnSignUp:
+            case R.id.btnSignUp2:
                 SignUp();
                 break;
 //            case R.id.btnBack:

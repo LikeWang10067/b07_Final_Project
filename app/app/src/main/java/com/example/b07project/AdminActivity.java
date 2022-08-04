@@ -47,7 +47,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         btnLogOut = (Button) findViewById(R.id.btnLogOut);
         btnLogOut.setOnClickListener(this);
 
-        lstvenue = (ListView) findViewById(R.id.lstvenue);
+        lstvenue = (ListView) findViewById(R.id.lstvenue_a);
 
         ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
         lstvenue.setAdapter(venueAdapter);
@@ -70,9 +70,9 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnaddvenue:
                 startActivity(new Intent(this, AddVenueActivity.class));
                 break;
-            case R.id.btndeletevenue:
-                startActivity(new Intent(this, DeleteVenueActivity.class));
-                break;
+//            case R.id.btndeletevenue:
+//                startActivity(new Intent(this, DeleteVenueActivity.class));
+//                break;
             case R.id.btnLogOut:
                 startActivity(new Intent(this, MainActivity.class));
                 break;

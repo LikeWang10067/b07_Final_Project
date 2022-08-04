@@ -24,7 +24,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_admin);
+        setContentView(R.layout.activity_customer);
 
         allvenue = new ArrayList<venue>();
         string_allvenue = new ArrayList<String>();
@@ -42,10 +42,10 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 //        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
 //        btndeletevenue.setOnClickListener(this);
 
-        btnLogOut = (Button) findViewById(R.id.btnLogOut);
+        btnLogOut = (Button) findViewById(R.id.btnLogOut_u);
         btnLogOut.setOnClickListener(this);
 
-        lstvenue = (ListView) findViewById(R.id.lstvenue);
+        lstvenue = (ListView) findViewById(R.id.lstvenue_u);
 
         ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(CustomerActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
         lstvenue.setAdapter(venueAdapter);
