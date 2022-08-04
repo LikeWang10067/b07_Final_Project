@@ -196,10 +196,12 @@ public class database_operation {
     }
 
 
-    public static void DisplayEventsByVenue(String venuename,Consumer<ArrayList<event>> callback) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void DisplayEventsByVenue(String venuename, Consumer<ArrayList<event>> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
+        LocalDateTime t = LocalDateTime.now();
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -209,7 +211,9 @@ public class database_operation {
                     for(DataSnapshot d: task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if(venuename.equals(test.getVenue())){
-                            s.add(test);
+                            if(t.compareTo(test.getStart())<0) {
+                                s.add(test);
+                            }
                         }
                     }
                     Collections.sort(s);
@@ -253,10 +257,11 @@ public class database_operation {
     }
 
 
-    public static void CheckEventStatus(event a,Consumer<Boolean> callback) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void CheckEventStatus(event a, Consumer<Boolean> callback) {
+        LocalDateTime t=LocalDateTime.now();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
@@ -266,7 +271,7 @@ public class database_operation {
                     Boolean flag=false;
                     for(DataSnapshot d: task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
-                        if(eventhashcode==test.hashCode()&&test.getReg_num()<test.getNum_players()){
+                        if(eventhashcode==test.hashCode()&&test.getReg_num()<test.getNum_players()&&t.compareTo(test.getStart())<0){
                             flag=true;
                         }
                     }
@@ -363,6 +368,63 @@ public class database_operation {
                 }
             }
 
+        });
+
+    }
+
+    public static  void  unjoinEvent(String username, event target, Consumer<Integer> callback){
+        int eventhashcode=target.hashCode();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
+        DatabaseReference refU = FirebaseDatabase.getInstance().getReference("User");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    for (DataSnapshot d : task.getResult().getChildren()) {
+                        event test = d.getValue(event.class);
+                        if (eventhashcode == test.hashCode()) {
+                            ArrayList<String> list = test.getUsernamess();
+                            if (list == null || (!list.contains(username))) {
+                                callback.accept(1);//the user does not exists in the event/event does not exist in user
+                            }
+                            list.remove(username);
+                            int reg = test.getReg_num();
+                            reg--;
+                            test.setReg_num(reg);
+                            test.setUsernames(list);
+                            addevent(test);
+
+                            refU.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                    if (!task.isSuccessful()) {
+                                        Log.e("firebase", "Error getting data", task.getException());
+                                    } else {
+                                        for (DataSnapshot d : task.getResult().getChildren()) {
+                                            user test = d.getValue(user.class);
+                                            if (test.get_name().equals(username)) {
+                                                ArrayList<Integer> userevents = test.getList_events();
+                                                if (userevents == null || (!userevents.contains(target.hashCode()))) {
+                                                    callback.accept(1);
+                                                }
+                                                userevents.remove(target.hashCode());
+                                                callback.accept(2);//success
+                                            }
+                                            callback.accept(0);
+                                        }
+                                    }
+                                }
+                            });
+
+                        }
+                    }
+                    callback.accept(0);//the event/user does not exists in list
+                }
+            }
         });
 
     }
@@ -466,6 +528,165 @@ public class database_operation {
 
     }
 
+    public static void admainDeleteEventUserpart(event delEvent, Consumer<Boolean>callback){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    for(DataSnapshot d: task.getResult().getChildren()) {
+                        user test = d.getValue(user.class);
+                        ArrayList<Integer> eventlist= test.getList_events();
+                        if(eventlist!=null){
+                            for(int i:eventlist){
+                                if(i==delEvent.hashCode()){
+                                    eventlist.remove(i);
+                                }
+                            }
+                            test.setList_events(eventlist);
+                            adduser(test);
+                        }
+                    }
+                    callback.accept(true);
+
+                }
+            }
+
+        });
+    }
+
+    public static void admainDeleteEventEventpart(event delEvent, Consumer<Boolean>callback){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    for(DataSnapshot d: task.getResult().getChildren()) {
+                        event test = d.getValue(event.class);
+                        if(test.hashCode()==delEvent.hashCode()){
+                            ref.child(String.valueOf(test.hashCode())).removeValue();
+                            callback.accept(true);
+                        }
+                    }
+                    callback.accept(false);
+
+                }
+            }
+
+        });
+
+    }
+
+    public static void admainDeleteEventVenuepart(event delEvent, Consumer<Boolean>callback){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    Boolean flag = false;
+                    for(DataSnapshot d: task.getResult().getChildren()) {
+                        venue test = d.getValue(venue.class);
+                        ArrayList<Integer> eventlist= test.getEventids();
+                        if(eventlist!=null){
+                            for(int i:eventlist){
+                                if(i==delEvent.hashCode()){
+                                    eventlist.remove(i);
+                                }
+                            }
+                            test.setEventids(eventlist);
+                            addvenue(test);
+                            flag=true;
+                        }
+                    }
+                    callback.accept(flag);
+
+                }
+            }
+
+        });
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static void adaminDeleteEvent(event delEvent, Consumer<Boolean> callback){
+        admainDeleteEventUserpart(delEvent,(Boolean get)->{
+            Boolean flag=true;
+            if(get==true){
+                admainDeleteEventEventpart(delEvent,(Boolean get1)->{
+                    if(get1==true){
+                        admainDeleteEventVenuepart(delEvent,(Boolean get2)->{
+                            if(get2==true)
+                                callback.accept(true);
+                            callback.accept(false);
+                        });
+                    }
+                    callback.accept(false);
+                });
+            }
+            callback.accept(false);
+
+        });
+    }
+
+    public static void adaimDeleteVenue(venue delVenue, Consumer<Boolean> callback){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
+        DatabaseReference refE = FirebaseDatabase.getInstance().getReference("Event");
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    Boolean flag = true;
+                    for(DataSnapshot d: task.getResult().getChildren()) {
+                        venue test = d.getValue(venue.class);
+                        if(delVenue.getVenue_name().equals(test.getVenue_name())){
+                            ArrayList<Integer> eventlist= test.getEventids();
+                            if(eventlist!=null){
+                                for(int eventid:eventlist){
+                                    refE.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+                                        @RequiresApi(api = Build.VERSION_CODES.N)
+                                        @Override
+                                        public void onComplete(@NonNull Task<DataSnapshot> task) {
+                                            if (!task.isSuccessful()) {
+                                                Log.e("firebase", "Error getting data", task.getException());
+                                            } else {
+                                                for(DataSnapshot d: task.getResult().getChildren()) {
+                                                    event test = d.getValue(event.class);
+                                                    if(test.hashCode()==eventid) {
+                                                        adaminDeleteEvent(test, (Boolean get2) -> {
+                                                            if (get2 == false)
+                                                                callback.accept(false);
+                                                        });
+                                                    }
+                                                }
+
+                                            }
+                                        }
+
+                                    });
+                                }
+                            }
+                            ref.child(delVenue.getVenue_name()).removeValue();
+                            callback.accept(true);
+                        }
+
+                        callback.accept(false);
+                    }
+                }
+            }
+
+        });
+    }
 
 
 

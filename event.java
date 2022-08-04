@@ -4,10 +4,11 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class event implements Comparable<event>{
+public class event implements Comparable<event>, Serializable {
 //    private static int total_ids;
 
     private int num_players;

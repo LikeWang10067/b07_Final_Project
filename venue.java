@@ -1,12 +1,13 @@
 package com.example.myfirstapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class venue {
-    //    private static int total_venueids;
+public class venue implements Serializable {
+//    private static int total_venueids;
     private String venue_name;
     private ArrayList<Integer> eventids;
-    //    private int id;
+//    private int id;
     public venue(){}
     public venue(String name){
         venue_name=name;
@@ -20,7 +21,7 @@ public class venue {
     public void setEventids(ArrayList<Integer> i){
         eventids=i;
     }
-    //    public int getId(){
+//    public int getId(){
 //        return id;
 //    }
     public ArrayList<Integer> getEventids(){

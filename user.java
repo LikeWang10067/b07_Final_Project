@@ -1,14 +1,15 @@
 package com.example.myfirstapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class user {
-    //    private static int totalid;
+public class user implements Serializable {
+//    private static int totalid;
     private ArrayList<Integer> list_events;
     private String Name;
     private Boolean is_admin;
     private int password;
-    //    private int id;
+//    private int id;
     public user(String n, int p,boolean admin){
         Name=n;
         password=p;
@@ -38,7 +39,7 @@ public class user {
     public int getPassword(){
         return password;
     }
-    //    public int getId(){
+//    public int getId(){
 //        return id;
 //    }
     public void setList_events(ArrayList<Integer> i){
