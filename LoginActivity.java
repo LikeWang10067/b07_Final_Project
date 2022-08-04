@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText username, password;
-    private Button btnLogIn, btnBack;
+    private Button btnLogIn
+//    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -31,8 +32,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogIn:
                 LogIn();
                 break;
-            case R.id.btnBack:
-                startActivity(new Intent(this, MainActivity.class));
+//            case R.id.btnBack:
+//                startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -45,7 +46,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 this.username.setError("User Incorrect or Password Incorrect");
                 this.password.setError("User Incorrect or Password Incorrect");
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("error_message", "User already exist");
+                intent.putExtra("error_message", "User Incorrect or Password Incorrect");
                 startActivity(intent);
 
             }

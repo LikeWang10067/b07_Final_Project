@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText username, password;
-    private Button btnSignUp, btnBack;
+    private Button btnSignUp
+//    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -31,8 +32,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.btnSignUp:
                 SignUp();
                 break;
-            case R.id.btnBack:
-                startActivity(new Intent(this, MainActivity.class));
+//            case R.id.btnBack:
+//                startActivity(new Intent(this, MainActivity.class));
         }
     }
 

@@ -1,19 +1,60 @@
 package com.example.b07project;
 
-public class CustomerActivity {
-    user User;
-    public CustomerActivity(user User){
-        this.User = User;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class CustomerActivity extends AppCompatActivity implements View.OnClickListener {
+    private user User;
+//    private Button btnaddvenue, btndeletevenue;
+    private ListView lstvenue;
+    private List<venue> allvenue;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_admin);
+
+        allvenue = new ArrayList<venue>();
+        database_operation.DisplayVenues((ArrayList<venue> venue_list) ->{
+            allvenue = venue_list;
+        });
+        this.User = (user) getIntent().getSerializableExtra("user");
+//        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
+//        btnaddvenue.setOnClickListener(this);
+//        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
+//        btndeletevenue.setOnClickListener(this);
+        lstvenue = (ListView) findViewById(R.id.lstvenue);
+        lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                venue want_venue = allvenue.get(i);
+                String venue_name = want_venue.getVenue_name();
+                Intent intent = new Intent(CustomerActivity.this, EventActivity.class);
+                intent.putExtra("Venue name", venue_name);
+                intent.putExtra("user", User);
+                startActivity(intent);
+            }
+        });
     }
 
-    public void listvenue(){}
-
-    public void listactivity(){}
-
-    public void join(){}
-
-    public void cancel(){}
-
-    public void logout(){}
+    @Override
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.btnaddvenue:
+                startActivity(new Intent(this, AddVenueActivity.class));
+                break;
+            case R.id.btndeletevenue:
+                startActivity(new Intent(this, DeleteVenueActivity.class));
+        }
+    }
 
 }
