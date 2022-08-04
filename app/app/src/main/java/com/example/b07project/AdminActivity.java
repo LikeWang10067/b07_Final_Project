@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import java.util.List;
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
     private user User;
     private Button btnaddvenue, btnLogOut;
-//    private Button btndeletevenue;
+    //    private Button btndeletevenue;
     private ListView lstvenue;
     private List<venue> allvenue;
     private List<String> string_allvenue;
@@ -27,12 +26,13 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        allvenue = new ArrayList<venue>(); string_allvenue = new ArrayList<String>();
-        database_operation.DisplayVenues((ArrayList<venue> venue_list) ->{
+        allvenue = new ArrayList<venue>();
+        string_allvenue = new ArrayList<String>();
+        database_operation.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
         });
 
-        for(venue Venue: allvenue){
+        for (venue Venue : allvenue) {
             string_allvenue.add(Venue.getVenue_name());
         }
 
@@ -65,8 +65,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btnaddvenue:
                 startActivity(new Intent(this, AddVenueActivity.class));
                 break;

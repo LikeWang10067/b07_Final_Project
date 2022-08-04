@@ -10,11 +10,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText username, password;
-    private Button btnSignUp
+    private Button btnSignUp;
 //    private Button btnBack;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
@@ -27,8 +27,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
-    public void onClick(View view){
-        switch(view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btnSignUp:
                 SignUp();
                 break;
@@ -37,18 +37,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private void SignUp(){
+    private void SignUp() {
         String username = this.username.getText().toString().trim();
         String password = this.password.getText().toString();
         int num_password = Integer.valueOf(password);
         database_operation.CheckSignUp(username, num_password, (user User) -> {
-            if(User == null){
+            if (User == null) {
                 this.username.setError("User already exist");
                 Intent intent = new Intent(this, MainActivity.class);
                 intent.putExtra("error_message", "User already exist");
                 startActivity(intent);
-            }
-            else{
+            } else {
                 Intent intent = new Intent(this, CustomerActivity.class);
                 intent.putExtra("user", User); //remember class user need to implement Serializable
                 startActivity(intent);

@@ -1,31 +1,31 @@
 package com.example.b07project;
 
 public class UIinterface {
-    public static void redirectToStarterPage(){
+    public static void redirectToStarterPage() {
 
     }
 
-    public static void redirectToSignUpPage(){
+    public static void redirectToSignUpPage() {
 
     }
 
-    public static void redirectToLoginPage(){
+    public static void redirectToLoginPage() {
 
     }
 
-    public static void redirectToAdminPage(){
+    public static void redirectToAdminPage() {
 
     }
 
-    public static void redirectToCustomerPage(){
+    public static void redirectToCustomerPage() {
 
     }
 
-    public static void redirectToActivityPage(){
+    public static void redirectToActivityPage() {
 
     }
 
-    public static void redirectToVenuePage(){
+    public static void redirectToVenuePage() {
 
     }
 

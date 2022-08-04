@@ -14,7 +14,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private Button btnBack;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
@@ -27,8 +27,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View view){
-        switch(view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btnLogIn:
                 LogIn();
                 break;
@@ -37,25 +37,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    private void LogIn(){
+    private void LogIn() {
         String username = this.username.getText().toString().trim();
         String password = this.password.getText().toString();
         int num_password = Integer.valueOf(password);
         database_operation.CheckLogIn(username, num_password, (user User) -> {
-            if(User == null){
+            if (User == null) {
                 this.username.setError("User Incorrect or Password Incorrect");
                 this.password.setError("User Incorrect or Password Incorrect");
 //                Intent intent = new Intent(this, MainActivity.class);
 //                intent.putExtra("error_message", "User Incorrect or Password Incorrect");
 //                startActivity(intent);
 
-            }
-            else if(User.get_admin() == true){
+            } else if (User.get_admin() == true) {
                 Intent intent = new Intent(this, AdminActivity.class);
                 intent.putExtra("user", User); //remember class user need to implement Serializable
                 startActivity(intent);
-            }
-            else{
+            } else {
                 Intent intent = new Intent(this, CustomerActivity.class);
                 intent.putExtra("user", User); //remember class user need to implement Serializable
                 startActivity(intent);

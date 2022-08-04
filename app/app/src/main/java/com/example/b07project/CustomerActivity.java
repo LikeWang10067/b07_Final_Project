@@ -15,7 +15,7 @@ import java.util.List;
 
 public class CustomerActivity extends AppCompatActivity implements View.OnClickListener {
     private user User;
-//    private Button btnaddvenue, btndeletevenue;
+    //    private Button btnaddvenue, btndeletevenue;
     private Button btnLogOut;
     private ListView lstvenue;
     private List<venue> allvenue;
@@ -26,16 +26,17 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        allvenue = new ArrayList<venue>(); string_allvenue = new ArrayList<String>();
-        database_operation.DisplayVenues((ArrayList<venue> venue_list) ->{
+        allvenue = new ArrayList<venue>();
+        string_allvenue = new ArrayList<String>();
+        database_operation.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
         });
 
-        for(venue Venue: allvenue){
+        for (venue Venue : allvenue) {
             string_allvenue.add(Venue.getVenue_name());
         }
 
-            this.User = (user) getIntent().getSerializableExtra("user");
+        this.User = (user) getIntent().getSerializableExtra("user");
 //        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
 //        btnaddvenue.setOnClickListener(this);
 //        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
@@ -62,8 +63,8 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.btnLogOut:
                 startActivity(new Intent(this, MainActivity.class));
                 break;

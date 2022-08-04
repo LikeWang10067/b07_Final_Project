@@ -4,10 +4,11 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class event implements Comparable<event>{
+public class event implements Comparable<event>, Serializable {
 //    private static int total_ids;
 
     private int num_players;
@@ -15,23 +16,25 @@ public class event implements Comparable<event>{
     private String venue;
     private LocalDateTime start;
     private LocalDateTime end;
-//    private int id;
+    //    private int id;
     private ArrayList<String> usernames;
 
 
-    public event(){}
+    public event() {
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public event(int num_player, String v, String start, String end){
-        num_players=num_player;
-        venue=v;
-        this.start=LocalDateTime.parse(start);
+    public event(int num_player, String v, String start, String end) {
+        num_players = num_player;
+        venue = v;
+        this.start = LocalDateTime.parse(start);
         this.end = LocalDateTime.parse(end);
-        reg_num=0;
+        reg_num = 0;
     }
 
 
-    public void setUsernames(ArrayList<String> id){
-        usernames=id;
+    public void setUsernames(ArrayList<String> id) {
+        usernames = id;
     }
 
     public void setNum_players(int num_players) {
@@ -40,7 +43,8 @@ public class event implements Comparable<event>{
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setEnd(String end) {
-        this.end = this.end = LocalDateTime.parse(end);;
+        this.end = this.end = LocalDateTime.parse(end);
+        ;
     }
 
     public void setReg_num(int reg_num) {
@@ -64,26 +68,29 @@ public class event implements Comparable<event>{
         return num_players;
     }
 
-    public LocalDateTime getStart(){
+    public LocalDateTime getStart() {
         return start;
     }
 
-    public LocalDateTime getEnd(){
+    public LocalDateTime getEnd() {
         return end;
     }
-    public int getReg_num(){
+
+    public int getReg_num() {
         return reg_num;
     }
 
     public String getVenue() {
         return venue;
     }
-    public ArrayList<String> getUsernamess(){
+
+    public ArrayList<String> getUsernamess() {
         return usernames;
     }
+
     @Override
-    public int hashCode(){
-        return num_players+venue.hashCode()+start.hashCode()+end.hashCode();
+    public int hashCode() {
+        return num_players + venue.hashCode() + start.hashCode() + end.hashCode();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -97,8 +104,9 @@ public class event implements Comparable<event>{
 //            return 0;
 //        return -1;
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean checkOverlap(event b){
-        return !(this.end.compareTo(b.start)>0||b.end.compareTo(this.start)>0);
+    public boolean checkOverlap(event b) {
+        return !(this.end.compareTo(b.start) > 0 || b.end.compareTo(this.start) > 0);
     }
 }
