@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
     private user User;
-    private Button btnaddvenue, btndeletevenue;
+    private Button btnaddvenue, btndeletevenue, btnLogOut;
     private ListView lstvenue;
     private List<venue> allvenue;
 
@@ -36,12 +36,14 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
         btndeletevenue.setOnClickListener(this);
 
+        btnLogOut = (Button) findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(this);
+
         lstvenue = (ListView) findViewById(R.id.lstvenue);
         lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                venue want_venue = allvenue.get(i);
-                String venue_name = want_venue.getVenue_name();
+                String venue_name = allvenue.get(i).getVenue_name();
                 Intent intent = new Intent(AdminActivity.this, EventActivity.class);
                 intent.putExtra("Venue name", venue_name);
                 intent.putExtra("user", User);
@@ -58,6 +60,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btndeletevenue:
                 startActivity(new Intent(this, DeleteVenueActivity.class));
+                break;
+            case R.id.btnLogOut:
+                startActivity(new Intent(this, MainActivity.class));
+                break;
         }
     }
 }

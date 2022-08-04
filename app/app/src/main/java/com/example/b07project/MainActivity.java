@@ -14,20 +14,20 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private Button btnLogIn, btnSignUp;
-    private String error_message = null;
-    private TextView tv_error_message;
+//    private String error_message = null;
+//    private TextView tv_error_message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tv_error_message = (TextView) findViewById(R.id.tv_error_message);
-        Intent intent = getIntent();
-        if(intent != null){
-            error_message = intent.getStringExtra("error_message");
-            tv_error_message.setText(error_message);
-        }
+//        tv_error_message = (TextView) findViewById(R.id.tv_error_message);
+//        Intent intent = getIntent();
+//        if(intent != null){
+//            error_message = intent.getStringExtra("error_message");
+//            tv_error_message.setText(error_message);
+//        }
         btnLogIn = (Button) findViewById(R.id.btnLogIn);
         btnLogIn.setOnClickListener(this);
         btnSignUp = (Button) findViewById(R.id.btnSignUp);

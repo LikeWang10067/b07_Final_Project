@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText username, password;
     private Button btnLogIn
-//    private Button btnBack;
+    private Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -20,8 +20,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         btnLogIn = (Button) findViewById(R.id.btnLogIn);
         btnLogIn.setOnClickListener(this);
-//        btnBack = (Button) findViewById(R.id.btnBack);
-//        btnBack.setOnClickListener(this);
+        btnBack = (Button) findViewById(R.id.btnBack);
+        btnBack.setOnClickListener(this);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
     }
@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogIn:
                 LogIn();
                 break;
-//            case R.id.btnBack:
-//                startActivity(new Intent(this, MainActivity.class));
+            case R.id.btnBack:
+                startActivity(new Intent(this, MainActivity.class));
         }
     }
 
@@ -45,9 +45,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             if(User == null){
                 this.username.setError("User Incorrect or Password Incorrect");
                 this.password.setError("User Incorrect or Password Incorrect");
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("error_message", "User Incorrect or Password Incorrect");
-                startActivity(intent);
+//                Intent intent = new Intent(this, MainActivity.class);
+//                intent.putExtra("error_message", "User Incorrect or Password Incorrect");
+//                startActivity(intent);
 
             }
             else if(User.get_admin() == true){

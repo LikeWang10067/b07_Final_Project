@@ -15,6 +15,7 @@ import java.util.List;
 public class CustomerActivity extends AppCompatActivity implements View.OnClickListener {
     private user User;
 //    private Button btnaddvenue, btndeletevenue;
+    private Button btnLogOut;
     private ListView lstvenue;
     private List<venue> allvenue;
 
@@ -32,12 +33,13 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 //        btnaddvenue.setOnClickListener(this);
 //        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
 //        btndeletevenue.setOnClickListener(this);
+        btnLogOut = (Button) findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(this);
         lstvenue = (ListView) findViewById(R.id.lstvenue);
         lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                venue want_venue = allvenue.get(i);
-                String venue_name = want_venue.getVenue_name();
+                String venue_name = allvenue.get(i).getVenue_name();
                 Intent intent = new Intent(CustomerActivity.this, EventActivity.class);
                 intent.putExtra("Venue name", venue_name);
                 intent.putExtra("user", User);
@@ -49,11 +51,9 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.btnaddvenue:
-                startActivity(new Intent(this, AddVenueActivity.class));
+            case R.id.btnLogOut:
+                startActivity(new Intent(this, MainActivity.class));
                 break;
-            case R.id.btndeletevenue:
-                startActivity(new Intent(this, DeleteVenueActivity.class));
         }
     }
 
