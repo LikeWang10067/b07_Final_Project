@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +21,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private ListView lstvenue;
     private List<venue> allvenue;
     private List<String> string_allvenue;
+    private EditText filter_text;
+    private Button btnfilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,11 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         btnLogOut = (Button) findViewById(R.id.btnLogOut);
         btnLogOut.setOnClickListener(this);
 
+        filter_text = (EditText) findViewById(R.id.filter_text);
+
+        btnfilter = (Button) findViewById(R.id.btnfilter);
+        btnfilter.setOnClickListener(this);
+
         lstvenue = (ListView) findViewById(R.id.lstvenue_a);
 
         ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
@@ -56,7 +64,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String venue_name = allvenue.get(i).getVenue_name();
-                Intent intent = new Intent(AdminActivity.this, EventActivity.class);
+                Intent intent = new Intent(AdminActivity.this, AllEventActivity.class);
                 intent.putExtra("Venue name", venue_name);
                 intent.putExtra("user", User);
                 startActivity(intent);
@@ -70,11 +78,19 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnaddvenue:
                 startActivity(new Intent(this, AddVenueActivity.class));
                 break;
-//            case R.id.btndeletevenue:
-//                startActivity(new Intent(this, DeleteVenueActivity.class));
-//                break;
             case R.id.btnLogOut:
                 startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.btnfilter:
+                String filter_text = this.filter_text.toString();
+                database_operation.filterVenue(filter_text, (ArrayList<venue> venues) ->{
+                    string_allvenue.clear();
+                    for(venue Venue: venues){
+                        string_allvenue.add(Venue.getVenue_name());
+                    }
+                    ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+                    lstvenue.setAdapter(venueAdapter);
+                });
                 break;
         }
     }

@@ -54,6 +54,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
