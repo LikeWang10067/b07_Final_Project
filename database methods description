@@ -79,3 +79,23 @@ JoinEvent(String username, event target, Consumer<Boolean> callback)
 This function will let a user to join a event
 return false: 3 cases may lead to false: the user does not exists, the event does not exists, the event is full of people
 return true: the user joins the event successfully
+
+unjoinEvent(String username, event target, Consumer<Integer> callback)
+
+This function will let a user to unjoin a evernt;
+return 2 success
+return 1 user doest have any events or the target event in not in that user's list
+return 0 no such user
+
+adaminDeleteEvent(event delEvent, Consumer<Boolean> callback)
+
+This function will let admain to delete a event
+return true for success
+return false for fail
+
+filterVenue(String input, Consumer<ArrayList<venue>> callback
+This function will filter all the venues for adamin
+return the result a list venues.
+
+
+
