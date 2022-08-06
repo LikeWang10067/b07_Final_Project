@@ -37,7 +37,7 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
         });
 
         for (event Event: allevent) {
-            string_allactivity.add(Event.getname());
+            string_allactivity.add(Event.getEventName());
         }
 
         delete_venue = (Button) findViewById(R.id.delete_venue);
@@ -54,7 +54,7 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
         lstevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String event_name = allevent.get(i).getname();
+                String event_name = allevent.get(i).getEventName();
                 Intent intent = new Intent(AdminEventActivity.this, DeleteEventActivity.class);
                 intent.putExtra("Event", event_name);
                 startActivity(intent);
@@ -64,21 +64,21 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View view){
-        switch (view.getId()){
-            case R.id.add_event:
-                Intent intent = new Intent(this, AddEventActivity.class);
-                intent.putExtra("Venue name", venue_name);
-                startActivity(intent);
-                break;
-            case R.id.delete_venue:
-                Do.adaimDeleteVenue(venue_name, (Boolean success) -> {
-                    if(success == true){ // Delete success
-                        startActivity(new Intent(this, AdminActivity.class));
-                    }
-                    else{ //Delete fail
-                        delete_venue.setError("Fail to delete venue");
-                    }
-                });
-        }
+//        switch (view.getId()){
+//            case R.id.add_event:
+//                Intent intent = new Intent(this, AddEventActivity.class);
+//                intent.putExtra("Venue name", venue_name);
+//                startActivity(intent);
+//                break;
+//            case R.id.delete_venue:
+//                Do.adaimDeleteVenue(venue_name, (Boolean success) -> {
+//                    if(success == true){ // Delete success
+//                        startActivity(new Intent(this, AdminActivity.class));
+//                    }
+//                    else{ //Delete fail
+//                        delete_venue.setError("Fail to delete venue");
+//                    }
+//                });
+//        }
     }
 }

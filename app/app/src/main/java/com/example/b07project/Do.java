@@ -281,23 +281,29 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
     public static void DisplayEventsByVenue(String venuename, Consumer<ArrayList<event>> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
         LocalDateTime t = LocalDateTime.now();
+
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
+                    Log.d("!!!!!!!!!!!!!","!!!!!!!!!!");
                     ArrayList<event> s = new ArrayList<event>();
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if (venuename.equals(test.getVenue())) {
-                            if (t.compareTo(test.getStart()) < 0) {
-                                s.add(test);
-                            }
+                            s.add(test);
+ //                           if (t.compareTo(test.getStart()) < 0) {
+ //                               s.add(test);
+ //                           }
                         }
                     }
+
                     Collections.sort(s);
+
                     callback.accept(s);
 //                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
 
