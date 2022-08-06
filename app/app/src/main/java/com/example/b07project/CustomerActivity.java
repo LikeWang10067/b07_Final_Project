@@ -46,7 +46,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         btnLogOut.setOnClickListener(this);
 
 //        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
-        btnListJoinActivity.setOnClickListener(this);
+//        btnListJoinActivity.setOnClickListener(this);
 
         lstvenue = (ListView) findViewById(R.id.lstvenue_u);
 

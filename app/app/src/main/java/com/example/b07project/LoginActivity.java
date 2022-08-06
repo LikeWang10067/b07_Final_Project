@@ -41,10 +41,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                intent.putExtra("error_message", "User Incorrect or Password Incorrect");
 //                startActivity(intent);
 
-//            } else if (User.getadmin() == 1) {
-//                Intent intent = new Intent(this, AdminActivity.class);
-//                intent.putExtra("user", User); //remember class user need to implement Serializable
-//                startActivity(intent);
+            } else if (User.get_admin() == 1) {
+                Intent intent = new Intent(this, AdminActivity.class);
+                intent.putExtra("user", User); //remember class user need to implement Serializable
+                startActivity(intent);
             } else {
                 Intent intent = new Intent(this, CustomerActivity.class);
                 intent.putExtra("user", User); //remember class user need to implement Serializable

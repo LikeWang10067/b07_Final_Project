@@ -85,57 +85,64 @@ public class Do {
         callback.accept(a);
     }
 
-    public static void CheckLogIn(String applicantname, int password, Consumer<user> callback) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
-        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                } else {
-                    Boolean flag = false;
-                    for (DataSnapshot d : task.getResult().getChildren()) {
-                        user test = d.getValue(user.class);
-
-                        if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
-//                            adduser(new user(applicantname,password,false));
-                            //test.setIs_admin(false);
-                            Log.d("firebase",String.valueOf(test.getadmin()));
-                            callback.accept(test);
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (flag == false) {
-                        callback.accept(null);
-                    }
-//                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-
+//    public static void CheckLogIn(String applicantname, int password, Consumer<user> callback) {
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+//        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.e("firebase", "Error getting data", task.getException());
+//                } else {
+//                    Boolean flag = false;
+//                    for (DataSnapshot d : task.getResult().getChildren()) {
+//                        user test = d.getValue(user.class);
+//
+//                        if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
+////                            adduser(new user(applicantname,password,false));
+//                            //test.setIs_admin(false);
+////                            Log.d("firebase",String.valueOf(test.get_admin()));
+//                            callback.accept(test);
+//                            flag = true;
+//                            break;
+//                        }
+//                    }
+//                    if (flag == false) {
+//                        callback.accept(null);
+//                    }
+////                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//
+//                }
+//            }
+//
+//        });
+//    }
+public static void CheckLogIn(String applicantname, int password,Consumer<user> callback) {
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+    ref.child(applicantname).addListenerForSingleValueEvent(new ValueEventListener() {
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            user user1 = snapshot.getValue(user.class);
+            if(user1!=null){
+                if(user1.getPassword()==password){
+                    callback.accept(user1);
+                }
+                else {
+                    callback.accept(null);
                 }
             }
+            Log.d("wudi",String.valueOf(user1.get_admin()));
+            callback.accept(null);
 
-        });
-    }
-//public static void CheckLogIn(String applicantname, int password,Consumer<user> callback) {
-//    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
-//    ref.child(applicantname).addListenerForSingleValueEvent(new ValueEventListener() {
-//        @RequiresApi(api = Build.VERSION_CODES.N)
-//        @Override
-//        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//            user user = snapshot.getValue(user.class);
-//
-//            Log.d("wudi",String.valueOf(user.getadmin()));
-//            callback.accept(user);
-//
-//        }
-//
-//        @Override
-//        public void onCancelled(@NonNull DatabaseError error) {
-//
-//        }
-//    });
-//                                                            }
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    });
+                                                            }
 
 
 
@@ -200,7 +207,7 @@ public class Do {
                         user test = d.getValue(user.class);
                         if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
 //                            adduser(new user(applicantname,password,false));
-                            callback.accept(test.getadmin());
+                            callback.accept(test.get_admin());
                             //flag=true;
                             break;
                         }

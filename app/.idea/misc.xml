@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_user_event.xml" value="0.335" />
       </map>
     </option>
   </component>

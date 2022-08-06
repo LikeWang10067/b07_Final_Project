@@ -36,7 +36,7 @@ public class user implements Serializable {
         admin = b;
     }
 
-    public int getadmin() {
+    public int get_admin() {
         return admin;
     }
 
