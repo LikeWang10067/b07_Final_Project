@@ -304,7 +304,7 @@ public class Do {
     }
 
     public static void DisplayEventsByUser(String username, Consumer<ArrayList<event>> callback) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(" ");
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
