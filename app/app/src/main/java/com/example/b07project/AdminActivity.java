@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdminActivity extends AppCompatActivity implements View.OnClickListener {
-    private user User;
+//    private user User;
     private Button btnaddvenue, btnLogOut;
     //    private Button btndeletevenue;
     private ListView lstvenue;
@@ -40,7 +40,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         });
 
 
-        this.User = (user) getIntent().getSerializableExtra("user");
+//        this.User = (user) getIntent().getSerializableExtra("user");
 
         btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
         btnaddvenue.setOnClickListener(this);
