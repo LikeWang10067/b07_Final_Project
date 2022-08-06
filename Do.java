@@ -274,7 +274,11 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
+
+
     public static void DisplayEventsByVenue(String venuename, Consumer<ArrayList<event>> callback) {
+
+
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
         LocalDateTime t = LocalDateTime.now();
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -486,7 +490,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                             if (test.get_name().equals(username)) {
                                                 ArrayList<Integer> userevents = test.getList_events();
                                                 if (userevents == null || (!userevents.contains(target.hashCode()))) {
-                                                    callback.accept(1);
+
                                                 }
                                                 userevents.remove(target.hashCode());
                                                 callback.accept(2);//success
