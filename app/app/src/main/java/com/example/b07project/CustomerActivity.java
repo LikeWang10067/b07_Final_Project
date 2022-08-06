@@ -52,16 +52,12 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 
 
         this.User = (user) getIntent().getSerializableExtra("user");
-//        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
-//        btnaddvenue.setOnClickListener(this);
-//        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
-//        btndeletevenue.setOnClickListener(this);
 
         btnLogOut = (Button) findViewById(R.id.btnLogOut_u);
         btnLogOut.setOnClickListener(this);
 
-//        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
-//        btnListJoinActivity.setOnClickListener(this);
+        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
+        btnListJoinActivity.setOnClickListener(this);
 
         lstvenue = (ListView) findViewById(R.id.lstvenue_u);
 
@@ -85,11 +81,11 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btnLogOut:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
-//            case R.id.btnListJoinActivity:
-//                Intent intent = new Intent(this, UserEventActivity.class);
-//                intent.putExtra("user", this.User);
-//                startActivity(intent);
-//                break;
+            case R.id.btnListJoinActivity:
+                Intent intent = new Intent(this, UserEventActivity.class);
+                intent.putExtra("user", this.User);
+                startActivity(intent);
+                break;
         }
     }
 
