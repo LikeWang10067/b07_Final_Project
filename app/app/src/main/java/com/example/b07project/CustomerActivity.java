@@ -72,7 +72,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent intent = new Intent(CustomerActivity.this, AllEventActivity.class);
-                intent.putExtra("Venue name", allvenue.get(i));
+                intent.putExtra("Venue name", allvenue.get(i).getVenue_name());
                 intent.putExtra("user", User);
                 startActivity(intent);
             }
