@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String username = this.username.getText().toString().trim();
         String password = this.password.getText().toString();
         int num_password = Integer.valueOf(password);
-        database_operation.fgetuser(username, num_password, (user User) -> {
+        Do.CheckLogIn(username, num_password, (user User) -> {
             if (User == null) {
                 this.username.setError("User Incorrect or Password Incorrect");
                 this.password.setError("User Incorrect or Password Incorrect");
@@ -41,10 +41,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                intent.putExtra("error_message", "User Incorrect or Password Incorrect");
 //                startActivity(intent);
 
-            } else if (User.get_admin() == true) {
-                Intent intent = new Intent(this, AdminActivity.class);
-                intent.putExtra("user", User); //remember class user need to implement Serializable
-                startActivity(intent);
+//            } else if (User.getadmin() == 1) {
+//                Intent intent = new Intent(this, AdminActivity.class);
+//                intent.putExtra("user", User); //remember class user need to implement Serializable
+//                startActivity(intent);
             } else {
                 Intent intent = new Intent(this, CustomerActivity.class);
                 intent.putExtra("user", User); //remember class user need to implement Serializable

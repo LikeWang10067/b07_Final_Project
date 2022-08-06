@@ -31,7 +31,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
         allvenue = new ArrayList<venue>();
         string_allvenue = new ArrayList<String>();
-        database_operation.DisplayVenues((ArrayList<venue> venue_list) -> {
+        Do.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
         });
 
@@ -83,7 +83,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnfilter:
                 String filter_text = this.filter_text.toString();
-                database_operation.filterVenue(filter_text, (ArrayList<venue> venues) ->{
+                Do.filterVenue(filter_text, (ArrayList<venue> venues) ->{
                     string_allvenue.clear();
                     for(venue Venue: venues){
                         string_allvenue.add(Venue.getVenue_name());

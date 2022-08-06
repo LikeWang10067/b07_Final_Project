@@ -28,7 +28,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 
         allvenue = new ArrayList<venue>();
         string_allvenue = new ArrayList<String>();
-        database_operation.DisplayVenues((ArrayList<venue> venue_list) -> {
+        Do.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
         });
 
@@ -45,7 +45,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         btnLogOut = (Button) findViewById(R.id.btnLogOut_u);
         btnLogOut.setOnClickListener(this);
 
-        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
+//        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
         btnListJoinActivity.setOnClickListener(this);
 
         lstvenue = (ListView) findViewById(R.id.lstvenue_u);
@@ -71,11 +71,11 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btnLogOut:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
-            case R.id.btnListJoinActivity:
-                Intent intent = new Intent(this, UserEventActivity.class);
-                intent.putExtra("user", this.User);
-                startActivity(intent);
-                break;
+//            case R.id.btnListJoinActivity:
+//                Intent intent = new Intent(this, UserEventActivity.class);
+//                intent.putExtra("user", this.User);
+//                startActivity(intent);
+//                break;
         }
     }
 

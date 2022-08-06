@@ -41,7 +41,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         String username = this.username.getText().toString().trim();
         String password = this.password.getText().toString();
         int num_password = Integer.valueOf(password);
-        database_operation.CheckSignUp(username, num_password, (user User) -> {
+        Do.CheckSignUp(username, num_password, (user User) -> {
             if (User == null) {
                 this.username.setError("User already exist");
                 Intent intent = new Intent(this, MainActivity.class);
