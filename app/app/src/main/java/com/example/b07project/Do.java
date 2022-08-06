@@ -85,7 +85,7 @@ public class Do {
         callback.accept(a);
     }
 
-//    public static void CheckLogIn(String applicantname, int password, Consumer<user> callback) {
+    //    public static void CheckLogIn(String applicantname, int password, Consumer<user> callback) {
 //        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
 //        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
 //            @RequiresApi(api = Build.VERSION_CODES.N)
@@ -101,7 +101,7 @@ public class Do {
 //                        if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
 ////                            adduser(new user(applicantname,password,false));
 //                            //test.setIs_admin(false);
-////                            Log.d("firebase",String.valueOf(test.get_admin()));
+//                            Log.d("firebase",String.valueOf(test.get_admin()));
 //                            callback.accept(test);
 //                            flag = true;
 //                            break;
@@ -117,32 +117,25 @@ public class Do {
 //
 //        });
 //    }
-public static void CheckLogIn(String applicantname, int password,Consumer<user> callback) {
-    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
-    ref.child(applicantname).addListenerForSingleValueEvent(new ValueEventListener() {
-        @RequiresApi(api = Build.VERSION_CODES.N)
-        @Override
-        public void onDataChange(@NonNull DataSnapshot snapshot) {
-            user user1 = snapshot.getValue(user.class);
-            if(user1!=null){
-                if(user1.getPassword()==password){
-                    callback.accept(user1);
-                }
-                else {
-                    callback.accept(null);
-                }
+    public static void CheckLogIn(String applicantname, int password,Consumer<user> callback) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+        ref.child(applicantname).addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user user = snapshot.getValue(user.class);
+
+                Log.d("wudi",String.valueOf(user.getadmin()));
+                callback.accept(user);
+
             }
-            Log.d("wudi",String.valueOf(user1.get_admin()));
-            callback.accept(null);
 
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        @Override
-        public void onCancelled(@NonNull DatabaseError error) {
-
-        }
-    });
-                                                            }
+            }
+        });
+    }
 
 
 
@@ -207,7 +200,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                         user test = d.getValue(user.class);
                         if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
 //                            adduser(new user(applicantname,password,false));
-                            callback.accept(test.get_admin());
+                            callback.accept(test.getadmin());
                             //flag=true;
                             break;
                         }

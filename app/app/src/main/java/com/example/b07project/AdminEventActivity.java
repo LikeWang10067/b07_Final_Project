@@ -21,7 +21,7 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
     private ListView lstevent;
     private List<event> allevent;
     private List<String> string_allactivity;
-    private String venue_name;
+    private venue Venue;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -29,16 +29,16 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_event);
 
-        venue_name = getIntent().getStringExtra("Venue name");
+        Venue = (venue) getIntent().getSerializableExtra("Venue");
         allevent = new ArrayList<event>();
         string_allactivity = new ArrayList<String>();
-        Do.DisplayEventsByVenue(venue_name, (ArrayList<event> events) -> {
+        Do.DisplayEventsByVenue(Venue.getVenue_name(), (ArrayList<event> events) -> {
             allevent = events;
+            for (event Event: allevent) {
+                string_allactivity.add(Event.getEventName());
+            }
         });
 
-        for (event Event: allevent) {
-            string_allactivity.add(Event.getname());
-        }
 
         delete_venue = (Button) findViewById(R.id.delete_venue);
         delete_venue.setOnClickListener(this);
@@ -54,9 +54,8 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
         lstevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String event_name = allevent.get(i).getname();
                 Intent intent = new Intent(AdminEventActivity.this, DeleteEventActivity.class);
-                intent.putExtra("Event", event_name);
+                intent.putExtra("Event", allevent.get(i));
                 startActivity(intent);
             }
         });
@@ -67,11 +66,11 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()){
             case R.id.add_event:
                 Intent intent = new Intent(this, AddEventActivity.class);
-                intent.putExtra("Venue name", venue_name);
+                intent.putExtra("Venue", Venue);
                 startActivity(intent);
                 break;
             case R.id.delete_venue:
-                Do.adaimDeleteVenue(venue_name, (Boolean success) -> {
+                Do.adaimDeleteVenue(Venue, (Boolean success) -> {
                     if(success == true){ // Delete success
                         startActivity(new Intent(this, AdminActivity.class));
                     }

@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,18 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     private List<venue> allvenue;
     private List<String> string_allvenue;
 
+
+    String[] tutorials
+            = { "Algorithms", "Data Structures",
+            "Languages", "Interview Corner",
+            "GATE", "ISRO CS",
+            "UGC NET CS", "CS Subjects",
+            "Web Technologies", "Algorithms", "Data Structures",
+            "Languages", "Interview Corner",
+            "GATE", "ISRO CS",
+            "UGC NET CS", "CS Subjects",
+            "Web Technologies" };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,11 +43,13 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         string_allvenue = new ArrayList<String>();
         Do.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
+
+            for (venue Venue : allvenue) {
+                string_allvenue.add(Venue.getVenue_name());
+            }
         });
 
-        for (venue Venue : allvenue) {
-            string_allvenue.add(Venue.getVenue_name());
-        }
+
 
         this.User = (user) getIntent().getSerializableExtra("user");
 //        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
@@ -50,15 +65,14 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 
         lstvenue = (ListView) findViewById(R.id.lstvenue_u);
 
-        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(CustomerActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, string_allvenue);
         lstvenue.setAdapter(venueAdapter);
 
         lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String venue_name = allvenue.get(i).getVenue_name();
                 Intent intent = new Intent(CustomerActivity.this, AllEventActivity.class);
-                intent.putExtra("Venue name", venue_name);
+                intent.putExtra("Venue name", allvenue.get(i));
                 intent.putExtra("user", User);
                 startActivity(intent);
             }

@@ -33,11 +33,12 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         string_allvenue = new ArrayList<String>();
         Do.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
+            for (venue Venue : allvenue) {
+                string_allvenue.add(Venue.getVenue_name());
+            }
+
         });
 
-        for (venue Venue : allvenue) {
-            string_allvenue.add(Venue.getVenue_name());
-        }
 
         this.User = (user) getIntent().getSerializableExtra("user");
 
@@ -63,9 +64,8 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String venue_name = allvenue.get(i).getVenue_name();
                 Intent intent = new Intent(AdminActivity.this, AllEventActivity.class);
-                intent.putExtra("Venue name", venue_name);
+                intent.putExtra("Venue", allvenue.get(i));
 //                intent.putExtra("user", User);
                 startActivity(intent);
             }
