@@ -7,14 +7,14 @@ public class user implements Serializable {
     //    private static int totalid;
     private ArrayList<Integer> list_events;
     private String Name;
-    private Boolean is_admin;
+    private int admin;
     private int password;
 
     //    private int id;
-    public user(String n, int p, boolean admin) {
+    public user(String n, int p, int admin) {
         Name = n;
         password = p;
-        is_admin = admin;
+        this.admin = admin;
 //        id = totalid;
 //        totalid++;
         list_events = null;
@@ -32,12 +32,12 @@ public class user implements Serializable {
         this.Name = s;
     }
 
-    public void setIs_admin(Boolean b) {
-        is_admin = b;
+    public void setadmin(int b) {
+        admin = b;
     }
 
-    public boolean get_admin() {
-        return is_admin;
+    public int get_admin() {
+        return admin;
     }
 
     public void setPassword(int n) {

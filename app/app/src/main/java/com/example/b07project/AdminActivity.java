@@ -31,7 +31,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
         allvenue = new ArrayList<venue>();
         string_allvenue = new ArrayList<String>();
-        database_operation.DisplayVenues((ArrayList<venue> venue_list) -> {
+        Do.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
         });
 
@@ -57,7 +57,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
         lstvenue = (ListView) findViewById(R.id.lstvenue_a);
 
-        ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
         lstvenue.setAdapter(venueAdapter);
 
         lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -66,7 +66,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 String venue_name = allvenue.get(i).getVenue_name();
                 Intent intent = new Intent(AdminActivity.this, AllEventActivity.class);
                 intent.putExtra("Venue name", venue_name);
-                intent.putExtra("user", User);
+//                intent.putExtra("user", User);
                 startActivity(intent);
             }
         });
@@ -83,7 +83,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 break;
             case R.id.btnfilter:
                 String filter_text = this.filter_text.toString();
-                database_operation.filterVenue(filter_text, (ArrayList<venue> venues) ->{
+                Do.filterVenue(filter_text, (ArrayList<venue> venues) ->{
                     string_allvenue.clear();
                     for(venue Venue: venues){
                         string_allvenue.add(Venue.getVenue_name());

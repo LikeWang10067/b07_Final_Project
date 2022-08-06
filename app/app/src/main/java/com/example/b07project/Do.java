@@ -9,8 +9,10 @@ import androidx.annotation.RequiresApi;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class database_operation {
+public class Do {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean checkDateSequence(String start, String end) {
         LocalDateTime first = LocalDateTime.parse(start);
@@ -59,7 +61,7 @@ public class database_operation {
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void fgetuser(String username, int password, Consumer<user> callback) {
-        user a = new user("xyz", 12, false);
+        user a = new user("xyz", 12, 0);
         callback.accept(a);
     }
 
@@ -83,37 +85,115 @@ public class database_operation {
         callback.accept(a);
     }
 
-    public static void CheckLogIn(String applicantname, int password, Consumer<user> callback) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
-        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                } else {
-                    Boolean flag = false;
-                    for (DataSnapshot d : task.getResult().getChildren()) {
-                        user test = d.getValue(user.class);
-                        if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
-//                            adduser(new user(applicantname,password,false));
-                            callback.accept(test);
-                            flag = true;
-                            break;
-                        }
-                    }
-                    if (flag == false) {
-                        callback.accept(null);
-                    }
-//                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-
+//    public static void CheckLogIn(String applicantname, int password, Consumer<user> callback) {
+//        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+//        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//            @RequiresApi(api = Build.VERSION_CODES.N)
+//            @Override
+//            public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                if (!task.isSuccessful()) {
+//                    Log.e("firebase", "Error getting data", task.getException());
+//                } else {
+//                    Boolean flag = false;
+//                    for (DataSnapshot d : task.getResult().getChildren()) {
+//                        user test = d.getValue(user.class);
+//
+//                        if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
+////                            adduser(new user(applicantname,password,false));
+//                            //test.setIs_admin(false);
+////                            Log.d("firebase",String.valueOf(test.get_admin()));
+//                            callback.accept(test);
+//                            flag = true;
+//                            break;
+//                        }
+//                    }
+//                    if (flag == false) {
+//                        callback.accept(null);
+//                    }
+////                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//
+//                }
+//            }
+//
+//        });
+//    }
+public static void CheckLogIn(String applicantname, int password,Consumer<user> callback) {
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+    ref.child(applicantname).addListenerForSingleValueEvent(new ValueEventListener() {
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            user user1 = snapshot.getValue(user.class);
+            if(user1!=null){
+                if(user1.getPassword()==password){
+                    callback.accept(user1);
+                }
+                else {
+                    callback.accept(null);
                 }
             }
+            Log.d("wudi",String.valueOf(user1.get_admin()));
+            callback.accept(null);
 
-        });
-    }
+        }
 
-    public static void CheckIsAdmain(String applicantname, int password, Consumer<Boolean> callback) {
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    });
+                                                            }
+
+
+
+
+
+
+
+
+//    ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//        @RequiresApi(api = Build.VERSION_CODES.N)
+//        @Override
+//        public void onComplete(@NonNull Task<DataSnapshot> task) {
+//            if (!task.isSuccessful()) {
+//                Log.e("firebase", "Error getting data", task.getException());
+//            } else {
+//                ref.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        for (DataSnapshot d : snapshot.getChildren()) {
+//                            user test = d.getValue(user.class);
+//                            if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
+//                                callback.accept(test);
+//                                break;
+//                            }
+//                        }
+//                        callback.accept(null);
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//                });
+////                    Boolean flag = false;
+////                    for(DataSnapshot d: task.getResult().getChildren()) {
+////                        user test = d.getValue(user.class);
+////                        if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
+//////                            adduser(new user(applicantname,password,false));
+////                            callback.accept(test);
+////                            flag=true;
+////                            break;
+////                        }
+////                    }
+////                    if(flag==false){
+////                        callback.accept(null)
+//            }
+//        }
+//    });
+
+
+    public static void CheckIsAdmain(String applicantname, int password, Consumer<Integer> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -163,7 +243,7 @@ public class database_operation {
                         }
                     }
                     if (flag) {
-                        user a = new user(applicantname, password, false);
+                        user a = new user(applicantname, password, 0);
                         adduser(a);
                         callback.accept(a);
                     }
