@@ -14,6 +14,7 @@ public class event implements Comparable<event>, Serializable {
     private int num_players;
     private int reg_num;
     private String venue;
+    private String eventName;
     private LocalDateTime start;
     private LocalDateTime end;
     //    private int id;
@@ -24,11 +25,12 @@ public class event implements Comparable<event>, Serializable {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public event(int num_player, String v, String start, String end) {
+    public event(int num_player, String v, String start, String end, String eventName) {
         num_players = num_player;
         venue = v;
         this.start = LocalDateTime.parse(start);
         this.end = LocalDateTime.parse(end);
+        this.eventName = eventName;
         reg_num = 0;
     }
 
@@ -63,6 +65,15 @@ public class event implements Comparable<event>, Serializable {
 //    public int getId(){
 //        return id;
 //    }
+
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
 
     public int getNum_players() {
         return num_players;
