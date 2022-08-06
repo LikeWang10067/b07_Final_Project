@@ -32,7 +32,7 @@ public class user implements Serializable {
         this.Name = s;
     }
 
-    public void setadmin(int b) {
+    public void set_admin(int b) {
         admin = b;
     }
 

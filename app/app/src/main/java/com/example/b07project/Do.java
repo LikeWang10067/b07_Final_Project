@@ -128,9 +128,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                 if(user1.getPassword()==password){
                     callback.accept(user1);
                 }
-                else {
-                    callback.accept(null);
-                }
             }
             Log.d("wudi",String.valueOf(user1.get_admin()));
             callback.accept(null);
