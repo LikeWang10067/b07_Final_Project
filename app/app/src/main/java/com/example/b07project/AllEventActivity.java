@@ -53,11 +53,19 @@ public class AllEventActivity extends AppCompatActivity {
             lstevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                String event_name = string_allevent.get(i);
-                    Intent intent = new Intent(AllEventActivity.this, UserEventActivity.class);
-                    intent.putExtra("event", allevent.get(i));
-                    intent.putExtra("user", User);
-                    startActivity(intent);
+                    if(Do.ifjoins(User, allevent.get(i)) == true){ // user have join activity
+                        Intent intent = new Intent(AllEventActivity.this, JoinActivity.class);
+                        intent.putExtra("event", allevent.get(i));
+                        intent.putExtra("user", User);
+                        startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(AllEventActivity.this, CancelActivity.class);
+                        intent.putExtra("event", allevent.get(i));
+                        intent.putExtra("user", User);
+                        startActivity(intent);
+
+                    }
                 }
             });
 

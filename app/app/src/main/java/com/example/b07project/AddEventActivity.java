@@ -132,8 +132,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         switch(view.getId()){
             case R.id.add:
                 String string_max_people = this.MaxPeople.getText().toString();
-                String string_start = this.start.getText().toString();
-                String string_end = this.end.getText().toString();
                 String string_event_name = this.event_name.getText().toString();
                 String string_start_date = this.start_date.getText().toString();
                 String string_start_time = this.start_time.getText().toString();

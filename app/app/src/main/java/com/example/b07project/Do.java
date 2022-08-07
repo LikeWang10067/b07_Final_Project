@@ -85,7 +85,7 @@ public class Do {
         callback.accept(a);
     }
 
-    //    public static void CheckLogIn(String applicantname, int password, Consumer<user> callback) {
+//    public static void CheckLogIn(String applicantname, int password, Consumer<user> callback) {
 //        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
 //        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
 //            @RequiresApi(api = Build.VERSION_CODES.N)
@@ -101,7 +101,7 @@ public class Do {
 //                        if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
 ////                            adduser(new user(applicantname,password,false));
 //                            //test.setIs_admin(false);
-//                            Log.d("firebase",String.valueOf(test.get_admin()));
+////                            Log.d("firebase",String.valueOf(test.get_admin()));
 //                            callback.accept(test);
 //                            flag = true;
 //                            break;
@@ -117,25 +117,29 @@ public class Do {
 //
 //        });
 //    }
-    public static void CheckLogIn(String applicantname, int password,Consumer<user> callback) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
-        ref.child(applicantname).addListenerForSingleValueEvent(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                user user = snapshot.getValue(user.class);
-
-                Log.d("wudi",String.valueOf(user.getadmin()));
-                callback.accept(user);
-
+public static void CheckLogIn(String applicantname, int password,Consumer<user> callback) {
+    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
+    ref.child(applicantname).addListenerForSingleValueEvent(new ValueEventListener() {
+        @RequiresApi(api = Build.VERSION_CODES.N)
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            user user1 = snapshot.getValue(user.class);
+            if(user1!=null){
+                if(user1.getPassword()==password){
+                    callback.accept(user1);
+                }
             }
+            Log.d("wudi",String.valueOf(user1.get_admin()));
+            callback.accept(null);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+        }
 
-            }
-        });
-    }
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    });
+                                                            }
 
 
 
@@ -200,7 +204,7 @@ public class Do {
                         user test = d.getValue(user.class);
                         if (applicantname.equals(test.get_name()) && password == test.getPassword()) {
 //                            adduser(new user(applicantname,password,false));
-                            callback.accept(test.getadmin());
+                            callback.accept(test.get_admin());
                             //flag=true;
                             break;
                         }
@@ -277,23 +281,29 @@ public class Do {
     public static void DisplayEventsByVenue(String venuename, Consumer<ArrayList<event>> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
         LocalDateTime t = LocalDateTime.now();
+
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
+
                 if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
+                    Log.e("firebase!!!!!!!!!!", "Error getting data", task.getException());
                 } else {
+                    Log.d("!!!!!!!!!!!!!","!!!!!!!!!!");
                     ArrayList<event> s = new ArrayList<event>();
                     for (DataSnapshot d : task.getResult().getChildren()) {
-                        event test = d.getValue(event.class);
+                        event test = (event) d.getValue(event.class);
                         if (venuename.equals(test.getVenue())) {
-                            if (t.compareTo(test.getStart()) < 0) {
-                                s.add(test);
-                            }
+                            s.add(test);
+ //                           if (t.compareTo(test.getStart()) < 0) {
+ //                               s.add(test);
+ //                           }
                         }
                     }
+
                     Collections.sort(s);
+
                     callback.accept(s);
 //                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
 
@@ -304,7 +314,7 @@ public class Do {
     }
 
     public static void DisplayEventsByUser(String username, Consumer<ArrayList<event>> callback) {
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference(" ");
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
@@ -348,7 +358,7 @@ public class Do {
                     Boolean flag = false;
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
-                        if (eventhashcode == test.hashCode() && test.getReg_num() < test.getNum_players() && t.compareTo(test.getStart()) < 0) {
+                        if (eventhashcode == test.hashCode() && test.getReg_num() < test.getNum_players() && t.compareTo(LocalDateTime.parse(test.getstart())) < 0) {
                             flag = true;
                         }
                     }
@@ -795,6 +805,13 @@ public class Do {
 
         });
 
+    }
+
+    public static boolean ifjoins(user u, event e){
+        if(e.getUsernamess()==null){
+            return false;
+        }
+        return e.getUsernamess().contains(u.get_name());
     }
 
 

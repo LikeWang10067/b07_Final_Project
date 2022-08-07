@@ -30,10 +30,10 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         event_name.setText(Event.getEventName());
 
         start = (TextView) findViewById(R.id.start);
-        start.setText(Event.getStart().toString());
+        start.setText(Event.getstart().toString());
 
         end = (TextView) findViewById(R.id.end);
-        end.setText(Event.getEnd().toString());
+        end.setText(Event.getend().toString());
 
         location = (TextView) findViewById(R.id.location);
         location.setText(Event.getVenue());
