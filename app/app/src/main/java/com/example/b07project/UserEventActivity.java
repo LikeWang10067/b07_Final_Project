@@ -30,20 +30,33 @@ public class UserEventActivity extends AppCompatActivity implements View.OnClick
             for(event Event: events){
                 string_all_join_event.add(Event.getEventName());
             }
-        });
-        lstuserevent = (ListView) findViewById(R.id.lstuserevent);
-        ArrayAdapter<String> alljoineventAdapter = new ArrayAdapter<String>(UserEventActivity.this, android.R.layout.simple_list_item_1, string_all_join_event);
-        lstuserevent.setAdapter(alljoineventAdapter);
+            lstuserevent = (ListView) findViewById(R.id.lstuserevent);
+            ArrayAdapter<String> alljoineventAdapter = new ArrayAdapter<String>(UserEventActivity.this, android.R.layout.simple_list_item_1, string_all_join_event);
+            lstuserevent.setAdapter(alljoineventAdapter);
 
-        lstuserevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(UserEventActivity.this, CancelActivity.class);
-                intent.putExtra("user", User);
-                intent.putExtra("event", all_join_event.get(i));
-                startActivity(intent);
-            }
+            lstuserevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(UserEventActivity.this, CancelActivity.class);
+                    intent.putExtra("user", User);
+                    intent.putExtra("event", all_join_event.get(i));
+                    startActivity(intent);
+                }
+            });
         });
+//        lstuserevent = (ListView) findViewById(R.id.lstuserevent);
+//        ArrayAdapter<String> alljoineventAdapter = new ArrayAdapter<String>(UserEventActivity.this, android.R.layout.simple_list_item_1, string_all_join_event);
+//        lstuserevent.setAdapter(alljoineventAdapter);
+//
+//        lstuserevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Intent intent = new Intent(UserEventActivity.this, CancelActivity.class);
+//                intent.putExtra("user", User);
+//                intent.putExtra("event", all_join_event.get(i));
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override

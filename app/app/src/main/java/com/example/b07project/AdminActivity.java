@@ -37,39 +37,65 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 string_allvenue.add(Venue.getVenue_name());
             }
 
+            btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
+            btnaddvenue.setOnClickListener(this);
+
+
+            btnLogOut = (Button) findViewById(R.id.btnLogOut);
+            btnLogOut.setOnClickListener(this);
+
+            filter_text = (EditText) findViewById(R.id.filter_text);
+
+            btnfilter = (Button) findViewById(R.id.btnfilter);
+            btnfilter.setOnClickListener(this);
+
+            lstvenue = (ListView) findViewById(R.id.lstvenue_a);
+
+            ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+            lstvenue.setAdapter(venueAdapter);
+
+            lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    Intent intent = new Intent(AdminActivity.this, AdminEventActivity.class);
+                    intent.putExtra("Venue", allvenue.get(i));
+                    startActivity(intent);
+                }
+            });
+
         });
 
 
-//        this.User = (user) getIntent().getSerializableExtra("user");
-
-        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
-        btnaddvenue.setOnClickListener(this);
-
-//        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
-//        btndeletevenue.setOnClickListener(this);
-
-        btnLogOut = (Button) findViewById(R.id.btnLogOut);
-        btnLogOut.setOnClickListener(this);
-
-        filter_text = (EditText) findViewById(R.id.filter_text);
-
-        btnfilter = (Button) findViewById(R.id.btnfilter);
-        btnfilter.setOnClickListener(this);
-
-        lstvenue = (ListView) findViewById(R.id.lstvenue_a);
-
-        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
-        lstvenue.setAdapter(venueAdapter);
-
-        lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent(AdminActivity.this, AllEventActivity.class);
-                intent.putExtra("Venue", allvenue.get(i));
-//                intent.putExtra("user", User);
-                startActivity(intent);
-            }
-        });
+////        this.User = (user) getIntent().getSerializableExtra("user");
+//
+//        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
+//        btnaddvenue.setOnClickListener(this);
+//
+////        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
+////        btndeletevenue.setOnClickListener(this);
+//
+//        btnLogOut = (Button) findViewById(R.id.btnLogOut);
+//        btnLogOut.setOnClickListener(this);
+//
+//        filter_text = (EditText) findViewById(R.id.filter_text);
+//
+//        btnfilter = (Button) findViewById(R.id.btnfilter);
+//        btnfilter.setOnClickListener(this);
+//
+//        lstvenue = (ListView) findViewById(R.id.lstvenue_a);
+//
+//        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+//        lstvenue.setAdapter(venueAdapter);
+//
+//        lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                Intent intent = new Intent(AdminActivity.this, AllEventActivity.class);
+//                intent.putExtra("Venue", allvenue.get(i));
+////                intent.putExtra("user", User);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override

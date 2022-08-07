@@ -15,8 +15,8 @@ public class event implements Comparable<event>, Serializable {
     private int reg_num;
     private String venue;
     private String eventName;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private String start;
+    private String end;
     //    private int id;
     private ArrayList<String> usernames;
 
