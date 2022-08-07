@@ -52,7 +52,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
         start_date = (EditText) findViewById(R.id.start_date);
         start_date.setOnClickListener(this);
-        start_date.setInputType(InputType.TYPE_NULL);
 //        start_date.setInputType(InputType.TYPE_NULL);
 //        start_date.setOnClickListener(new View.OnClickListener(){
 //            @Override
@@ -73,7 +72,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
         end_date = (EditText) findViewById(R.id.end_date);
         end_date.setOnClickListener(this);
-        end_date.setInputType(InputType.TYPE_NULL);
 //        end_date.setOnClickListener(new View.OnClickListener(){
 //            @Override
 //            public void onClick(View view) {
@@ -93,7 +91,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
         start_time = (EditText) findViewById(R.id.start_time);
         start_time.setOnClickListener(this);
-        start_time.setInputType(InputType.TYPE_NULL);
 
 //        start_time.setOnClickListener(new View.OnClickListener(){
 //            @Override
@@ -114,7 +111,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
         end_time = (EditText) findViewById(R.id.end_time);
         end_time.setOnClickListener(this);
-        end_time.setInputType(InputType.TYPE_NULL);
 //        end_time.setOnClickListener(new View.OnClickListener(){
 //            @Override
 //            public void onClick(View view) {
@@ -179,16 +175,17 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 int num_player = Integer.valueOf(string_max_people);
                 event Event = new event(num_player, Venue.getVenue_name(), start, end, string_event_name);
                 Do.checkEventOverlap(Event, (Boolean overlap) -> {
+                    Log.d("Overlap", String.valueOf(overlap));
                     if(overlap == true){
-                        add.setError("Event overlap with other event");
+                        this.event_name.setError("Event overlap with other event");
                     }
                     else{
                         Do.admainAddEvent(Event, (Integer success) -> {
                             if(success == 0){
-                                add.setError("Venue does not exist");
+                                this.event_name.setError("Venue does not exist");
                             }
                             else if(success == 1){
-                                add.setError("Event already exist");
+                                this.event_name.setError("Event already exist");
                             }
                             else{
                                 startActivity(new Intent(this, AdminActivity.class));
@@ -213,7 +210,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 start_date_picker = new DatePickerDialog(AddEventActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        start_date.setText(year+"-"+month+"-"+day);
+                        int modify_month = month+1;
+                        start_date.setText(year+"-"+modify_month+"-"+day);
                     }
                 }, year, month, day);
                 start_date_picker.show();
@@ -223,7 +221,8 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 end_date_picker = new DatePickerDialog(AddEventActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        end_date.setText(year+"-"+month+"-"+day);
+                        int modify_month = month+1;
+                        end_date.setText(year+"-"+modify_month+"-"+day);
                     }
                 }, year, month, day);
                 end_date_picker.show();

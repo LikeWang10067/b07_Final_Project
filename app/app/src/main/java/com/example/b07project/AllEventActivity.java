@@ -55,7 +55,7 @@ public class AllEventActivity extends AppCompatActivity {
             lstevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    if(Do.ifjoins(User, allevent.get(i)) == true){ // user have join activity
+                    if(Do.ifjoins(User, allevent.get(i)) == true){ // user have not join activity
                         Intent intent = new Intent(AllEventActivity.this, JoinActivity.class);
                         intent.putExtra("event", allevent.get(i));
                         intent.putExtra("user", User);

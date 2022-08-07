@@ -117,7 +117,7 @@ public class event implements Comparable<event>, Serializable {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean checkOverlap(event b) {
-        return true;
-        //        return !(this.end.compareTo(b.start) < 0 || b.end.compareTo(this.start) < 0);
+//        return !(this.compareTo(b) < 0 || b.compareTo(this) < 0);
+        return !(LocalDateTime.parse(this.end).compareTo( LocalDateTime.parse(b.start))<0 || LocalDateTime.parse(b.end).compareTo (LocalDateTime.parse(this.start))<0);
     }
 }

@@ -127,10 +127,14 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
             if(user1!=null){
                 if(user1.getPassword()==password){
                     callback.accept(user1);
+                    return;
                 }
             }
-            Log.d("wudi",String.valueOf(user1.get_admin()));
-            callback.accept(null);
+
+//                Log.d("wudi", String.valueOf(user1.get_admin()));
+                callback.accept(null);
+
+
 
         }
 
@@ -552,10 +556,12 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if (test.checkOverlap(newEvent) == true && test.getVenue().equals(newEvent.getVenue())) {
-                            callback.accept(false);
+                            callback.accept(true);
+                            return;
                         }
                     }
-                    callback.accept(true);
+                    callback.accept(false);
+                    return;
                 }
             }
         });
@@ -686,7 +692,8 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                         if (eventlist != null) {
                             for (int i : eventlist) {
                                 if (i == delEvent.hashCode()) {
-                                    eventlist.remove(i);
+                                    int index = eventlist.indexOf(i);
+                                    eventlist.remove(index);
                                 }
                             }
                             test.setEventids(eventlist);
@@ -779,6 +786,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
     public static void filterVenue(String input, Consumer<ArrayList<venue>> callback) {
         String s = input.toLowerCase();
         String regex = ".*" + s + ".*";
+        Log.d("regex", regex);
         Pattern style1 = Pattern.compile(regex);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -791,7 +799,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     ArrayList<venue> res = new ArrayList<venue>();
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         venue test = d.getValue(venue.class);
-                        Matcher m1 = style1.matcher(test.getVenue_name());
+                        Matcher m1 = style1.matcher(test.getVenue_name().toLowerCase());
                         if (m1.matches()) {
                             res.add(test);
                         }

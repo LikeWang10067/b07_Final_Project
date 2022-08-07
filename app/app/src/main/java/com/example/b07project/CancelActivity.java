@@ -41,7 +41,7 @@ public class CancelActivity extends AppCompatActivity implements View.OnClickLis
 
         Max_people = (TextView) findViewById(R.id.Max_people);
 
-        Max_people.setText(String.valueOf(Event.getNum_players()));
+        Max_people.setText(Event.getReg_num() + "/" + Event.getNum_players());
     }
 
     @Override

@@ -39,7 +39,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         location.setText(Event.getVenue());
 
         Max_people = (TextView) findViewById(R.id.Max_people_j);
-        Max_people.setText(Event.getNum_players());
+        Max_people.setText(Event.getReg_num() + "/" + Event.getNum_players());
     }
 
     @Override

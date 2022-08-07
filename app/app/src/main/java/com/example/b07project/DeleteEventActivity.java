@@ -34,7 +34,7 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
         location.setText(Event.getVenue().toString());
 
         MaxPlayer = (TextView) findViewById(R.id.MaxPlayer_d);
-        MaxPlayer.setText(String.valueOf(Event.getNum_players()));
+        MaxPlayer.setText(Event.getReg_num() + "/" + String.valueOf(Event.getNum_players()));
 
         event_name = (TextView) findViewById(R.id.event_name_d);
         event_name.setText(Event.getEventName());

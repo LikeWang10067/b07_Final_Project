@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -126,8 +127,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.btnfilter:
-                String filter_text = this.filter_text.toString();
+                String filter_text = this.filter_text.getText().toString();
+                Log.d("filter_text", filter_text);
                 Do.filterVenue(filter_text, (ArrayList<venue> venues) ->{
+                    Log.d("Size of venues", String.valueOf(venues.size()));
                     string_allvenue.clear();
                     for(venue Venue: venues){
                         string_allvenue.add(Venue.getVenue_name());

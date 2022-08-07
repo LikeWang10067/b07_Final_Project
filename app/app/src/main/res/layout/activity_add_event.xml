@@ -53,7 +53,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:focusable="false"
         android:hint="Input Event Name"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/MaxPeople"

@@ -3,6 +3,7 @@ package com.example.b07project;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = this.password.getText().toString();
         int num_password = Integer.valueOf(password);
         Do.CheckLogIn(username, num_password, (user User) -> {
+            Log.d("User", String.valueOf(User == null));
             if (User == null) {
                 this.username.setError("User Incorrect or Password Incorrect");
                 this.password.setError("User Incorrect or Password Incorrect");
