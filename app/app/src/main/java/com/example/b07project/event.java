@@ -62,7 +62,7 @@ public class event implements Comparable<event>, Serializable {
         this.venue = venue;
     }
 
-    public ArrayList<String> getUsernames() {
+    public ArrayList<String> getusernames() {
         return usernames;
     }
 
@@ -92,10 +92,6 @@ public class event implements Comparable<event>, Serializable {
 
     public String getVenue() {
         return venue;
-    }
-
-    public ArrayList<String> getUsernamess() {
-        return usernames;
     }
 
     @Override

@@ -112,6 +112,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogOut:
+                Log.d("Logout", "Logout");
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.btnListJoinActivity:

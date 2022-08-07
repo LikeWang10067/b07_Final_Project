@@ -329,8 +329,8 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     ArrayList<event> s = new ArrayList<event>();
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
-                        if (test.getUsernamess() != null) {
-                            for (String name : test.getUsernamess()) {
+                        if (test.getusernames() != null) {
+                            for (String name : test.getusernames()) {
                                 if (name.equals(username)) {
                                     s.add(test);
                                 }
@@ -400,7 +400,16 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
         });
     }
 
-    public static void JoinEvent(String username, event target, Consumer<Boolean> callback) {
+    public  static boolean helper_checkJoined(user user1,event target){
+
+        if(user1.getList_events() == null){
+            return false;
+        }
+        return user1.getList_events().contains(target.hashCode());
+
+
+    }
+    public static void JoinEvent(user user1, event target, Consumer<Boolean> callback) {
         int eventhashcode = target.hashCode();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
         DatabaseReference refU = FirebaseDatabase.getInstance().getReference("User");
@@ -412,13 +421,19 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
+                    String username = user1.get_name();
+                    boolean flag = helper_checkJoined(user1,target);
+                    if(flag == true){
+                        callback.accept(false);
+                        return;
+                    }
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if (eventhashcode == test.hashCode() && test.getReg_num() < test.getNum_players()) {
                             int temp = test.getReg_num();
                             temp++;
                             test.setReg_num(temp);
-                            ArrayList<String> usersInEvent = test.getUsernamess();
+                            ArrayList<String> usersInEvent = test.getusernames();
                             if (usersInEvent == null) {
                                 usersInEvent = new ArrayList<String>();
                             }
@@ -444,9 +459,11 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                                 test1.setList_events(events);
                                                 adduser(test1);
                                                 callback.accept(true);
+                                                return;
                                             }
                                         }
                                         callback.accept(false);
+                                        return;
 
                                     }
                                 }
@@ -455,6 +472,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                         }
                     }
                     callback.accept(false);
+                    return;
 
                 }
             }
@@ -462,7 +480,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
         });
 
     }
-
     public static void unjoinEvent(String username, event target, Consumer<Integer> callback) {
         int eventhashcode = target.hashCode();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
@@ -478,11 +495,12 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if (eventhashcode == test.hashCode()) {
-                            ArrayList<String> list = test.getUsernamess();
+                            ArrayList<String> list = test.getusernames();
                             if (list == null || (!list.contains(username))) {
                                 callback.accept(1);//the user does not exists in the event/event does not exist in user
                             }
-                            list.remove(username);
+                            int index = list.indexOf(username);
+                            list.remove(index);
                             int reg = test.getReg_num();
                             reg--;
                             test.setReg_num(reg);
@@ -504,6 +522,8 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                                 }
                                                 int index = userevents.indexOf(target.hashCode());
                                                 userevents.remove(index);
+                                                test.setList_events(userevents);
+                                                adduser(test);
                                                 callback.accept(2);//success
                                             }
                                             callback.accept(0);
@@ -817,10 +837,10 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
     }
 
     public static boolean ifjoins(user u, event e){
-        if(e.getUsernames()==null){
+        if(e.getusernames()==null){
             return false;
         }
-        return e.getUsernames().contains(u.get_name());
+        return e.getusernames().contains(u.get_name());
     }
 
 

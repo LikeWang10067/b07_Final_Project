@@ -46,7 +46,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.Join:
-                Do.JoinEvent(User.get_name(), Event, (Boolean join) ->{
+                Do.JoinEvent(User, Event, (Boolean join) ->{
                     if(join == true){
                         Intent intent = new Intent(JoinActivity.this, CustomerActivity.class);
                         intent.putExtra("user", User);
