@@ -10,70 +10,63 @@
         android:id="@+id/Join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="571dp"
-        android:layout_marginBottom="112dp"
+        android:layout_marginBottom="64dp"
         android:text="Join"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/event_name_j"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/start_j"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="117dp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/start_j"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="43dp"
-        android:layout_marginBottom="373dp"
+        android:layout_marginBottom="50dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/Join"
+        app:layout_constraintBottom_toTopOf="@+id/end_j"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/event_name_j" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/end_j"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="177dp"
-        android:layout_marginTop="55dp"
         android:layout_marginEnd="176dp"
-        android:layout_marginBottom="298dp"
+        android:layout_marginBottom="50dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/Join"
+        app:layout_constraintBottom_toTopOf="@+id/location_j"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_j" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/location_j"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:layout_marginBottom="223dp"
+        android:layout_marginBottom="50dp"
         android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/Join"
+        app:layout_constraintBottom_toTopOf="@+id/Max_people_j"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/end_j" />
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/Max_people_j"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="139dp"
+        android:layout_marginBottom="100dp"
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/Join"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_j" />
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
