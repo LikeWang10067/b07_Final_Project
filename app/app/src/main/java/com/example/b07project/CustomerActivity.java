@@ -42,9 +42,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         allvenue = new ArrayList<venue>();
         string_allvenue = new ArrayList<String>();
         Do.DisplayVenues((ArrayList<venue> venue_list) -> {
-            allvenue = venue_list;
-
-            for (venue Venue : allvenue) {
+            for (venue Venue : venue_list) {
                 string_allvenue.add(Venue.getVenue_name());
             }
         });
