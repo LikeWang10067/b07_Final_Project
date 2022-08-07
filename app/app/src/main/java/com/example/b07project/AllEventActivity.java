@@ -23,6 +23,7 @@ public class AllEventActivity extends AppCompatActivity {
     private List<String> string_allevent;
     private String venue_name;
     private user User;
+
     ArrayList<String> tutorials = new ArrayList<String>();
 
 
@@ -43,6 +44,7 @@ public class AllEventActivity extends AppCompatActivity {
             for (event Event: allevent) {
                 string_allevent.add(Event.getEventName());
             }
+
             User = (user) getIntent().getSerializableExtra("user");
 
             lstevent = (ListView) findViewById(R.id.venue_lstevent);
@@ -71,8 +73,8 @@ public class AllEventActivity extends AppCompatActivity {
 
         });
 
-//        User = (user) getIntent().getSerializableExtra("user");
-//
+
+
 //        lstevent = (ListView) findViewById(R.id.venue_lstevent);
 //
 //        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, string_allevent);
@@ -81,10 +83,9 @@ public class AllEventActivity extends AppCompatActivity {
 //        lstevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-////                String event_name = string_allevent.get(i);
+//                String event_name = string_allevent.get(i);
 //                Intent intent = new Intent(AllEventActivity.this, UserEventActivity.class);
-//                intent.putExtra("event", allevent.get(i));
-//                intent.putExtra("user", User);
+//                intent.putExtra("Event", event_name);
 //                startActivity(intent);
 //            }
 //        });

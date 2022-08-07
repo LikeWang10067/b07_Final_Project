@@ -32,6 +32,7 @@ public class event implements Comparable<event>, Serializable {
         this.end = end;
         this.EventName = eventName;
         reg_num = 0;
+
     }
 
     public void setUsernames(ArrayList<String> id) {
@@ -116,6 +117,7 @@ public class event implements Comparable<event>, Serializable {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean checkOverlap(event b) {
-        return !(this.end.compareTo(b.start) > 0 || b.end.compareTo(this.start) > 0);
+        return true;
+        //        return !(this.end.compareTo(b.start) < 0 || b.end.compareTo(this.start) < 0);
     }
 }

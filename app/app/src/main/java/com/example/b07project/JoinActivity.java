@@ -26,19 +26,19 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
         User = (user) getIntent().getSerializableExtra("user");
         Event = (event) getIntent().getSerializableExtra("event");
 
-        event_name = (TextView) findViewById(R.id.event_name);
+        event_name = (TextView) findViewById(R.id.event_name_j);
         event_name.setText(Event.getEventName());
 
-        start = (TextView) findViewById(R.id.start);
+        start = (TextView) findViewById(R.id.start_j);
         start.setText(Event.getstart());
 
-        end = (TextView) findViewById(R.id.end);
+        end = (TextView) findViewById(R.id.end_j);
         end.setText(Event.getend());
 
-        location = (TextView) findViewById(R.id.location);
+        location = (TextView) findViewById(R.id.location_j);
         location.setText(Event.getVenue());
 
-        Max_people = (TextView) findViewById(R.id.Max_people);
+        Max_people = (TextView) findViewById(R.id.Max_people_j);
         Max_people.setText(Event.getNum_players());
     }
 

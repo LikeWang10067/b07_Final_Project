@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,6 +31,7 @@ public class UserEventActivity extends AppCompatActivity implements View.OnClick
             for(event Event: events){
                 string_all_join_event.add(Event.getEventName());
             }
+
             lstuserevent = (ListView) findViewById(R.id.lstuserevent);
             ArrayAdapter<String> alljoineventAdapter = new ArrayAdapter<String>(UserEventActivity.this, android.R.layout.simple_list_item_1, string_all_join_event);
             lstuserevent.setAdapter(alljoineventAdapter);
@@ -43,6 +45,12 @@ public class UserEventActivity extends AppCompatActivity implements View.OnClick
                     startActivity(intent);
                 }
             });
+
+
+
+
+
+
         });
 //        lstuserevent = (ListView) findViewById(R.id.lstuserevent);
 //        ArrayAdapter<String> alljoineventAdapter = new ArrayAdapter<String>(UserEventActivity.this, android.R.layout.simple_list_item_1, string_all_join_event);

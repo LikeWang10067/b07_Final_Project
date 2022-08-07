@@ -37,6 +37,7 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
             for (event Event: allevent) {
                 string_allactivity.add(Event.getEventName());
             }
+
             delete_venue = (Button) findViewById(R.id.delete_venue);
             delete_venue.setOnClickListener(this);
 
@@ -56,6 +57,8 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
                     startActivity(intent);
                 }
             });
+
+
 
         });
 
