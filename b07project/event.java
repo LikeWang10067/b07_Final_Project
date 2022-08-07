@@ -32,6 +32,7 @@ public class event implements Comparable<event>, Serializable {
         this.end = end;
         this.EventName = eventName;
         reg_num = 0;
+
     }
 
     public void setUsernames(ArrayList<String> id) {

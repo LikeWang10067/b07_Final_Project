@@ -807,11 +807,11 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
 
     }
 
-    public static boolean ifjoins(user u, event e){
-        if(e.getUsernamess()==null){
+    public boolean ifjoins(user u, event e){
+        if(e.getUsernames()==null){
             return false;
         }
-        return e.getUsernamess().contains(u.get_name());
+        return e.getUsernames().contains(u.get_name());
     }
 
 

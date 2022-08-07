@@ -4,17 +4,11 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 
 public class DeleteEventActivity extends AppCompatActivity implements View.OnClickListener {
     private event Event;
@@ -30,19 +24,19 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
 
         Event = (event) getIntent().getSerializableExtra("Event");
 
-        start = (TextView) findViewById(R.id.start);
+        start = (TextView) findViewById(R.id.start_d);
         start.setText(Event.getStart().toString());
 
-        end = (TextView) findViewById(R.id.end);
+        end = (TextView) findViewById(R.id.end_d);
         end.setText(Event.getEnd().toString());
 
-        location = (TextView) findViewById(R.id.location);
+        location = (TextView) findViewById(R.id.location_d);
         location.setText(Event.getVenue().toString());
 
-        MaxPlayer = (TextView) findViewById(R.id.MaxPlayer);
+        MaxPlayer = (TextView) findViewById(R.id.MaxPlayer_d);
         MaxPlayer.setText(Event.getNum_players());
 
-        event_name = (TextView) findViewById(R.id.event_name);
+        event_name = (TextView) findViewById(R.id.event_name_d);
         event_name.setText(Event.getEventName());
 
     }

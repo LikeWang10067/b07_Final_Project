@@ -1,4 +1,4 @@
 package com.example.b07project;
 
-public class JoinActivity {
+public class DeleteVenueActivity {
 }

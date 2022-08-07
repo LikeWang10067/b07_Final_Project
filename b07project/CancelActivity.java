@@ -30,10 +30,10 @@ public class CancelActivity extends AppCompatActivity implements View.OnClickLis
         event_name.setText(Event.getEventName());
 
         start = (TextView) findViewById(R.id.start);
-        start.setText(Event.getstart());
+        start.setText(Event.getStart().toString());
 
         end = (TextView) findViewById(R.id.end);
-        end.setText(Event.getend());
+        end.setText(Event.getEnd().toString());
 
         location = (TextView) findViewById(R.id.location);
         location.setText(Event.getVenue());

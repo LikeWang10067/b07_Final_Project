@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class CustomerActivity extends AppCompatActivity implements View.OnClickListener {
     private user User;
@@ -21,6 +22,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     private ListView lstvenue;
     private List<venue> allvenue;
     private List<String> string_allvenue;
+
 
 
     String[] tutorials
@@ -40,22 +42,32 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_customer);
 
         allvenue = new ArrayList<venue>();
+
         string_allvenue = new ArrayList<String>();
         Do.DisplayVenues((ArrayList<venue> venue_list) -> {
-            for (venue Venue : venue_list) {
+            allvenue = venue_list;
+
+            for (venue Venue : allvenue) {
                 string_allvenue.add(Venue.getVenue_name());
+
+
+
             }
         });
 
 
 
         this.User = (user) getIntent().getSerializableExtra("user");
+//        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
+//        btnaddvenue.setOnClickListener(this);
+//        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
+//        btndeletevenue.setOnClickListener(this);
 
         btnLogOut = (Button) findViewById(R.id.btnLogOut_u);
         btnLogOut.setOnClickListener(this);
 
-        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
-        btnListJoinActivity.setOnClickListener(this);
+//        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
+//        btnListJoinActivity.setOnClickListener(this);
 
         lstvenue = (ListView) findViewById(R.id.lstvenue_u);
 
@@ -65,8 +77,9 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String venue_name = string_allvenue.get(i);
                 Intent intent = new Intent(CustomerActivity.this, AllEventActivity.class);
-                intent.putExtra("Venue name", allvenue.get(i).getVenue_name());
+                intent.putExtra("Venue name", venue_name);
                 intent.putExtra("user", User);
                 startActivity(intent);
             }
@@ -79,11 +92,11 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             case R.id.btnLogOut:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
-            case R.id.btnListJoinActivity:
-                Intent intent = new Intent(this, UserEventActivity.class);
-                intent.putExtra("user", this.User);
-                startActivity(intent);
-                break;
+//            case R.id.btnListJoinActivity:
+//                Intent intent = new Intent(this, UserEventActivity.class);
+//                intent.putExtra("user", this.User);
+//                startActivity(intent);
+//                break;
         }
     }
 

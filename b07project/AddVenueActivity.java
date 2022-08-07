@@ -20,7 +20,7 @@ public class AddVenueActivity extends AppCompatActivity implements View.OnClickL
 
         venue_name = (EditText) findViewById(R.id.venue_name);
 
-        btnadd_venue = (Button) findViewById(R.id.btnaddvenue);
+        btnadd_venue = (Button) findViewById(R.id.btnaddvenue_true);
         btnadd_venue.setOnClickListener(this);
     }
 
