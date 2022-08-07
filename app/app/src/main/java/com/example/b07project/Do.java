@@ -502,7 +502,8 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                                 if (userevents == null || (!userevents.contains(target.hashCode()))) {
                                                     callback.accept(1);
                                                 }
-                                                userevents.remove(target.hashCode());
+                                                int index = userevents.indexOf(target.hashCode());
+                                                userevents.remove(index);
                                                 callback.accept(2);//success
                                             }
                                             callback.accept(0);

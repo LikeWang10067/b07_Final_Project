@@ -27,11 +27,11 @@
         android:ems="10"
         android:hint="Start Date"
         android:inputType="textPersonName"
-        android:focusable="false"
         app:layout_constraintBottom_toTopOf="@+id/end_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="false" />
 
     <EditText
         android:id="@+id/end_date"
@@ -39,13 +39,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:focusable="false"
         android:hint="End Date"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/start_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="false"/>
 
     <EditText
         android:id="@+id/event_name_add"
@@ -66,13 +66,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:focusable="false"
         android:hint="Start time"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/end_time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="false"/>
 
     <EditText
         android:id="@+id/end_time"
@@ -80,13 +80,13 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:ems="10"
-        android:focusable="false"
         android:hint="End time"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/add1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:focusable="false"/>
 
     <Button
         android:id="@+id/add1"

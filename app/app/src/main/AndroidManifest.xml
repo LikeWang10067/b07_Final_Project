@@ -28,6 +28,7 @@
         <activity android:name=".AddEventActivity" />
         <activity android:name=".AddVenueActivity" />
         <activity android:name=".CancelActivity" />
+        <activity android:name=".JoinActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
