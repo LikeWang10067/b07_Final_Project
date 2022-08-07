@@ -39,7 +39,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
 
-        add = (Button) findViewById(R.id.add);
+        add = (Button) findViewById(R.id.add1);
         add.setOnClickListener(this);
 
         Venue = (venue) getIntent().getSerializableExtra("Venue");
@@ -122,7 +122,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        event_name = (EditText) findViewById(R.id.event_name);
+        event_name = (EditText) findViewById(R.id.event_name_add);
 
     }
 
@@ -130,7 +130,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.add:
+            case R.id.add1:
                 String string_max_people = this.MaxPeople.getText().toString();
                 String string_event_name = this.event_name.getText().toString();
                 String string_start_date = this.start_date.getText().toString();

@@ -19,6 +19,15 @@
         <activity android:name="com.example.b07project.LoginActivity" />
         <activity android:name="com.example.b07project.AdminActivity" />
         <activity android:name="com.example.b07project.SignUpActivity" />
+        <activity android:name="com.example.b07project.AddEventActivity" />
+        <activity android:name="com.example.b07project.AddVenueActivity" />
+        <activity android:name="com.example.b07project.AdminEventActivity" />
+        <activity android:name="com.example.b07project.AllEventActivity" />
+        <activity android:name="com.example.b07project.CancelActivity" />
+        <activity android:name="com.example.b07project.DeleteEventActivity" />
+        <activity android:name="com.example.b07project.JoinActivity" />
+        <activity android:name="com.example.b07project.UserEventActivity" />
+
         <activity android:name="com.example.b07project.MainActivity"
             android:exported="true">
         android:label="@string/app_name"
