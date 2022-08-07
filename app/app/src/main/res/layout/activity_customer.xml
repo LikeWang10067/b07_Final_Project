@@ -23,7 +23,13 @@
         android:id="@+id/btnLogOut_u"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="254dp"
+        android:layout_marginTop="63dp"
+        android:layout_marginEnd="59dp"
+        android:layout_marginBottom="39dp"
         android:text="Log out"
-        tools:layout_editor_absoluteX="254dp"
-        tools:layout_editor_absoluteY="63dp" />
+        app:layout_constraintBottom_toTopOf="@+id/lstvenue_u"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
