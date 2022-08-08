@@ -12,14 +12,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -130,14 +127,10 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
             if(user1!=null){
                 if(user1.getPassword()==password){
                     callback.accept(user1);
-                    return;
                 }
             }
-
-//                Log.d("wudi", String.valueOf(user1.get_admin()));
+            Log.d("wudi",String.valueOf(user1.get_admin()));
             callback.accept(null);
-            return;
-
 
         }
 
@@ -213,7 +206,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
 //                            adduser(new user(applicantname,password,false));
                             callback.accept(test.get_admin());
                             //flag=true;
-                            return;
+                            break;
                         }
                     }
 //                    if(flag==false){
@@ -243,14 +236,13 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                         if (applicantname.equals(test.get_name())) {
                             callback.accept(null);
                             flag = false;
-                            return;
+                            break;
                         }
                     }
                     if (flag) {
                         user a = new user(applicantname, password, 0);
                         adduser(a);
                         callback.accept(a);
-                        return;
                     }
 //                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
 
@@ -277,7 +269,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     }
                     callback.accept(s);
 //                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    return;
+
                 }
             }
 
@@ -288,7 +280,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public static void DisplayEventsByVenue(String venuename, Consumer<ArrayList<event>> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
-        LocalDateTime t = LocalDateTime.now();
 
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.O)
@@ -298,14 +289,16 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                 if (!task.isSuccessful()) {
                     Log.e("firebase!!!!!!!!!!", "Error getting data", task.getException());
                 } else {
+                    LocalDateTime t = LocalDateTime.now();
+                    Log.d("!!!!!!!!!!!!!","!!!!!!!!!!");
                     ArrayList<event> s = new ArrayList<event>();
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = (event) d.getValue(event.class);
                         if (venuename.equals(test.getVenue())) {
-                            s.add(test);
- //                           if (t.compareTo(test.getStart()) < 0) {
- //                               s.add(test);
- //                           }
+//                            s.add(test);
+                            if (t.compareTo(LocalDateTime.parse(test.getstart())) < 0) {
+                                s.add(test);
+                            }
                         }
                     }
 
@@ -313,7 +306,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
 
                     callback.accept(s);
 //                    Log.d("firebase", String.valueOf(task.getResult().getValue()));
-                    return;
+
                 }
             }
 
@@ -332,8 +325,8 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     ArrayList<event> s = new ArrayList<event>();
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
-                        if (test.getusernames() != null) {
-                            for (String name : test.getusernames()) {
+                        if (test.getUsernamess() != null) {
+                            for (String name : test.getUsernamess()) {
                                 if (name.equals(username)) {
                                     s.add(test);
                                 }
@@ -403,16 +396,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
         });
     }
 
-    public  static boolean helper_checkJoined(user user1,event target){
-
-        if(user1.getList_events() == null){
-            return false;
-        }
-        return user1.getList_events().contains(target.hashCode());
-
-
-    }
-    public static void JoinEvent(user user1, event target, Consumer<Boolean> callback) {
+    public static void JoinEvent(String username, event target, Consumer<Boolean> callback) {
         int eventhashcode = target.hashCode();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
         DatabaseReference refU = FirebaseDatabase.getInstance().getReference("User");
@@ -424,19 +408,13 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
-                    String username = user1.get_name();
-                    boolean flag = helper_checkJoined(user1,target);
-                    if(flag == true){
-                        callback.accept(false);
-                        return;
-                    }
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if (eventhashcode == test.hashCode() && test.getReg_num() < test.getNum_players()) {
                             int temp = test.getReg_num();
                             temp++;
                             test.setReg_num(temp);
-                            ArrayList<String> usersInEvent = test.getusernames();
+                            ArrayList<String> usersInEvent = test.getUsernamess();
                             if (usersInEvent == null) {
                                 usersInEvent = new ArrayList<String>();
                             }
@@ -462,11 +440,9 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                                 test1.setList_events(events);
                                                 adduser(test1);
                                                 callback.accept(true);
-                                                return;
                                             }
                                         }
                                         callback.accept(false);
-                                        return;
 
                                     }
                                 }
@@ -475,7 +451,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                         }
                     }
                     callback.accept(false);
-                    return;
 
                 }
             }
@@ -483,6 +458,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
         });
 
     }
+
     public static void unjoinEvent(String username, event target, Consumer<Integer> callback) {
         int eventhashcode = target.hashCode();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
@@ -498,19 +474,16 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if (eventhashcode == test.hashCode()) {
-                            ArrayList<String> list = test.getusernames();
+                            ArrayList<String> list = test.getUsernamess();
                             if (list == null || (!list.contains(username))) {
                                 callback.accept(1);//the user does not exists in the event/event does not exist in user
-                                return;
                             }
-                            int index = list.indexOf(username);
-                            list.remove(index);
+                            list.remove(username);
                             int reg = test.getReg_num();
                             reg--;
                             test.setReg_num(reg);
                             test.setUsernames(list);
                             addevent(test);
-
 
                             refU.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
                                 @Override
@@ -518,26 +491,17 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                     if (!task.isSuccessful()) {
                                         Log.e("firebase", "Error getting data", task.getException());
                                     } else {
-                                        if (task.getResult().child(username).exists()) {
-
- //                                       for (DataSnapshot d : task.getResult().getChildren()) {
-                                            user test = task.getResult().child(username).getValue(user.class);
-                                            Log.d("$$$$$$$$",test.get_name());
+                                        for (DataSnapshot d : task.getResult().getChildren()) {
+                                            user test = d.getValue(user.class);
                                             if (test.get_name().equals(username)) {
                                                 ArrayList<Integer> userevents = test.getList_events();
                                                 if (userevents == null || (!userevents.contains(target.hashCode()))) {
                                                     callback.accept(1);
-                                                    return;
                                                 }
-                                                int index = userevents.indexOf(target.hashCode());
-                                                userevents.remove(index);
-                                                test.setList_events(userevents);
-                                                adduser(test);
+                                                userevents.remove(target.hashCode());
                                                 callback.accept(2);//success
-                                                return;
                                             }
                                             callback.accept(0);
-                                            return;
                                         }
                                     }
                                 }
@@ -545,8 +509,7 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
 
                         }
                     }
-                    callback.accept(3);//the event/user does not exists in list
-                    return;
+                    callback.accept(0);//the event/user does not exists in list
                 }
             }
         });
@@ -566,13 +529,11 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                         venue test = d.getValue(venue.class);
                         if (venueName.equals(test.getVenue_name())) {
                             callback.accept(null);
-                            return;
                         }
                     }
                     venue newVenue = new venue(venueName);
                     addvenue(newVenue);
                     callback.accept(newVenue);
-                    return;
                 }
             }
 
@@ -591,12 +552,10 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if (test.checkOverlap(newEvent) == true && test.getVenue().equals(newEvent.getVenue())) {
-                            callback.accept(true);
-                            return;
+                            callback.accept(false);
                         }
                     }
-                    callback.accept(false);
-                    return;
+                    callback.accept(true);
                 }
             }
         });
@@ -624,7 +583,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                 for (int one : newList) {
                                     if (one == newEvent.hashCode()) {
                                         callback.accept(1);
-                                        return;
                                     }
                                 }
                             }
@@ -640,7 +598,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                     } else {
                                         addevent(newEvent);
                                         callback.accept(2);
-                                        return;
                                     }
                                 }
 
@@ -651,7 +608,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
 
                 }
                 callback.accept(0);
-                return;
             }
 
         });
@@ -661,29 +617,28 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
 
     public static void admainDeleteEventUserpart(event delEvent, Consumer<Boolean> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("User");
-        ArrayList<String> usernames = delEvent.getusernames();
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-
-                int event_id = delEvent.hashCode();
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
-                    for (String username : usernames) {
-                        DataSnapshot d = task.getResult().child(username).child("list_events");
-                        DatabaseReference r = d.getRef();
-
-                        GenericTypeIndicator<ArrayList<Integer>> t = new GenericTypeIndicator<ArrayList<Integer>>() {};
-                        ArrayList<Integer> k = new ArrayList<Integer>();
-                        k = d.getValue(t);
-                        if (k != null && k.contains(event_id)) {
-                            r.child(String.valueOf(k.indexOf(event_id))).removeValue();
+                    for (DataSnapshot d : task.getResult().getChildren()) {
+                        user test = d.getValue(user.class);
+                        ArrayList<Integer> eventlist = test.getList_events();
+                        if (eventlist != null) {
+                            for (int i : eventlist) {
+                                if (i == delEvent.hashCode()) {
+                                    eventlist.remove(i);
+                                }
+                            }
+                            test.setList_events(eventlist);
+                            adduser(test);
                         }
                     }
                     callback.accept(true);
-                    return;
+
                 }
             }
 
@@ -704,11 +659,10 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                         if (test.hashCode() == delEvent.hashCode()) {
                             ref.child(String.valueOf(test.hashCode())).removeValue();
                             callback.accept(true);
-                            return;
                         }
                     }
                     callback.accept(false);
-                    return;
+
                 }
             }
 
@@ -718,33 +672,33 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
 
     public static void admainDeleteEventVenuepart(event delEvent, Consumer<Boolean> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
-        String vanue_name = delEvent.getVenue();
-        ref.child(vanue_name).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
-
-                int event_id = delEvent.hashCode();
-
                 if (!task.isSuccessful()) {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
-                    DataSnapshot d = task.getResult().child("eventids");
-                    DatabaseReference r = d.getRef();
-
-                    GenericTypeIndicator<ArrayList<Integer>> t = new GenericTypeIndicator<ArrayList<Integer>>() {
-                    };
-                    ArrayList<Integer> k = new ArrayList<Integer>();
-                    k = d.getValue(t);
-                    if (k != null && k.contains(event_id)) {
-                        r.child(String.valueOf(k.indexOf(event_id))).removeValue();
-                        callback.accept(true);
-                        return;
+                    Boolean flag = false;
+                    for (DataSnapshot d : task.getResult().getChildren()) {
+                        venue test = d.getValue(venue.class);
+                        ArrayList<Integer> eventlist = test.getEventids();
+                        if (eventlist != null) {
+                            for (int i : eventlist) {
+                                if (i == delEvent.hashCode()) {
+                                    eventlist.remove(i);
+                                }
+                            }
+                            test.setEventids(eventlist);
+                            addvenue(test);
+                            flag = true;
+                        }
                     }
-                    callback.accept(false);
-                    return;
+                    callback.accept(flag);
+
                 }
             }
+
         });
     }
 
@@ -756,20 +710,16 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                 admainDeleteEventEventpart(delEvent, (Boolean get1) -> {
                     if (get1 == true) {
                         admainDeleteEventVenuepart(delEvent, (Boolean get2) -> {
-                            if (get2 == true) {
+                            if (get2 == true)
                                 callback.accept(true);
-                                return;
-                            }
                             callback.accept(false);
-                            return;
                         });
                     }
                     callback.accept(false);
-                    return;
                 });
             }
             callback.accept(false);
-            return;
+
         });
     }
 
@@ -803,7 +753,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                                                         adaminDeleteEvent(test, (Boolean get2) -> {
                                                             if (get2 == false)
                                                                 callback.accept(false);
-                                                                return;
                                                         });
                                                     }
                                                 }
@@ -816,11 +765,9 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                             }
                             ref.child(delVenue.getVenue_name()).removeValue();
                             callback.accept(true);
-                            return;
                         }
 
                         callback.accept(false);
-                        return;
                     }
                 }
             }
@@ -832,7 +779,6 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
     public static void filterVenue(String input, Consumer<ArrayList<venue>> callback) {
         String s = input.toLowerCase();
         String regex = ".*" + s + ".*";
-        Log.d("regex", regex);
         Pattern style1 = Pattern.compile(regex);
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -845,14 +791,14 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
                     ArrayList<venue> res = new ArrayList<venue>();
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         venue test = d.getValue(venue.class);
-                        Matcher m1 = style1.matcher(test.getVenue_name().toLowerCase());
+                        Matcher m1 = style1.matcher(test.getVenue_name());
                         if (m1.matches()) {
                             res.add(test);
                         }
 
                     }
                     callback.accept(res);
-                    return;
+
 
                 }
             }
@@ -862,10 +808,10 @@ public static void CheckLogIn(String applicantname, int password,Consumer<user> 
     }
 
     public static boolean ifjoins(user u, event e){
-        if(e.getusernames()==null){
+        if(e.getUsernames()==null){
             return false;
         }
-        return e.getusernames().contains(u.get_name());
+        return e.getUsernames().contains(u.get_name());
     }
 
 
