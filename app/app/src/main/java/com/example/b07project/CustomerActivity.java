@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,6 +22,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     private ListView lstvenue;
     private List<venue> allvenue;
     private List<String> string_allvenue;
+    private TextView Customer_venue;
 
 
     @Override
@@ -42,8 +44,13 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
                     string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
                 }
             }
-
-
+            Customer_venue = (TextView) findViewById(R.id.Customer_venue);
+            if(allvenue.size() == 0){
+                Customer_venue.setText("No Venue");
+            }
+            else{
+                Customer_venue.setText("All Venue");
+            }
             this.User = (user) getIntent().getSerializableExtra("user");
             this.setTitle("Welcome " + this.User.get_name() + " !");
 

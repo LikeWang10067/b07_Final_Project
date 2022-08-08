@@ -40,8 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.password.setError("Please input password");
             return;
         }else {
-            int num_password = Integer.valueOf(password);
-            Do.CheckLogIn(username, num_password, (user User) -> {
+            //int num_password = Integer.valueOf(password);
+            Do.CheckLogIn(username, password, (user User) -> {
                 Log.d("User", String.valueOf(User == null));
                 if (User == null) {
                     this.username.setError("User Incorrect or Password Incorrect");

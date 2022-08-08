@@ -36,4 +36,17 @@
         android:text="Your Event"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/Customer_venue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColorHighlight="#00FFFFFF"
+        android:textColorLink="#00FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/lstvenue_u"
+        app:layout_constraintTop_toBottomOf="@+id/btnListJoinActivity"
+        tools:layout_editor_absoluteX="39dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

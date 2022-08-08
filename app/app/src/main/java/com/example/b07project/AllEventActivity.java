@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class AllEventActivity extends AppCompatActivity {
     private List<String> string_allevent;
     private String venue_name;
     private user User;
+    private TextView all_event_view;
 
     ArrayList<String> tutorials = new ArrayList<String>();
 
@@ -45,6 +47,13 @@ public class AllEventActivity extends AppCompatActivity {
                 string_allevent.add(Event.getEventName() + " Players Joined: " + Event.getReg_num() + "/" + Event.getNum_players());
             }
 
+            all_event_view = (TextView) findViewById(R.id.all_event_view);
+            if(allevent.size() == 0){
+                all_event_view.setText("No Activity");
+            }
+            else{
+                all_event_view.setText("All activity of " + venue_name);
+            }
             User = (user) getIntent().getSerializableExtra("user");
 
             lstevent = (ListView) findViewById(R.id.venue_lstevent);

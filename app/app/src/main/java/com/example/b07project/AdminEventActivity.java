@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
     private List<event> allevent;
     private List<String> string_allactivity;
     private venue Venue;
+    private TextView admin_event;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -39,7 +41,13 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
             for (event Event: allevent) {
                 string_allactivity.add(Event.getEventName() + " Players Joined: " + Event.getReg_num() + "/" + Event.getNum_players());
             }
-
+            admin_event = (TextView) findViewById(R.id.admin_event);
+            if(allevent.size() == 0){
+                admin_event.setText("No Activity");
+            }
+            else{
+                admin_event.setText("All activity");
+            }
             delete_venue = (Button) findViewById(R.id.delete_venue);
             delete_venue.setOnClickListener(this);
 

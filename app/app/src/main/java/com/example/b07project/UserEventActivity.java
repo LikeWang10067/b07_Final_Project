@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ public class UserEventActivity extends AppCompatActivity implements View.OnClick
     private List<String> string_all_join_event;
     private List<event> all_join_event;
     private user User;
+    private TextView join_activity;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,14 @@ public class UserEventActivity extends AppCompatActivity implements View.OnClick
             all_join_event = events;
             for(event Event: events){
                 string_all_join_event.add(Event.getEventName() + " Players Joined: " + Event.getReg_num() + "/" + Event.getNum_players());
+            }
+
+            join_activity = (TextView) findViewById(R.id.join_activity);
+            if(all_join_event.size() == 0){
+                join_activity.setText("No join activity");
+            }
+            else{
+                join_activity.setText("All join activity by " + User.get_name());
             }
 
             lstuserevent = (ListView) findViewById(R.id.lstuserevent);
