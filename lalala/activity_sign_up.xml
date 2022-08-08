@@ -14,9 +14,9 @@
         android:layout_marginTop="200dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
+        android:hint="username"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="Username"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,6 +29,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:ems="10"
+        android:hint="******"
         android:inputType="numberPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"

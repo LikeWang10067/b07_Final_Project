@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/start_j"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/end_j"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -45,6 +47,7 @@
         android:layout_marginEnd="176dp"
         android:layout_marginBottom="50dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/location_j"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -55,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/Max_people_j"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
@@ -66,6 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="100dp"
         android:text="TextView"
+        android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/Join"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
