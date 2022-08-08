@@ -2,6 +2,8 @@ package com.example.b07project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +25,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private List<venue> allvenue;
     private List<String> string_allvenue;
     private EditText filter_text;
-    private Button btnfilter;
+//    private Button btnfilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +38,12 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             allvenue = venue_list;
 
             for (venue Venue : allvenue) {
-                string_allvenue.add(Venue.getVenue_name());
+                if (Venue.getEventids() != null) {
+                    string_allvenue.add(Venue.getVenue_name() + " " + "Activity: " + Venue.getEventids().size());
+                }
+                else{
+                    string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
+                }
             }
 
             btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
@@ -46,9 +53,41 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             btnLogOut.setOnClickListener(this);
 
             filter_text = (EditText) findViewById(R.id.filter_text);
+            filter_text.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-            btnfilter = (Button) findViewById(R.id.btnfilter);
-            btnfilter.setOnClickListener(this);
+                }
+
+                @Override
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    String filter_text = AdminActivity.this.filter_text.getText().toString();
+                    Log.d("filter_text", filter_text);
+                    Do.filterVenue(filter_text, (ArrayList<venue> venues) -> {
+                        Log.d("Size of venues", String.valueOf(venues.size()));
+                        string_allvenue.clear();
+                        for (venue Venue : venues) {
+                            if (Venue.getEventids() != null) {
+                                string_allvenue.add(Venue.getVenue_name() + " " + "Activity: " + Venue.getEventids().size());
+                            }
+                            else{
+                                string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
+                            }
+                        }
+                        ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+                        lstvenue.setAdapter(venueAdapter);
+                    });
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+
+                }
+            });
+
+
+//            btnfilter = (Button) findViewById(R.id.btnfilter);
+//            btnfilter.setOnClickListener(this);
 
             lstvenue = (ListView) findViewById(R.id.lstvenue_a);
 
@@ -126,19 +165,19 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogOut:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
-            case R.id.btnfilter:
-                String filter_text = this.filter_text.getText().toString();
-                Log.d("filter_text", filter_text);
-                Do.filterVenue(filter_text, (ArrayList<venue> venues) ->{
-                    Log.d("Size of venues", String.valueOf(venues.size()));
-                    string_allvenue.clear();
-                    for(venue Venue: venues){
-                        string_allvenue.add(Venue.getVenue_name());
-                    }
-                    ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
-                    lstvenue.setAdapter(venueAdapter);
-                });
-                break;
+//            case R.id.btnfilter:
+//                String filter_text = this.filter_text.getText().toString();
+//                Log.d("filter_text", filter_text);
+//                Do.filterVenue(filter_text, (ArrayList<venue> venues) ->{
+//                    Log.d("Size of venues", String.valueOf(venues.size()));
+//                    string_allvenue.clear();
+//                    for(venue Venue: venues){
+//                        string_allvenue.add(Venue.getVenue_name());
+//                    }
+//                    ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+//                    lstvenue.setAdapter(venueAdapter);
+//                });
+//                break;
         }
     }
 }

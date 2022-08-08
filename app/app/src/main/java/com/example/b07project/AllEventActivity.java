@@ -36,13 +36,13 @@ public class AllEventActivity extends AppCompatActivity {
 
 
         venue_name = getIntent().getStringExtra("Venue name");
+        this.setTitle("Events at " + venue_name);
         allevent = new ArrayList<event>();
         string_allevent = new ArrayList<String>();
         Do.DisplayEventsByVenue(venue_name, (ArrayList<event> events) -> {
             allevent = events;
-            Log.d("lalalala", String.valueOf(allevent.size()));
             for (event Event: allevent) {
-                string_allevent.add(Event.getEventName());
+                string_allevent.add(Event.getEventName() + " Players Joined: " + Event.getReg_num() + "/" + Event.getNum_players());
             }
 
             User = (user) getIntent().getSerializableExtra("user");

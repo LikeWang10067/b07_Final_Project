@@ -23,18 +23,6 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     private List<String> string_allvenue;
 
 
-
-    String[] tutorials
-            = { "Algorithms", "Data Structures",
-            "Languages", "Interview Corner",
-            "GATE", "ISRO CS",
-            "UGC NET CS", "CS Subjects",
-            "Web Technologies", "Algorithms", "Data Structures",
-            "Languages", "Interview Corner",
-            "GATE", "ISRO CS",
-            "UGC NET CS", "CS Subjects",
-            "Web Technologies" };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +35,17 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             allvenue = venue_list;
 
             for (venue Venue : allvenue) {
-                string_allvenue.add(Venue.getVenue_name());
+                if (Venue.getEventids() != null) {
+                    string_allvenue.add(Venue.getVenue_name() + " " + "Activity: " + Venue.getEventids().size());
+                }
+                else{
+                    string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
+                }
             }
 
 
             this.User = (user) getIntent().getSerializableExtra("user");
+            this.setTitle("Welcome " + this.User.get_name() + " !");
 
             btnLogOut = (Button) findViewById(R.id.btnLogOut_u);
             btnLogOut.setOnClickListener(this);
@@ -67,7 +61,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
             lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String venue_name = string_allvenue.get(i);
+                    String venue_name = allvenue.get(i).getVenue_name();
                     Intent intent = new Intent(CustomerActivity.this, AllEventActivity.class);
                     intent.putExtra("Venue name", venue_name);
                     intent.putExtra("user", User);
@@ -113,6 +107,8 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()) {
             case R.id.btnLogOut_u:
                 Log.d("Logout", "Logout");
+
+
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.btnListJoinActivity:

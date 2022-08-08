@@ -18,22 +18,20 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-        btnSignUp = (Button) findViewById(R.id.btnSignUp2);
+        btnSignUp = (Button) findViewById(R.id.btnSignUps);
         btnSignUp.setOnClickListener(this);
 //        btnBack = (Button) findViewById(R.id.btnBack);
 //        btnBack.setOnClickListener(this);
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
+        username = (EditText) findViewById(R.id.username_s);
+        password = (EditText) findViewById(R.id.password_s);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnSignUp2:
+            case R.id.btnSignUps:
                 SignUp();
                 break;
-//            case R.id.btnBack:
-//                startActivity(new Intent(this, MainActivity.class));
         }
     }
 

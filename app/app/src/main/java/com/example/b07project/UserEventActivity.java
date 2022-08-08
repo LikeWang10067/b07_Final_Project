@@ -29,7 +29,7 @@ public class UserEventActivity extends AppCompatActivity implements View.OnClick
         Do.DisplayEventsByUser(User.get_name(), (ArrayList<event> events) -> {
             all_join_event = events;
             for(event Event: events){
-                string_all_join_event.add(Event.getEventName());
+                string_all_join_event.add(Event.getEventName() + " Players Joined: " + Event.getReg_num() + "/" + Event.getNum_players());
             }
 
             lstuserevent = (ListView) findViewById(R.id.lstuserevent);

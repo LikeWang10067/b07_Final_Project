@@ -13,7 +13,7 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
     private user User;
     private event Event;
     private Button Join;
-    private TextView event_name, start, end, location, Max_people;
+    private TextView start, end, location, Max_people;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,15 +25,13 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 
         User = (user) getIntent().getSerializableExtra("user");
         Event = (event) getIntent().getSerializableExtra("event");
-
-        event_name = (TextView) findViewById(R.id.event_name_j);
-        event_name.setText(Event.getEventName());
+        this.setTitle(Event.getEventName() + "'s Detail");
 
         start = (TextView) findViewById(R.id.start_j);
-        start.setText(Event.getstart());
+        start.setText(Event.getstart().replace("T", " "));
 
         end = (TextView) findViewById(R.id.end_j);
-        end.setText(Event.getend());
+        end.setText(Event.getend().replace("T", " "));
 
         location = (TextView) findViewById(R.id.location_j);
         location.setText(Event.getVenue());

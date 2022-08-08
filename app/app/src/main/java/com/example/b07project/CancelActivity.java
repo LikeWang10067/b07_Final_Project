@@ -14,7 +14,7 @@ public class CancelActivity extends AppCompatActivity implements View.OnClickLis
     private user User;
     private event Event;
     private Button Cancel;
-    private TextView event_name, start, end, location, Max_people;
+    private TextView  start, end, location, Max_people;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -26,15 +26,14 @@ public class CancelActivity extends AppCompatActivity implements View.OnClickLis
 
         User = (user) getIntent().getSerializableExtra("user");
         Event = (event) getIntent().getSerializableExtra("event");
+        this.setTitle(Event.getEventName() + "'s Detail");
 
-        event_name = (TextView) findViewById(R.id.event_name);
-        event_name.setText(Event.getEventName());
 
         start = (TextView) findViewById(R.id.start);
-        start.setText(Event.getstart().toString());
+        start.setText(Event.getstart().toString().replace("T", " "));
 
         end = (TextView) findViewById(R.id.end);
-        end.setText(Event.getend().toString());
+        end.setText(Event.getend().toString().replace("T", " "));
 
         location = (TextView) findViewById(R.id.location);
         location.setText(Event.getVenue());
