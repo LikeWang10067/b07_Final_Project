@@ -61,4 +61,16 @@
         app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toEndOf="@+id/filter_text"
         app:layout_constraintTop_toBottomOf="@+id/btnLogOut" />
+
+    <TextView
+        android:id="@+id/admin_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="6dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintBottom_toTopOf="@+id/lstvenue_a"
+        app:layout_constraintTop_toBottomOf="@+id/filter_text"
+        tools:layout_editor_absoluteX="64dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

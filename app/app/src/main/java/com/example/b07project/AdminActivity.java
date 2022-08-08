@@ -11,8 +11,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     private List<String> string_allvenue;
     private EditText filter_text;
 //    private Button btnfilter;
+    private TextView admin_textview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,13 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
 
+            admin_textview = (TextView) findViewById(R.id.admin_textview);
+            if(allvenue.size() == 0){
+                admin_textview.setText("No Venue");
+            }
+            else{
+                admin_textview.setText("All Venue");
+            }
             btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
             btnaddvenue.setOnClickListener(this);
 
