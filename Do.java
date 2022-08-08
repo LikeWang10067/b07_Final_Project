@@ -651,8 +651,7 @@ public class Do {
                     }
 
                 }
-                callback.accept(0);
-                return;
+
             }
 
         });
@@ -801,7 +800,7 @@ public class Do {
 //                Log.d("+++++++++++++",String.valueOf(events.get(1)));
                 //Log.d("+++++++++++++",String.valueOf(events.get(2)));
                 ref.child(delVenue.getVenue_name()).removeValue();
-
+                Log.d("+++++++++++++",String.valueOf(events.size()));
 
                 for(int eventId: events) {
                     DatabaseReference ref_E = FirebaseDatabase.getInstance().getReference("Event");
@@ -840,6 +839,47 @@ public class Do {
             }
         });
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void cleaner(Consumer<Boolean>callback){
+        DatabaseReference ref_E = FirebaseDatabase.getInstance().getReference("Event");
+       // DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
+        ref_E.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    LocalDateTime now = LocalDateTime.now();
+                    ArrayList<event> s = new ArrayList<event>();
+                    for (DataSnapshot d : task.getResult().getChildren()) {
+                        event test = d.getValue(event.class);
+                        if(LocalDateTime.parse(test.getstart()).compareTo(now) < 0 ){
+                            admainDeleteEventVenuepart(test, (Boolean get2) -> {
+                                if (get2 == false) {
+                                    callback.accept(false);
+                                    return;
+                                }
+
+                            });
+
+                        }
+                    }
+                    callback.accept(true);
+                    return;
+
+                }
+            }
+
+        });
+        LocalDateTime now = LocalDateTime.now();
+
+
+
+    }
+
 
 //    public static void adaimDeleteVenue(venue delVenue, Consumer<Boolean> callback) {
 //        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
