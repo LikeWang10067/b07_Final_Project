@@ -8,71 +8,57 @@
 
     <ListView
         android:id="@+id/lstvenue_a"
-        android:layout_width="344dp"
-        android:layout_height="436dp"
+        android:layout_width="341dp"
+        android:layout_height="495dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="260dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/filter_text" />
 
     <Button
         android:id="@+id/btnLogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="150dp"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="47dp"
         android:text="Log Out"
-        app:layout_constraintBottom_toTopOf="@+id/lstvenue_a"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnaddvenue"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnaddvenue"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="150dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="32dp"
         android:text="Add Venue"
-        app:layout_constraintBottom_toTopOf="@+id/lstvenue_a"
-        app:layout_constraintEnd_toStartOf="@+id/btnLogOut"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/filter_text"
-        android:layout_width="210dp"
-        android:layout_height="0dp"
+        android:layout_width="187dp"
+        android:layout_height="45dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="64dp"
         android:ems="10"
+        android:hint="Search Venue"
         android:inputType="textPersonName"
-        android:text="search venue"
-        app:layout_constraintBottom_toTopOf="@+id/lstvenue_a"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnaddvenue" />
 
     <Button
         android:id="@+id/btnfilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="45dp"
         android:layout_marginStart="41dp"
-        android:layout_marginTop="39dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:layout_marginBottom="64dp"
         android:text="Search"
-        app:layout_constraintBottom_toTopOf="@+id/lstvenue_a"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toEndOf="@+id/filter_text"
         app:layout_constraintTop_toBottomOf="@+id/btnLogOut" />
 </androidx.constraintlayout.widget.ConstraintLayout>

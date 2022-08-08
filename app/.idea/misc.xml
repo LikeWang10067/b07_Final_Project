@@ -5,16 +5,24 @@
       <map>
         <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_cancel.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_event.xml" value="0.18611111111111112" />
-        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_admin_event.xml" value="0.178125" />
+        <entry key="app/src/main/res/layout/activity_add_event.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_add_venue.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_admin.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_admin_event.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_all_event.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_cancel.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_customer.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_delete_event.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_delete_event.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_delete_venue.xml" value="0.38697916666666665" />
         <entry key="app/src/main/res/layout/activity_event.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/activity_join.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_user_event.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/content_delete_event.xml" value="0.38697916666666665" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.34103260869565216" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.34103260869565216" />
       </map>
     </option>
   </component>
