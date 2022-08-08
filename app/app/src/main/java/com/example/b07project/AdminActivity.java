@@ -83,8 +83,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                             }
                             else{
                                 string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
-                                admin_textview.clearComposingText();
-                                admin_textview.setText("No Venue");
                             }
                         }
                         ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
