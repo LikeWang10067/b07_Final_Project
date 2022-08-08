@@ -723,41 +723,84 @@ public class Do {
 
     public static void admainDeleteEventVenuepart(event delEvent, Consumer<Boolean> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
-        String vanue_name = delEvent.getVenue();
-        ref.child(vanue_name).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        String a = delEvent.getVenue();
+        ref.child(a).addListenerForSingleValueEvent(new ValueEventListener() {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
-            public void onComplete(@NonNull Task<DataSnapshot> task) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                venue test = snapshot.getValue(venue.class);
+                if(test==null){
 
-                int event_id = delEvent.hashCode();
+                    callback.accept(false);
+                    return;
+                }
+                else{
+                    Boolean flag = false;
+                    ArrayList<Integer> eventlist = test.getEventids();
+                    if (eventlist != null) {
+                        for (int i : eventlist) {
+                            if (i == delEvent.hashCode()) {
+                                flag= true;
+                                int index = eventlist.indexOf(i);
+                                eventlist.remove(index);
+                                test.setEventids(eventlist);
+                                addvenue(test);
+                                callback.accept(flag);
+                                return;
+                            }
+                        }
 
-                if (!task.isSuccessful()) {
-                    Log.e("firebase", "Error getting data", task.getException());
-                } else {
-                    DataSnapshot d = task.getResult().child("eventids");
-                    DatabaseReference r = d.getRef();
-
-                    GenericTypeIndicator<ArrayList<Integer>> t = new GenericTypeIndicator<ArrayList<Integer>>() {
-                    };
-                    ArrayList<Integer> k = new ArrayList<Integer>();
-                    k = d.getValue(t);
-                    if (k != null && k.contains(event_id)) {
-                        r.child(String.valueOf(k.indexOf(event_id))).removeValue();
-                        callback.accept(true);
-                        return;
                     }
                     callback.accept(false);
                     return;
                 }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
         });
     }
+
+//    public static void admainDeleteEventVenuepart(event delEvent, Consumer<Boolean> callback) {
+////        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
+////        String vanue_name = delEvent.getVenue();
+////        ref.child(vanue_name).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+////            @RequiresApi(api = Build.VERSION_CODES.N)
+////            @Override
+////            public void onComplete(@NonNull Task<DataSnapshot> task) {
+////
+////                int event_id = delEvent.hashCode();
+////
+////                if (!task.isSuccessful()) {
+////                    Log.e("firebase", "Error getting data", task.getException());
+////                } else {
+////                    DataSnapshot d = task.getResult().child("eventids");
+////                    DatabaseReference r = d.getRef();
+////
+////                    GenericTypeIndicator<ArrayList<Integer>> t = new GenericTypeIndicator<ArrayList<Integer>>() {
+////                    };
+////                    ArrayList<Integer> k = new ArrayList<Integer>();
+////                    k = d.getValue(t);
+////                    if (k != null && k.contains(event_id)) {
+////                        r.child(String.valueOf(k.indexOf(event_id))).removeValue();
+////                        callback.accept(true);
+////                        return;
+////                    }
+////                    callback.accept(false);
+////                    return;
+////                }
+////            }
+////        });
+//    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void adaminDeleteEvent(event delEvent, Consumer<Boolean> callback) {
         admainDeleteEventUserpart(delEvent, (Boolean get) -> {
             Boolean flag = true;
             if (get == true) {
+
                 admainDeleteEventEventpart(delEvent, (Boolean get1) -> {
                     if (get1 == true) {
                         admainDeleteEventVenuepart(delEvent, (Boolean get2) -> {
@@ -857,7 +900,7 @@ public class Do {
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if(LocalDateTime.parse(test.getstart()).compareTo(now) < 0 ){
-                            admainDeleteEventVenuepart(test, (Boolean get2) -> {
+                            adaminDeleteEvent(test, (Boolean get2) -> {
                                 if (get2 == false) {
                                     callback.accept(false);
                                     return;
