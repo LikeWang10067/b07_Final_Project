@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,9 +28,11 @@ public class AddVenueActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.btnaddvenue:
+            case R.id.btnaddvenue_true:
                 String string_venue_name = venue_name.getText().toString();
+
                 Do.admainAddVenue(string_venue_name, (venue Venue)->{
+
                     if(Venue == null){
                         venue_name.setError("Venue already exist");
                     }

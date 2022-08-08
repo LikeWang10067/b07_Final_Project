@@ -17,7 +17,6 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class CustomerActivity extends AppCompatActivity implements View.OnClickListener {
     private user User;
-    //    private Button btnaddvenue, btndeletevenue;
     private Button btnLogOut, btnListJoinActivity;
     private ListView lstvenue;
     private List<venue> allvenue;
@@ -49,54 +48,80 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 
             for (venue Venue : allvenue) {
                 string_allvenue.add(Venue.getVenue_name());
-
-
-
             }
+
+
+            this.User = (user) getIntent().getSerializableExtra("user");
+
+            btnLogOut = (Button) findViewById(R.id.btnLogOut_u);
+            btnLogOut.setOnClickListener(this);
+
+        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
+        btnListJoinActivity.setOnClickListener(this);
+
+            lstvenue = (ListView) findViewById(R.id.lstvenue_u);
+
+            ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, string_allvenue);
+            lstvenue.setAdapter(venueAdapter);
+
+            lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    String venue_name = string_allvenue.get(i);
+                    Intent intent = new Intent(CustomerActivity.this, AllEventActivity.class);
+                    intent.putExtra("Venue name", venue_name);
+                    intent.putExtra("user", User);
+                    startActivity(intent);
+                }
+            });
+
         });
 
-
-
-        this.User = (user) getIntent().getSerializableExtra("user");
-//        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
-//        btnaddvenue.setOnClickListener(this);
-//        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
-//        btndeletevenue.setOnClickListener(this);
-
-        btnLogOut = (Button) findViewById(R.id.btnLogOut_u);
-        btnLogOut.setOnClickListener(this);
-
-//        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
-//        btnListJoinActivity.setOnClickListener(this);
-
-        lstvenue = (ListView) findViewById(R.id.lstvenue_u);
-
-        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, string_allvenue);
-        lstvenue.setAdapter(venueAdapter);
-
-        lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String venue_name = string_allvenue.get(i);
-                Intent intent = new Intent(CustomerActivity.this, AllEventActivity.class);
-                intent.putExtra("Venue name", venue_name);
-                intent.putExtra("user", User);
-                startActivity(intent);
-            }
-        });
+//
+//
+//        this.User = (user) getIntent().getSerializableExtra("user");
+////        btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
+////        btnaddvenue.setOnClickListener(this);
+////        btndeletevenue = (Button) findViewById(R.id.btndeletevenue);
+////        btndeletevenue.setOnClickListener(this);
+//
+//        btnLogOut = (Button) findViewById(R.id.btnLogOut_u);
+//        btnLogOut.setOnClickListener(this);
+//
+////        btnListJoinActivity = (Button) findViewById(R.id.btnListJoinActivity);
+////        btnListJoinActivity.setOnClickListener(this);
+//
+//        lstvenue = (ListView) findViewById(R.id.lstvenue_u);
+//
+//        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, string_allvenue);
+//        lstvenue.setAdapter(venueAdapter);
+//
+//        lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//                String venue_name = string_allvenue.get(i);
+//                Intent intent = new Intent(CustomerActivity.this, AllEventActivity.class);
+//                intent.putExtra("Venue name", venue_name);
+//                intent.putExtra("user", User);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnLogOut:
+            case R.id.btnLogOut_u:
+                Log.d("Logout", "Logout");
+
+
                 startActivity(new Intent(this, MainActivity.class));
                 break;
-//            case R.id.btnListJoinActivity:
-//                Intent intent = new Intent(this, UserEventActivity.class);
-//                intent.putExtra("user", this.User);
-//                startActivity(intent);
-//                break;
+            case R.id.btnListJoinActivity:
+                Intent intent = new Intent(this, UserEventActivity.class);
+                intent.putExtra("user", this.User);
+                startActivity(intent);
+                break;
         }
     }
 

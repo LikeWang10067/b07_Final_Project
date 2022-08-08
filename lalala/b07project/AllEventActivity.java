@@ -22,6 +22,7 @@ public class AllEventActivity extends AppCompatActivity {
     private List<event> allevent;
     private List<String> string_allevent;
     private String venue_name;
+    private user User;
 
     ArrayList<String> tutorials = new ArrayList<String>();
 
@@ -39,10 +40,11 @@ public class AllEventActivity extends AppCompatActivity {
         string_allevent = new ArrayList<String>();
         Do.DisplayEventsByVenue(venue_name, (ArrayList<event> events) -> {
             allevent = events;
-            Log.d("lalalala", String.valueOf(allevent.size()));
             for (event Event: allevent) {
                 string_allevent.add(Event.getEventName());
             }
+
+            User = (user) getIntent().getSerializableExtra("user");
 
             lstevent = (ListView) findViewById(R.id.venue_lstevent);
 
@@ -52,10 +54,19 @@ public class AllEventActivity extends AppCompatActivity {
             lstevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String event_name = string_allevent.get(i);
-                    Intent intent = new Intent(AllEventActivity.this, UserEventActivity.class);
-                    intent.putExtra("Event", event_name);
-                    startActivity(intent);
+                    if(Do.ifjoins(User, allevent.get(i)) == false){ // user have not join activity
+                        Intent intent = new Intent(AllEventActivity.this, JoinActivity.class);
+                        intent.putExtra("event", allevent.get(i));
+                        intent.putExtra("user", User);
+                        startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(AllEventActivity.this, CancelActivity.class);
+                        intent.putExtra("event", allevent.get(i));
+                        intent.putExtra("user", User);
+                        startActivity(intent);
+
+                    }
                 }
             });
 

@@ -25,16 +25,16 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
         Event = (event) getIntent().getSerializableExtra("Event");
 
         start = (TextView) findViewById(R.id.start_d);
-        start.setText(Event.getStart().toString());
+        start.setText(Event.getstart().toString());
 
         end = (TextView) findViewById(R.id.end_d);
-        end.setText(Event.getEnd().toString());
+        end.setText(Event.getend().toString());
 
         location = (TextView) findViewById(R.id.location_d);
         location.setText(Event.getVenue().toString());
 
         MaxPlayer = (TextView) findViewById(R.id.MaxPlayer_d);
-        MaxPlayer.setText(Event.getNum_players());
+        MaxPlayer.setText(Event.getReg_num() + "/" + String.valueOf(Event.getNum_players()));
 
         event_name = (TextView) findViewById(R.id.event_name_d);
         event_name.setText(Event.getEventName());
@@ -45,7 +45,7 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.delete_venue:
+            case R.id.delete_event:
                 Do.adaminDeleteEvent(Event, (Boolean success) ->{
                     if(success == true){ // success delete
                         startActivity(new Intent(this, AdminActivity.class));

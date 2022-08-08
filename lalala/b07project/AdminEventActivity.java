@@ -57,31 +57,8 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
                     startActivity(intent);
                 }
             });
-
-
-
         });
 
-
-//        delete_venue = (Button) findViewById(R.id.delete_venue);
-//        delete_venue.setOnClickListener(this);
-//
-//        add_event = (Button) findViewById(R.id.add_event);
-//        add_event.setOnClickListener(this);
-//
-//        lstevent = (ListView) findViewById(R.id.lstevent);
-//
-//        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(AdminEventActivity.this, android.R.layout.simple_list_item_1, string_allactivity);
-//        lstevent.setAdapter(venueAdapter);
-//
-//        lstevent.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//                Intent intent = new Intent(AdminEventActivity.this, DeleteEventActivity.class);
-//                intent.putExtra("Event", allevent.get(i));
-//                startActivity(intent);
-//            }
-//        });
     }
 
     @Override

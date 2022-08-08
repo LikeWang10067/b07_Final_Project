@@ -2,6 +2,7 @@ package com.example.b07project;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,16 +31,17 @@ public class CancelActivity extends AppCompatActivity implements View.OnClickLis
         event_name.setText(Event.getEventName());
 
         start = (TextView) findViewById(R.id.start);
-        start.setText(Event.getStart().toString());
+        start.setText(Event.getstart().toString());
 
         end = (TextView) findViewById(R.id.end);
-        end.setText(Event.getEnd().toString());
+        end.setText(Event.getend().toString());
 
         location = (TextView) findViewById(R.id.location);
         location.setText(Event.getVenue());
 
         Max_people = (TextView) findViewById(R.id.Max_people);
-        Max_people.setText(Event.getNum_players());
+
+        Max_people.setText(Event.getReg_num() + "/" + Event.getNum_players());
     }
 
     @Override
