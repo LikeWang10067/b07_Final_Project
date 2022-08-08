@@ -83,6 +83,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                             }
                             else{
                                 string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
+                                admin_textview.clearComposingText();
                                 admin_textview.setText("No Venue");
                             }
                         }

@@ -43,6 +43,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
                 else{
                     string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
                 }
+
             }
             Customer_venue = (TextView) findViewById(R.id.Customer_venue);
             if(allvenue.size() == 0){

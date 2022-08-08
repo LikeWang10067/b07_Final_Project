@@ -111,25 +111,31 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 String end = check_format(string_end_date, "-", 3) + "T" + check_format(string_end_time, ":", 2) + ":00";
                 int num_player = Integer.valueOf(string_max_people);
                 event Event = new event(num_player, Venue.getVenue_name(), start, end, string_event_name);
-                Do.checkEventOverlap(Event, (Boolean overlap) -> {
-                    Log.d("Overlap", String.valueOf(overlap));
-                    if(overlap == true){
-                        this.event_name.setError("Event overlap with other event");
-                    }
-                    else{
-                        Do.admainAddEvent(Event, (Integer success) -> {
-                            if(success == 0){
-                                this.event_name.setError("Venue does not exist");
-                            }
-                            else if(success == 1){
-                                this.event_name.setError("Event already exist");
-                            }
-                            else{
-                                startActivity(new Intent(this, AdminActivity.class));
-                            }
-                        });
-                    }
-                });
+                if(Do.checkDateSequence(start, end)){//normal case
+                    Do.checkEventOverlap(Event, (Boolean overlap) -> {
+                        Log.d("Overlap", String.valueOf(overlap));
+                        if(overlap == true){
+                            this.event_name.setError("Event overlap with other event");
+                        }
+                        else{
+                            Do.admainAddEvent(Event, (Integer success) -> {
+                                if(success == 0){
+                                    this.event_name.setError("Venue does not exist");
+                                }
+                                else if(success == 1){
+                                    this.event_name.setError("Event already exist");
+                                }
+                                else{
+                                    startActivity(new Intent(this, AdminActivity.class));
+                                }
+                            });
+                        }
+                    });
+
+                }
+                else{ //end time go before start time
+                    start_time.setError("Start time start after end_time");
+                }
 
                 break;
             case R.id.start_time:

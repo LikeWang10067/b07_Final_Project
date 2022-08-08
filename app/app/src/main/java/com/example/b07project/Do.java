@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 public class Do {
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean checkDateSequence(String start, String end) {
+    public static boolean checkDateSequence(String start, String end) {
         LocalDateTime first = LocalDateTime.parse(start);
         LocalDateTime second = LocalDateTime.parse(end);
         return first.compareTo(second) > 0;

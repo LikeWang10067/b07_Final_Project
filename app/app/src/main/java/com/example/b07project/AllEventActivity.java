@@ -49,9 +49,11 @@ public class AllEventActivity extends AppCompatActivity {
 
             all_event_view = (TextView) findViewById(R.id.all_event_view);
             if(allevent.size() == 0){
+                Log.d("Size", "0");
                 all_event_view.setText("No Activity");
             }
             else{
+                Log.d("Size", String.valueOf(allevent.size()));
                 all_event_view.setText("All activity of " + venue_name);
             }
             User = (user) getIntent().getSerializableExtra("user");
