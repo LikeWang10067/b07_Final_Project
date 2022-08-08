@@ -111,7 +111,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnLogOut:
+            case R.id.btnLogOut_u:
                 Log.d("Logout", "Logout");
                 startActivity(new Intent(this, MainActivity.class));
                 break;
