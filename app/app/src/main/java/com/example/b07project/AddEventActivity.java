@@ -112,6 +112,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 int num_player = Integer.valueOf(string_max_people);
                 event Event = new event(num_player, Venue.getVenue_name(), start, end, string_event_name);
                 if(Do.checkDateSequence(start, end)){//normal case
+                    Log.d("check", "true");
                     Do.checkEventOverlap(Event, (Boolean overlap) -> {
                         Log.d("Overlap", String.valueOf(overlap));
                         if(overlap == true){
@@ -134,7 +135,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
                 }
                 else{ //end time go before start time
-                    start_time.setError("Start time start after end_time");
+                    event_name.setError("Start time start after end time");
                 }
 
                 break;
