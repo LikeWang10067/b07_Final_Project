@@ -31,6 +31,8 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_event);
 
+        Do.cleaner((Boolean clean)->{});
+
         Venue = (venue) getIntent().getSerializableExtra("Venue");
         this.setTitle(Venue.getVenue_name() + "'s Events");
 

@@ -36,7 +36,7 @@ public class AllEventActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_event);
 
 
-
+        Do.cleaner((Boolean clean)->{});
         venue_name = getIntent().getStringExtra("Venue name");
         this.setTitle("Events at " + venue_name);
         allevent = new ArrayList<event>();

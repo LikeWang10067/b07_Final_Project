@@ -651,6 +651,7 @@ public class Do {
                     }
 
                 }
+
             }
 
         });
@@ -720,7 +721,7 @@ public class Do {
 
     }
 
-    public static void admainDeleteEventVenuepart(event delEvent, Consumer<Boolean> callback) {
+    /*public static void admainDeleteEventVenuepart(event delEvent, Consumer<Boolean> callback) {
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
         String vanue_name = delEvent.getVenue();
         ref.child(vanue_name).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
@@ -751,7 +752,51 @@ public class Do {
             }
         });
     }
+*/
 
+    public static void admainDeleteEventVenuepart(event delEvent, Consumer<Boolean> callback) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
+        String a = delEvent.getVenue();
+        ref.child(a).addListenerForSingleValueEvent(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                venue test = snapshot.getValue(venue.class);
+                if(test==null){
+                    Log.d("NULL", "NULL");
+                    callback.accept(false);
+                    return;
+                }
+                else{
+                    Boolean flag = false;
+                    ArrayList<Integer> eventlist = test.getEventids();
+                    if (eventlist != null) {
+                        for (int i : eventlist) {
+                            Log.d("For loop", String.valueOf(i));
+                            Log.d("Hash Code", String.valueOf(delEvent.hashCode()));
+                            if (i == delEvent.hashCode()) {
+                                flag= true;
+                                int index = eventlist.indexOf(i);
+                                eventlist.remove(index);
+                                test.setEventids(eventlist);
+                                addvenue(test);
+                                callback.accept(flag);
+                                return;
+                            }
+                        }
+                    }
+                    Log.d("Back", "dd");
+                    callback.accept(false);
+                    return;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public static void adaminDeleteEvent(event delEvent, Consumer<Boolean> callback) {
         admainDeleteEventUserpart(delEvent, (Boolean get) -> {
@@ -760,7 +805,9 @@ public class Do {
                 admainDeleteEventEventpart(delEvent, (Boolean get1) -> {
                     if (get1 == true) {
                         admainDeleteEventVenuepart(delEvent, (Boolean get2) -> {
+                            Log.d("Get2", String.valueOf(get2));
                             if (get2 == true) {
+                                Log.d("Get", "True");
                                 callback.accept(true);
                                 return;
                             }
@@ -799,7 +846,7 @@ public class Do {
 //                Log.d("+++++++++++++",String.valueOf(events.get(1)));
                 //Log.d("+++++++++++++",String.valueOf(events.get(2)));
                 ref.child(delVenue.getVenue_name()).removeValue();
-
+                Log.d("+++++++++++++",String.valueOf(events.size()));
 
                 for(int eventId: events) {
                     DatabaseReference ref_E = FirebaseDatabase.getInstance().getReference("Event");
@@ -838,6 +885,50 @@ public class Do {
             }
         });
     }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void cleaner(Consumer<Boolean>callback){
+        DatabaseReference ref_E = FirebaseDatabase.getInstance().getReference("Event");
+        // DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
+        ref_E.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (!task.isSuccessful()) {
+                    Log.e("firebase", "Error getting data", task.getException());
+                } else {
+                    LocalDateTime now = LocalDateTime.now();
+                    ArrayList<event> s = new ArrayList<event>();
+                    for (DataSnapshot d : task.getResult().getChildren()) {
+                        event test = d.getValue(event.class);
+                        if(LocalDateTime.parse(test.getstart()).compareTo(now) < 0 ){
+                            int i = 0;
+                            Log.d("Check", test.getEventName());
+                            i++;
+                            adaminDeleteEvent(test, (Boolean get2) -> {
+                                if (get2 == false) {
+                                    callback.accept(false);
+                                    return;
+                                }
+
+                            });
+
+                        }
+                    }
+                    callback.accept(true);
+                    return;
+
+                }
+            }
+
+        });
+        LocalDateTime now = LocalDateTime.now();
+
+
+
+    }
+
 
 //    public static void adaimDeleteVenue(venue delVenue, Consumer<Boolean> callback) {
 //        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");

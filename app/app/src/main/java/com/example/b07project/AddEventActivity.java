@@ -47,6 +47,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         this.setTitle("Add Event for " + Venue.getVenue_name());
 
 
+        Do.cleaner((Boolean clean)->{});
 
         MaxPeople = (EditText) findViewById(R.id.MaxPeople);
 

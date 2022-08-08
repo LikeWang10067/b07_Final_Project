@@ -31,6 +31,7 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_customer);
 
         allvenue = new ArrayList<venue>();
+        Do.cleaner((Boolean clean)->{});
 
         string_allvenue = new ArrayList<String>();
         Do.DisplayVenues((ArrayList<venue> venue_list) -> {

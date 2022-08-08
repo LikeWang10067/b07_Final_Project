@@ -3,6 +3,7 @@ package com.example.b07project;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -48,9 +49,11 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
             case R.id.delete_event:
                 Do.adaminDeleteEvent(Event, (Boolean success) ->{
                     if(success == true){ // success delete
+                        Log.d("Delete", "True");
                         startActivity(new Intent(this, AdminActivity.class));
                     }
                     else{
+                        Log.d("Delete", "False");
                         delete_event.setError("Delete Event Fail");
                     }
                 });
