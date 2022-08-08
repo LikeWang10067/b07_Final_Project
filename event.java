@@ -14,9 +14,9 @@ public class event implements Comparable<event>, Serializable {
     private int num_players;
     private int reg_num;
     private String venue;
-    private String eventName;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private String EventName;
+    private String start;
+    private String end;
     //    private int id;
     private ArrayList<String> usernames;
 
@@ -28,12 +28,12 @@ public class event implements Comparable<event>, Serializable {
     public event(int num_player, String v, String start, String end, String eventName) {
         num_players = num_player;
         venue = v;
-        this.start = LocalDateTime.parse(start);
-        this.end = LocalDateTime.parse(end);
-        this.eventName = eventName;
+        this.start = start;
+        this.end = end;
+        this.EventName = eventName;
         reg_num = 0;
-    }
 
+    }
 
     public void setUsernames(ArrayList<String> id) {
         usernames = id;
@@ -45,7 +45,7 @@ public class event implements Comparable<event>, Serializable {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setEnd(String end) {
-        this.end = this.end = LocalDateTime.parse(end);
+        this.end = this.end = end;
         ;
     }
 
@@ -55,35 +55,34 @@ public class event implements Comparable<event>, Serializable {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void setStart(String start) {
-        this.start = LocalDateTime.parse(start);
+        this.start = start;
     }
 
     public void setVenue(String venue) {
         this.venue = venue;
     }
 
-//    public int getId(){
-//        return id;
-//    }
-
+    public ArrayList<String> getusernames() {
+        return usernames;
+    }
 
     public String getEventName() {
-        return eventName;
+        return EventName;
     }
 
     public void setEventName(String eventName) {
-        this.eventName = eventName;
+        this.EventName = eventName;
     }
 
     public int getNum_players() {
         return num_players;
     }
 
-    public LocalDateTime getStart() {
+    public String getstart() {
         return start;
     }
 
-    public LocalDateTime getEnd() {
+    public String getend() {
         return end;
     }
 
@@ -95,10 +94,6 @@ public class event implements Comparable<event>, Serializable {
         return venue;
     }
 
-    public ArrayList<String> getUsernamess() {
-        return usernames;
-    }
-
     @Override
     public int hashCode() {
         return num_players + venue.hashCode() + start.hashCode() + end.hashCode();
@@ -107,7 +102,7 @@ public class event implements Comparable<event>, Serializable {
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public int compareTo(event o) {
-        return this.start.compareTo(o.start);
+        return LocalDateTime.parse(this.start).compareTo(LocalDateTime.parse(o.start));
 //        if(this.start>o.start){
 //            return 1;
 //        }
@@ -118,6 +113,7 @@ public class event implements Comparable<event>, Serializable {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public boolean checkOverlap(event b) {
-        return !(this.end.compareTo(b.start) > 0 || b.end.compareTo(this.start) > 0);
+//        return !(this.compareTo(b) < 0 || b.compareTo(this) < 0);
+        return !(LocalDateTime.parse(this.end).compareTo( LocalDateTime.parse(b.start))<0 || LocalDateTime.parse(b.end).compareTo (LocalDateTime.parse(this.start))<0);
     }
 }
