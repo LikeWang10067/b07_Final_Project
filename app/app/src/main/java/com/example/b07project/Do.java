@@ -651,8 +651,6 @@ public class Do {
                     }
 
                 }
-                callback.accept(0);
-                return;
             }
 
         });

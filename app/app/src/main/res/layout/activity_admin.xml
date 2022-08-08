@@ -23,6 +23,8 @@
         android:layout_height="50dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="47dp"
+        android:background="@android:color/holo_red_dark"
+        android:backgroundTint="#E31111"
         android:text="Log Out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

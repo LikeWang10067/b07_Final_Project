@@ -79,6 +79,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                         string_allvenue.clear();
                         for (venue Venue : venues) {
                             if (Venue.getEventids() != null) {
+                                Log.d("Venue size", String.valueOf(Venue.getEventids()));
                                 string_allvenue.add(Venue.getVenue_name() + " " + "Activity: " + Venue.getEventids().size());
                             }
                             else{

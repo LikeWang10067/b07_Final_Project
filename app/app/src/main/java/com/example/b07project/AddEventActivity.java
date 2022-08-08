@@ -114,19 +114,23 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
                 if(Do.checkDateSequence(start, end)){//normal case
                     Log.d("check", "true");
                     Do.checkEventOverlap(Event, (Boolean overlap) -> {
-                        Log.d("Overlap", String.valueOf(overlap));
                         if(overlap == true){
+                            Log.d("Overlap", String.valueOf(overlap));
                             this.event_name.setError("Event overlap with other event");
                         }
                         else{
+                            Log.d("Overlap", String.valueOf(overlap));
                             Do.admainAddEvent(Event, (Integer success) -> {
                                 if(success == 0){
+                                    Log.d("success", "0");
                                     this.event_name.setError("Venue does not exist");
                                 }
                                 else if(success == 1){
+                                    Log.d("success", "1");
                                     this.event_name.setError("Event already exist");
                                 }
                                 else{
+                                    Log.d("success", "2");
                                     startActivity(new Intent(this, AdminActivity.class));
                                 }
                             });
@@ -135,6 +139,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
 
                 }
                 else{ //end time go before start time
+                    Log.d("check", "false");
                     event_name.setError("Start time start after end time");
                 }
 
