@@ -2,41 +2,46 @@
 
 This is a project that committed by 5 people as a group to develop an Android application that allows customers to schedule sports events online.
 There are 2 types of Users, customers and admin.
----
+
 
 **API required: API must be 33.**
 
-**There is one admin account preset in the database. User cannot SignUp as an admin account, but only regular user account.**
+**There is one admin account preset in the database.**
 
-    Preset data in the database:
+**User cannot SignUp as an admin account, but only regular user account.**
 
-    Admin Account:
+## Preset data in the database:
+
+### Admin Account:
     
     Username:   admin                          
     Passoword:  admin
 
-    User Account:
+### User Account:
     
     Username:   user1
     Password:   user1
     
     Sample event that already joined by user1:      NBA event in New York
 
-    Venue already in database:
+### Venue already in database:
     
     New York
     Toronto
 
-    Events already in database:
+### Events already in database:
     
-    NBA in New York(Which is already joined by user1)
-    Basketball Game in Toronto(No one joins at this moment)
+    NBA 
+    in New York(Which is already joined by user1)
+    
+    Basketball Game
+    in Toronto(No one joins at this moment)
 
     We will auto delete the events that passes the start time.
 
-```
-Back-end Contributions: 
 
+### Back-end Contributions: 
+```
 Back-end, is handled by Caleb Zhang and Runyu Yue, we finished all the operations that communicate with Realtime Database.
 We commit our code to Master branch.
 
@@ -55,9 +60,9 @@ Caleb Zhang and Runyu Yue thoroughly debugged all the bugs.
 
 ```
 
-```
-Front-end Contributions: 
 
+### Front-end Contributions: 
+```
 Front-end, is handled by Felix Lee and Like Wang, we finished implementing login, signup, user, and admin activity pages for user stories.
 
 Felix Lee Github username is: FelixLYY
