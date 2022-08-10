@@ -6,10 +6,26 @@ There are 2 types of users, customers and admin.
 API required: API must be 33.
 We have one admin account and we can not sign up an admin account, we can only sign up for customer account.
 
+What is already in the database:
+
 Admin Account:
 Username: admin                          
 Passoword: admin
 
+User Account:
+Username: user1
+Password: user1
+Events already joined by user1: NBA event in New York
+
+Venue already in Firebase:
+New York
+Toronto
+
+Events already in Firebase:
+NBA in New York(Which is already joined by user1)
+Basketball Game in Toronto(No one joins at this moment)
+
+We will auto delete the events that passes the start time.
 
 ```
 Back-end Contributions: 
