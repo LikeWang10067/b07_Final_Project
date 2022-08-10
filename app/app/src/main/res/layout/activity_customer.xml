@@ -11,18 +11,19 @@
         android:layout_width="334dp"
         android:layout_height="582dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnLogOut_u" />
+        app:layout_constraintTop_toBottomOf="@+id/Customer_venue" />
 
     <Button
         android:id="@+id/btnLogOut_u"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="47dp"
+        android:backgroundTint="@color/red"
         android:text="Log out"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,7 +32,7 @@
         android:id="@+id/btnListJoinActivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="47dp"
         android:layout_marginTop="32dp"
         android:text="Your Event"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,12 +42,12 @@
         android:id="@+id/Customer_venue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:text="TextView"
+        android:layout_marginStart="47dp"
+        android:layout_marginTop="8dp"
+        android:text="All Venue Around the World!"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColorHighlight="#00FFFFFF"
         android:textColorLink="#00FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/lstvenue_u"
-        app:layout_constraintTop_toBottomOf="@+id/btnListJoinActivity"
-        tools:layout_editor_absoluteX="39dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnListJoinActivity" />
 </androidx.constraintlayout.widget.ConstraintLayout>

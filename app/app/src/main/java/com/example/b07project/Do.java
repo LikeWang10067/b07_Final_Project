@@ -406,17 +406,23 @@ public class Do {
 
     public  static boolean helper_checkJoined(user user1,event target){
 
-        if(user1.getList_events() == null){
+        if(user1.getList_events() == null || target.getusernames() == null){
             return false;
         }
-        return user1.getList_events().contains(target.hashCode());
+        return user1.getList_events().contains(target.hashCode())&& target.getusernames().contains(user1.get_name());
 
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public static void JoinEvent(user user1, event target, Consumer<Boolean> callback) {
         int eventhashcode = target.hashCode();
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Event");
         DatabaseReference refU = FirebaseDatabase.getInstance().getReference("User");
+        if(target.getReg_num()>=target.getNum_players()){
+            Log.d("+++++","a");
+            callback.accept(false);
+            return;
+        }
         ref.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @RequiresApi(api = Build.VERSION_CODES.N)
 //            @RequiresApi(api = Build.VERSION_CODES.O)
@@ -428,6 +434,7 @@ public class Do {
                     String username = user1.get_name();
                     boolean flag = helper_checkJoined(user1,target);
                     if(flag == true){
+                        Log.d("+++++","c");
                         callback.accept(false);
                         return;
                     }
@@ -466,6 +473,8 @@ public class Do {
                                                 return;
                                             }
                                         }
+
+                                        Log.d("+++++","b");
                                         callback.accept(false);
                                         return;
 
@@ -475,8 +484,8 @@ public class Do {
                             });
                         }
                     }
-                    callback.accept(false);
-                    return;
+
+
 
                 }
             }
@@ -1023,6 +1032,17 @@ public class Do {
             return false;
         }
         return e.getusernames().contains(u.get_name());
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static boolean checkifpassed(String start){
+        LocalDateTime now = LocalDateTime.now();
+        return now.compareTo(LocalDateTime.parse(start))<0;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static void cleaner2(Consumer<ArrayList<venue>>callback){
+        cleaner((Boolean get2) -> {});
+        DisplayVenues((ArrayList<venue> get)->callback.accept(get));
     }
 
 

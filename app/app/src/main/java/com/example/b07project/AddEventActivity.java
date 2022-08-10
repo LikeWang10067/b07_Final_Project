@@ -35,6 +35,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     private Button add;
     private venue Venue;
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

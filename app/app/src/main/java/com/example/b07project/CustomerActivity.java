@@ -39,19 +39,19 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 
             for (venue Venue : allvenue) {
                 if (Venue.getEventids() != null) {
-                    string_allvenue.add(Venue.getVenue_name() + " " + "Activity: " + Venue.getEventids().size());
+                    string_allvenue.add(Venue.getVenue_name() + "                 " + " Current Activity: " + Venue.getEventids().size());
                 }
                 else{
-                    string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
+                    string_allvenue.add(Venue.getVenue_name() + "                 " + "Current Activity: 0");
                 }
 
             }
             Customer_venue = (TextView) findViewById(R.id.Customer_venue);
             if(allvenue.size() == 0){
-                Customer_venue.setText("No Venue");
+                Customer_venue.setText("No Venue Available");
             }
             else{
-                Customer_venue.setText("All Venue");
+                Customer_venue.setText("Venue Around the World!");
             }
             this.User = (user) getIntent().getSerializableExtra("user");
             this.setTitle("Welcome " + this.User.get_name() + " !");

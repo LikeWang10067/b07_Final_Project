@@ -34,7 +34,7 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
         Do.cleaner((Boolean clean)->{});
 
         Venue = (venue) getIntent().getSerializableExtra("Venue");
-        this.setTitle(Venue.getVenue_name() + "'s Events");
+        this.setTitle(Venue.getVenue_name() + " Events");
 
         allevent = new ArrayList<event>();
         string_allactivity = new ArrayList<String>();

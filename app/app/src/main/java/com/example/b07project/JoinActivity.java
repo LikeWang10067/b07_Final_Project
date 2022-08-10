@@ -1,12 +1,14 @@
 package com.example.b07project;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class JoinActivity extends AppCompatActivity implements View.OnClickListener{
@@ -38,8 +40,11 @@ public class JoinActivity extends AppCompatActivity implements View.OnClickListe
 
         Max_people = (TextView) findViewById(R.id.Max_people_j);
         Max_people.setText(Event.getReg_num() + "/" + Event.getNum_players());
+
+        this.Join.requestFocus();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View view) {
         switch (view.getId()){

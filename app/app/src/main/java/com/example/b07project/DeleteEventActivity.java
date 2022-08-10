@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DeleteEventActivity extends AppCompatActivity implements View.OnClickListener {
     private event Event;
     private Button delete_event;
-    private TextView start, end, location, MaxPlayer, event_name;
+    private TextView start, end, location, MaxPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +37,9 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
         MaxPlayer = (TextView) findViewById(R.id.MaxPlayer_d);
         MaxPlayer.setText(Event.getReg_num() + "/" + String.valueOf(Event.getNum_players()));
 
-        event_name = (TextView) findViewById(R.id.event_name_d);
-        event_name.setText(Event.getEventName());
+        this.setTitle(Event.getEventName() + " Detail");
+//        event_name = (TextView) findViewById(R.id.event_name_d);
+//        event_name.setText(Event.getEventName());
 
     }
 

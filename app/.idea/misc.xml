@@ -3,32 +3,32 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_admin.xml" value="0.4466666666666667" />
-        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_all_event.xml" value="0.4466666666666667" />
+        <entry key="../../../Library/Android/sdk/platforms/android-32/data/res/layout/simple_list_item_1.xml" value="0.45" />
+        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07/app/app/src/main/res/layout/activity_admin.xml" value="0.16666666666666666" />
+        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07/app/app/src/main/res/layout/activity_cancel.xml" value="0.17307692307692307" />
+        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07/app/app/src/main/res/layout/activity_join.xml" value="0.19480519480519481" />
+        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07/app/app/src/main/res/layout/list_view.xml" value="0.5" />
         <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_cancel.xml" value="0.21145833333333333" />
-        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_customer.xml" value="0.6" />
         <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_event.xml" value="0.18611111111111112" />
-        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_sign_up.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/Felix/Desktop/UTSC/2022 Summer/CSCB07H3 Y/Project/clone/b07_Final_Project/app/app/src/main/res/layout/activity_user_event.xml" value="0.6666666666666666" />
         <entry key="app/src/main/res/layout/activity_add_event.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_add_venue.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_admin.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_admin_event.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_all_event.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_cancel.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_customer.xml" value="0.375" />
-        <entry key="app/src/main/res/layout/activity_delete_event.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/activity_customer.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_delete_event.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_delete_venue.xml" value="0.38697916666666665" />
         <entry key="app/src/main/res/layout/activity_event.xml" value="0.45" />
         <entry key="app/src/main/res/layout/activity_join.xml" value="0.39010416666666664" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_sign_up.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_user_event.xml" value="0.335" />
         <entry key="app/src/main/res/layout/content_delete_event.xml" value="0.38697916666666665" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.34103260869565216" />
         <entry key="app/src/main/res/layout/fragment_second.xml" value="0.34103260869565216" />
+        <entry key="app/src/main/res/layout/list_view.xml" value="0.375" />
       </map>
     </option>
   </component>
@@ -37,5 +37,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.375" />
+      </ProjectState>
+    </option>
   </component>
 </project>

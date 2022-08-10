@@ -45,22 +45,28 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         string_allvenue = new ArrayList<String>();
         Do.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
+            int size = 0, new_size = 0;
+            for(venue Venue : allvenue){
+                new_size = Venue.getVenue_name().length();
+                if(new_size > size){ size = new_size;}
+            }
+            size++;
 
             for (venue Venue : allvenue) {
                 if (Venue.getEventids() != null) {
-                    string_allvenue.add(Venue.getVenue_name() + " " + "Activity: " + Venue.getEventids().size());
+                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Current Activity: " + Venue.getEventids().size());
                 }
                 else{
-                    string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
+                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Current Activity: 0");
                 }
             }
 
             admin_textview = (TextView) findViewById(R.id.admin_textview);
             if(allvenue.size() == 0){
-                admin_textview.setText("No Venue");
+                admin_textview.setText("No Venue Currently");
             }
             else{
-                admin_textview.setText("All Venue");
+                admin_textview.setText("Venue Around The World!");
             }
             btnaddvenue = (Button) findViewById(R.id.btnaddvenue);
             btnaddvenue.setOnClickListener(this);
@@ -82,13 +88,20 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                     Do.filterVenue(filter_text, (ArrayList<venue> venues) -> {
                         Log.d("Size of venues", String.valueOf(venues.size()));
                         string_allvenue.clear();
+                        int size = 0, new_size = 0;
+                        for(venue Venue : allvenue){
+                            new_size = Venue.getVenue_name().length();
+                            if(new_size > size){ size = new_size;}
+                        }
+                        size++;
+
                         for (venue Venue : venues) {
                             if (Venue.getEventids() != null) {
                                 Log.d("Venue size", String.valueOf(Venue.getEventids()));
-                                string_allvenue.add(Venue.getVenue_name() + " " + "Activity: " + Venue.getEventids().size());
+                                string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Activity: " + Venue.getEventids().size());
                             }
                             else{
-                                string_allvenue.add(Venue.getVenue_name() + " " + "Activity: 0");
+                                string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Activity: 0");
                             }
                         }
                         ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
@@ -196,5 +209,47 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 //                });
 //                break;
         }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Do.cleaner((Boolean b)->{});
+        Do.DisplayVenues((ArrayList<venue> venue_list) -> {
+            string_allvenue.clear();
+            allvenue = venue_list;
+            int size = 0, new_size = 0;
+            for(venue Venue : allvenue){
+                new_size = Venue.getVenue_name().length();
+                if(new_size > size){ size = new_size;}
+            }
+            size++;
+            for (venue Venue : allvenue) {
+                if (Venue.getEventids() != null) {
+                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Current Activity: " + Venue.getEventids().size());
+                } else {
+                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Current Activity: 0");
+                }
+                Log.d("Size", string_allvenue.get(string_allvenue.size()-1));
+            }
+            admin_textview = (TextView) findViewById(R.id.admin_textview);
+            if (allvenue.size() == 0) {
+                admin_textview.setText("No Venue Currently");
+            } else {
+                admin_textview.setText("Venue Around The World!");
+            }
+            ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+            lstvenue.setAdapter(venueAdapter);
+
+        });
+        }
+
+    public static String repeat_blank(String delimiter, int name_size, int size){
+        String return_s = "";
+        for(int i = 0; i < size-name_size; i++){
+            return_s += delimiter;
+        }
+        return return_s;
     }
 }
