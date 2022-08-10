@@ -10,6 +10,8 @@ There are 2 types of Users, customers and admin.
 
 **User cannot SignUp as an admin account, but only regular user account.**
 
+**For best viewing experience, please select virtual device that have screen size 5.0" or more.**
+
 ## Preset data in the database:
 
 ### Admin Account:
