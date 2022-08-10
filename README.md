@@ -9,7 +9,7 @@ Back-end, is handled by Caleb Zhang and Runyu Yue, we finished all the operation
 We commit our code to Master branch.
 
 Caleb Zhang Github username is: kz4ever
-Runyu Yue Github username is:
+Runyu Yue Github username is: Yry01
 
 In general, we split the whole back-end work into 50:50, half. 
 Ie, we implemented all the methods in the do.java and make sure all the methods work as we expected.
