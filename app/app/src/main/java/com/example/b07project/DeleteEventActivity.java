@@ -55,7 +55,7 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
                     }
                     else{
                         Log.d("Delete", "False");
-                        delete_event.setError("Delete Event Fail");
+//                        delete_event.setError("Delete Event Fail");
                     }
                 });
                 break;

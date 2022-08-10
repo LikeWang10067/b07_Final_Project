@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
-        Do.cleaner((Boolean clean)->{});
+//        Do.cleaner((Boolean clean)->{});
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);

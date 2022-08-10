@@ -31,7 +31,7 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin_event);
 
-        Do.cleaner((Boolean clean)->{});
+//        Do.cleaner((Boolean clean)->{});
 
         Venue = (venue) getIntent().getSerializableExtra("Venue");
         this.setTitle(Venue.getVenue_name() + " Events");
@@ -87,7 +87,7 @@ public class AdminEventActivity extends AppCompatActivity implements View.OnClic
                         startActivity(new Intent(this, AdminActivity.class));
                     }
                     else{ //Delete fail
-                        delete_venue.setError("Fail to delete venue");
+//                        delete_venue.setError("Fail to delete venue");
                     }
                 });
         }

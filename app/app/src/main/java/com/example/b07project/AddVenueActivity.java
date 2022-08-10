@@ -21,7 +21,7 @@ public class AddVenueActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_venue);
-        Do.cleaner((Boolean clean)->{});
+//        Do.cleaner((Boolean clean)->{});
 
         venue_name = (EditText) findViewById(R.id.venue_name);
 

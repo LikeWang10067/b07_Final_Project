@@ -39,7 +39,7 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
-        Do.cleaner((Boolean clean)->{});
+//        Do.cleaner((Boolean clean)->{});
 
         allvenue = new ArrayList<venue>();
         string_allvenue = new ArrayList<String>();
@@ -215,32 +215,36 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onResume() {
         super.onResume();
-        Do.cleaner((Boolean b)->{});
-        Do.DisplayVenues((ArrayList<venue> venue_list) -> {
-            string_allvenue.clear();
-            allvenue = venue_list;
-            int size = 0, new_size = 0;
-            for(venue Venue : allvenue){
-                new_size = Venue.getVenue_name().length();
-                if(new_size > size){ size = new_size;}
-            }
-            size++;
-            for (venue Venue : allvenue) {
-                if (Venue.getEventids() != null) {
-                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Current Activity: " + Venue.getEventids().size());
-                } else {
-                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Current Activity: 0");
+        Do.cleaner((ArrayList<Integer> hash)->{
+            Do.filterVenue(".*", (ArrayList<venue> venues) -> {
+                Log.d("Size of venues", String.valueOf(venues.size()));
+                string_allvenue.clear();
+                int size = 0, new_size = 0;
+                for(venue Venue : allvenue){
+                    new_size = Venue.getVenue_name().length();
+                    if(new_size > size){ size = new_size;}
                 }
-                Log.d("Size", string_allvenue.get(string_allvenue.size()-1));
-            }
-            admin_textview = (TextView) findViewById(R.id.admin_textview);
-            if (allvenue.size() == 0) {
-                admin_textview.setText("No Venue Currently");
-            } else {
-                admin_textview.setText("Venue Around The World!");
-            }
-            ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
-            lstvenue.setAdapter(venueAdapter);
+                size++;
+
+                for (venue Venue : venues) {
+                    if (Venue.getEventids() != null) {
+                        int event_size = Venue.getEventids().size();
+                        for(int i: Venue.getEventids()){
+                            if(hash.contains(i)){
+                                event_size--;
+                            }
+                        }
+                        Log.d("Venue size", String.valueOf(event_size));
+                        string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Activity: " + event_size);
+                    }
+                    else{
+                        string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Activity: 0");
+                    }
+                    Log.d("Venue name", string_allvenue.get(string_allvenue.size()-1));
+                }
+                ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+                lstvenue.setAdapter(venueAdapter);
+            });
 
         });
         }

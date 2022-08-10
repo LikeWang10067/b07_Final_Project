@@ -28,7 +28,7 @@ public class UserEventActivity extends AppCompatActivity implements View.OnClick
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_event);
-        Do.cleaner((Boolean clean)->{});
+//        Do.cleaner((Boolean clean)->{});
 
         User = (user) getIntent().getSerializableExtra("user");
         string_all_join_event = new ArrayList<String>();

@@ -896,10 +896,11 @@ public class Do {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void cleaner(Consumer<Boolean>callback){
+    public static void cleaner(Consumer<ArrayList<Integer>>callback){
         DatabaseReference ref_E = FirebaseDatabase.getInstance().getReference("Event");
         // DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Venue");
         ref_E.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+
 
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -908,35 +909,50 @@ public class Do {
                     Log.e("firebase", "Error getting data", task.getException());
                 } else {
                     LocalDateTime now = LocalDateTime.now();
-                    ArrayList<event> s = new ArrayList<event>();
+                    ArrayList<Integer> s = new ArrayList<Integer>();
                     for (DataSnapshot d : task.getResult().getChildren()) {
                         event test = d.getValue(event.class);
                         if(LocalDateTime.parse(test.getstart()).compareTo(now) < 0 ){
-                            int i = 0;
-                            Log.d("Check", test.getEventName());
-                            i++;
+                                s.add(test.hashCode());
                             adaminDeleteEvent(test, (Boolean get2) -> {
                                 if (get2 == false) {
-                                    callback.accept(false);
-                                    return;
+
                                 }
 
                             });
 
                         }
                     }
-                    callback.accept(true);
-                    return;
+                    callback.accept(s);
+
 
                 }
             }
 
         });
-        LocalDateTime now = LocalDateTime.now();
+//        ref_E.get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//
+//
+//              @Override
+//              public void onComplete(@NonNull Task<DataSnapshot> task) {
+//                  ArrayList<event> res = new ArrayList<event>();
+//                  for(DataSnapshot d: task.getResult().getChildren()){
+//                         event t = d.getValue(event.class);
+//                         res.add(t);
+//
+//                  }
+//                  callback.accept(res);
+//
+//              }
+//          });
+
+
 
 
 
     }
+
+
 
 
 //    public static void adaimDeleteVenue(venue delVenue, Consumer<Boolean> callback) {
@@ -1039,11 +1055,11 @@ public class Do {
         LocalDateTime now = LocalDateTime.now();
         return now.compareTo(LocalDateTime.parse(start))<0;
     }
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public static void cleaner2(Consumer<ArrayList<venue>>callback){
-        cleaner((Boolean get2) -> {});
-        DisplayVenues((ArrayList<venue> get)->callback.accept(get));
-    }
+//    @RequiresApi(api = Build.VERSION_CODES.O)
+//    public static void cleaner2(Consumer<ArrayList<venue>>callback){
+//        cleaner((Boolean get2) -> {});
+//        DisplayVenues((ArrayList<venue> get)->callback.accept(get));
+//    }
 
 
 //    public static void GetEventVenue(int eventhashcode, Consumer<String> callback) {
