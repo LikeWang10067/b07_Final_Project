@@ -6,6 +6,10 @@ There are 2 types of users, customers and admin.
 Back-end Contributions: 
 
 Back-end, is handled by Caleb Zhang and Runyu Yue, we finished all the operations that communicate with Realtime Database.
+We commit our code to Master branch.
+
+Caleb Zhang Github username is: kz4ever
+Runyu Yue Github username is:
 
 In general, we split the whole back-end work into 50:50, half. 
 Ie, we implemented all the methods in the do.java and make sure all the methods work as we expected.
