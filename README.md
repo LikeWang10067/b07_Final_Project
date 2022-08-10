@@ -2,6 +2,9 @@
 This is a project that committed by 5 people to develop an Android application that allows customers to schedule sports events online.
 There are 2 types of users, customers and admin.
 
+
+API required: API must be 33.
+
 ```
 Back-end Contributions: 
 
