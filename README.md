@@ -37,6 +37,9 @@ There are 2 types of Users, customers and admin.
     NBA 
     in New York(Which is already joined by user1)
     
+    CBA
+    in New York(No one joins at this moment)
+    
     Basketball Game
     in Toronto(No one joins at this moment)
 
@@ -79,4 +82,11 @@ in the front-end while Like assists Felix while he is implementing the Activity 
 
 We spent 2 days carefully finding out all of the unexpected behaviour, and bugs through massive testing with back-end developers and Scrum master. 
 Felix Lee and Like Wang thoroughly debugged all the bugs in the front-end. 
+```
+### UI and Scrum Master Contributions:
+```
+Ruichen Sun Github username: Ruichen-Sun
+
+As the scrum master and UI designer for this project. I ha
+
 ```
