@@ -1,27 +1,34 @@
 # b07_Final_Project
-This is a project that committed by 5 people to develop an Android application that allows customers to schedule sports events online.
-There are 2 types of users, customers and admin.
 
+This is a project that committed by 5 people as a group to develop an Android application that allows customers to schedule sports events online.
+There are 2 types of Users, customers and admin.
+---
 
-API required: API must be 33.
-We have one admin account and we can not sign up an admin account, we can only sign up for customer account.
+**API required: API must be 33.**
 
-What is already in the database:
+**There is one admin account preset in the database. User cannot SignUp as an admin account, but only regular user account.**
+
+    Preset data in the database:
 
     Admin Account:
-    Username: admin                          
-    Passoword: admin
+    
+    Username:   admin                          
+    Passoword:  admin
 
     User Account:
-    Username: user1
-    Password: user1
-    Events already joined by user1: NBA event in New York
+    
+    Username:   user1
+    Password:   user1
+    
+    Sample event that already joined by user1:      NBA event in New York
 
-    Venue already in Firebase:
+    Venue already in database:
+    
     New York
     Toronto
 
-    Events already in Firebase:
+    Events already in database:
+    
     NBA in New York(Which is already joined by user1)
     Basketball Game in Toronto(No one joins at this moment)
 
