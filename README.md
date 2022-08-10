@@ -25,3 +25,19 @@ Caleb Zhang and Runyu Yue thoroughly debugged all the bugs.
 
 
 ```
+
+```
+Front-end Contributions: 
+
+Front-end, is handled by Felix Lee and Like Wang, we finished implementing login, signup, user, and admin activity pages for user stories.
+
+Felix Lee Github username is: FelixLYY
+Like Wang Github username is: LikeWang10067
+
+During the process, we communicate with Steven (who design the UI), Runyu, and Caleb (who is in charge of the back-end) to consistently write codes 
+and fix bugs that are found during the testing stage. Felix is in charge of the majority of the work in the front-end while Like assists Felix 
+while he is implementing the Activity pages.
+
+We spent 2 days carefully finding out all of the unexpected behaviour, and bugs through massive testing with back-end developers and Scrum master. 
+Felix Lee and Like Wang thoroughly debugged all the bugs in the front-end. 
+```
