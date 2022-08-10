@@ -28,6 +28,7 @@ There are 2 types of Users, customers and admin.
     
     New York
     Toronto
+    Vancouver
 
 ### Events already in database:
     
