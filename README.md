@@ -4,6 +4,12 @@ There are 2 types of users, customers and admin.
 
 
 API required: API must be 33.
+We have one admin account and we can not sign up an admin account, we can only sign up for customer account.
+
+Admin Account:
+Username: admin                          
+Passoword: admin
+
 
 ```
 Back-end Contributions: 
