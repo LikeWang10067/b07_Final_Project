@@ -1,15 +1,18 @@
 package com.example.b07project;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -31,18 +34,29 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_customer);
 
         allvenue = new ArrayList<venue>();
-//        Do.cleaner((Boolean clean)->{});
+        //Do.cleaner((Boolean clean)->{});
 
         string_allvenue = new ArrayList<String>();
         Do.DisplayVenues((ArrayList<venue> venue_list) -> {
             allvenue = venue_list;
 
+            int size = 0, new_size = 0;
+            for(venue Venue : allvenue){
+                new_size = Venue.getVenue_name().length();
+                if(new_size > size){ size = new_size;}
+            }
+            if (size <= 18) {
+                size = 18;
+            }
+
             for (venue Venue : allvenue) {
                 if (Venue.getEventids() != null) {
-                    string_allvenue.add(Venue.getVenue_name() + "                 " + " Current Activity: " + Venue.getEventids().size());
+                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size)
+                            + "Future Events: " + Venue.getEventids().size());
                 }
                 else{
-                    string_allvenue.add(Venue.getVenue_name() + "                 " + "Current Activity: 0");
+                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size)
+                            + "Future Events: 0");
                 }
 
             }
@@ -64,7 +78,19 @@ public class CustomerActivity extends AppCompatActivity implements View.OnClickL
 
             lstvenue = (ListView) findViewById(R.id.lstvenue_u);
 
-            ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, string_allvenue);
+            final Typeface mTypeface = Typeface.createFromAsset(getAssets(), "fonts/vero.ttf");
+
+            ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, string_allvenue){
+                @NonNull
+                @Override
+                public View getView (int position, View convertView, ViewGroup parent){
+                    TextView item = (TextView) super.getView(position,convertView,parent);
+
+                    item.setTypeface(mTypeface);
+                    item.setTextSize(14);
+                    return item;
+                }
+            };
             lstvenue.setAdapter(venueAdapter);
 
             lstvenue.setOnItemClickListener(new AdapterView.OnItemClickListener() {

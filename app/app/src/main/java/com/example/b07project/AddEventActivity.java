@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.timepicker.MaterialTimePicker;
 
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -36,7 +35,6 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
     private Button add;
     private venue Venue;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +47,7 @@ public class AddEventActivity extends AppCompatActivity implements View.OnClickL
         this.setTitle("Add Event for " + Venue.getVenue_name());
 
 
-        Do.cleaner((ArrayList<Integer> hash)->{});
+        //Do.cleaner((Boolean clean)->{});
 
         MaxPeople = (EditText) findViewById(R.id.MaxPeople);
 

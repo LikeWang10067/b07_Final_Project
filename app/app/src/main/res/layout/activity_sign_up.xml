@@ -10,7 +10,7 @@
         android:id="@+id/username_s"
         android:layout_width="305dp"
         android:layout_height="40dp"
-        android:layout_marginStart="47dp"
+        android:layout_marginStart="43dp"
         android:layout_marginTop="200dp"
         android:ems="10"
         android:hint="username"
@@ -24,8 +24,8 @@
         android:id="@+id/password_s"
         android:layout_width="305dp"
         android:layout_height="40dp"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginTop="50dp"
         android:ems="10"
         android:hint="******"
         android:inputType="text"
@@ -42,4 +42,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_s" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginBottom="8dp"
+        android:text="Creat a username:"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/username_s"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="47dp"
+        android:layout_marginBottom="8dp"
+        android:text="Creat a password"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/password_s"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

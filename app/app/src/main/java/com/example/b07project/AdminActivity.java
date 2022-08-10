@@ -1,12 +1,15 @@
 package com.example.b07project;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -50,14 +54,16 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                 new_size = Venue.getVenue_name().length();
                 if(new_size > size){ size = new_size;}
             }
-            size++;
+            if (size <= 18) {
+                size = 18;
+            }
 
             for (venue Venue : allvenue) {
                 if (Venue.getEventids() != null) {
-                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Current Activity: " + Venue.getEventids().size());
+                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Future Events: " + Venue.getEventids().size());
                 }
                 else{
-                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Current Activity: 0");
+                    string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Future Events: 0");
                 }
             }
 
@@ -98,13 +104,27 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                         for (venue Venue : venues) {
                             if (Venue.getEventids() != null) {
                                 Log.d("Venue size", String.valueOf(Venue.getEventids()));
-                                string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Activity: " + Venue.getEventids().size());
+                                string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Future Events: " + Venue.getEventids().size());
                             }
                             else{
-                                string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Activity: 0");
+                                string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Future Events: 0");
                             }
                         }
-                        ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+
+                        final Typeface mTypeface = Typeface.createFromAsset(getAssets(), "fonts/vero.ttf");
+                        ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue) {
+                            @NonNull
+                            @Override
+                            public View getView (int position, View convertView, ViewGroup parent){
+                                TextView item = (TextView) super.getView(position,convertView,parent);
+
+                                item.setTypeface(mTypeface);
+                                item.setTextSize(14);
+
+                                return item;
+                            }
+                        };
+
                         lstvenue.setAdapter(venueAdapter);
                     });
                 }
@@ -134,15 +154,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                     startActivity(intent);
                 }
             });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -224,7 +235,10 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                     new_size = Venue.getVenue_name().length();
                     if(new_size > size){ size = new_size;}
                 }
-                size++;
+                if (size <= 18) {
+                    size = 18;
+                }
+
 
                 for (venue Venue : venues) {
                     if (Venue.getEventids() != null) {
@@ -235,14 +249,25 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
                             }
                         }
                         Log.d("Venue size", String.valueOf(event_size));
-                        string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Activity: " + event_size);
+                        string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Future Events: " + event_size);
                     }
                     else{
-                        string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Activity: 0");
+                        string_allvenue.add(Venue.getVenue_name() + AdminActivity.repeat_blank(" ", Venue.getVenue_name().length(), size) + "Future Events: 0");
                     }
-                    Log.d("Venue name", string_allvenue.get(string_allvenue.size()-1));
                 }
-                ArrayAdapter<String> venueAdapter = new ArrayAdapter<>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue);
+                final Typeface mTypeface = Typeface.createFromAsset(getAssets(), "fonts/vero.ttf");
+
+                ArrayAdapter<String> venueAdapter = new ArrayAdapter<String>(AdminActivity.this, android.R.layout.simple_list_item_1, string_allvenue){
+                    @NonNull
+                    @Override
+                    public View getView (int position, View convertView, ViewGroup parent){
+                        TextView item = (TextView) super.getView(position,convertView,parent);
+
+                        item.setTypeface(mTypeface);
+                        item.setTextSize(14);
+                        return item;
+                    }
+                };
                 lstvenue.setAdapter(venueAdapter);
             });
 
