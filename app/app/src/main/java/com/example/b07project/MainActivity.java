@@ -1,11 +1,13 @@
 package com.example.b07project;
 
 
+
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -20,7 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+        //Do.cleaner((Boolean clean)->{});
 
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -40,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             this.password.setError("Please input password");
             return;
         }else {
-            int num_password = Integer.valueOf(password);
-            Do.CheckLogIn(username, num_password, (user User) -> {
+            //int num_password = Integer.valueOf(password);
+            Do.CheckLogIn(username, password, (user User) -> {
                 Log.d("User", String.valueOf(User == null));
                 if (User == null) {
                     this.username.setError("User Incorrect or Password Incorrect");

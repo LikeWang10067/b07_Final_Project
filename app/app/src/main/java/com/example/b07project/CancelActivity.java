@@ -21,6 +21,8 @@ public class CancelActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cancel);
 
+        //Do.cleaner((Boolean clean)->{});
+
         Cancel = (Button) findViewById(R.id.Cancel);
         Cancel.setOnClickListener(this);
 

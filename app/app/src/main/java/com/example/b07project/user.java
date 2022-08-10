@@ -8,10 +8,10 @@ public class user implements Serializable {
     private ArrayList<Integer> list_events;
     private String Name;
     private int admin;
-    private int password;
+    private String password;
 
     //    private int id;
-    public user(String n, int p, int admin) {
+    public user(String n, String p, int admin) {
         Name = n;
         password = p;
         this.admin = admin;
@@ -40,11 +40,11 @@ public class user implements Serializable {
         return admin;
     }
 
-    public void setPassword(int n) {
+    public void setPassword(String n) {
         password = n;
     }
 
-    public int getPassword() {
+    public String getPassword() {
         return password;
     }
 

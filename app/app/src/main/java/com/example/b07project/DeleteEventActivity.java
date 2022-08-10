@@ -3,6 +3,7 @@ package com.example.b07project;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -13,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 public class DeleteEventActivity extends AppCompatActivity implements View.OnClickListener {
     private event Event;
     private Button delete_event;
-    private TextView start, end, location, MaxPlayer, event_name;
+    private TextView start, end, location, MaxPlayer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,9 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
         MaxPlayer = (TextView) findViewById(R.id.MaxPlayer_d);
         MaxPlayer.setText(Event.getReg_num() + "/" + String.valueOf(Event.getNum_players()));
 
-        event_name = (TextView) findViewById(R.id.event_name_d);
-        event_name.setText(Event.getEventName());
+        this.setTitle(Event.getEventName() + " Detail");
+//        event_name = (TextView) findViewById(R.id.event_name_d);
+//        event_name.setText(Event.getEventName());
 
     }
 
@@ -48,9 +50,11 @@ public class DeleteEventActivity extends AppCompatActivity implements View.OnCli
             case R.id.delete_event:
                 Do.adaminDeleteEvent(Event, (Boolean success) ->{
                     if(success == true){ // success delete
+                        Log.d("Delete", "True");
                         startActivity(new Intent(this, AdminActivity.class));
                     }
                     else{
+                        Log.d("Delete", "False");
                         delete_event.setError("Delete Event Fail");
                     }
                 });
