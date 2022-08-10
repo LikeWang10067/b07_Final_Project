@@ -8,24 +8,24 @@ We have one admin account and we can not sign up an admin account, we can only s
 
 What is already in the database:
 
-Admin Account:
-Username: admin                          
-Passoword: admin
+  Admin Account:
+  Username: admin                          
+  Passoword: admin
 
-User Account:
-Username: user1
-Password: user1
-Events already joined by user1: NBA event in New York
+  User Account:
+  Username: user1
+  Password: user1
+  Events already joined by user1: NBA event in New York
 
-Venue already in Firebase:
-New York
-Toronto
+  Venue already in Firebase:
+  New York
+  Toronto
 
-Events already in Firebase:
-NBA in New York(Which is already joined by user1)
-Basketball Game in Toronto(No one joins at this moment)
+  Events already in Firebase:
+  NBA in New York(Which is already joined by user1)
+  Basketball Game in Toronto(No one joins at this moment)
 
-We will auto delete the events that passes the start time.
+  We will auto delete the events that passes the start time.
 
 ```
 Back-end Contributions: 
