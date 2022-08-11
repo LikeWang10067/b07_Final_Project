@@ -53,7 +53,7 @@ There are 2 types of Users, customers and admin.
     Basketball
     in Toronto(No one joins at this moment)
 
-    We will auto delete the events that passes the start time.
+**We will auto delete the events that passes the start time.**
 
 
 ## Back-end Contributions: 
