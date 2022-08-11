@@ -4,30 +4,31 @@ This is a project that committed by 5 people as a group to develop an Android ap
 There are 2 types of Users, customers and admin.
 
 
-**API required: API must be 33.**
-
-**Please change API path inside build.gradle match your own environment**
-
-**For best viewing experience, please select virtual device that have screen size 5.0" or more.**
-
-**Daily Scrum Meeting detail is in each standup File.**
+> **API required: API must be 33.**
+>
+> **Please change API path inside build.gradle match your own environment**
+>
+> **For best viewing experience, please select virtual device that have screen size 5.0" or more.**
+>
+> **Daily Scrum Meeting detail is in each standup File.**
 
 ## Preset data in the database:
 
 ### Admin Account:
     
-    Username:   admin                          
-    Passoword:  admin
+    Username:     admin    
+    Passoword:    admin
     
     There is only one admin account defult in the database.
     User cannot SignUp as an admin account, instead only regular user account.
 
 ### User Account:
     
-    Username:   user1
-    Password:   user1
+    Username:   user1 
+    Password:   user1 
     
-    Sample event that already joined by user1:      NBA event in New York
+    Sample event that already joined by this user:      
+        NBA event in New York
 
 ### Venue already in database:
     
