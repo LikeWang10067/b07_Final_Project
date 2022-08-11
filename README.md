@@ -10,6 +10,8 @@ There are 2 types of Users, customers and admin.
 
 **For best viewing experience, please select virtual device that have screen size 5.0" or more.**
 
+**Daily Scrum Meeting detail is in each standup File.**
+
 ## Preset data in the database:
 
 ### Admin Account:
