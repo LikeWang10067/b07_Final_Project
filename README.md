@@ -6,9 +6,7 @@ There are 2 types of Users, customers and admin.
 
 **API required: API must be 33.**
 
-**There is one admin account preset in the database.**
-
-**User cannot SignUp as an admin account, but only regular user account.**
+**Please change API path inside build.gradle match your own environment**
 
 **For best viewing experience, please select virtual device that have screen size 5.0" or more.**
 
@@ -18,6 +16,9 @@ There are 2 types of Users, customers and admin.
     
     Username:   admin                          
     Passoword:  admin
+    
+    There is only one admin account defult in the database.
+    User cannot SignUp as an admin account, instead only regular user account.
 
 ### User Account:
     
@@ -37,16 +38,16 @@ There are 2 types of Users, customers and admin.
     NBA 
     in New York(Which is already joined by user1)
     
-    CBA
+    Football
     in New York(No one joins at this moment)
     
-    Basketball Game
+    Basketball
     in Toronto(No one joins at this moment)
 
     We will auto delete the events that passes the start time.
 
 
-### Back-end Contributions: 
+## Back-end Contributions: 
 ```
 Back-end, is handled by Caleb Zhang and Runyu Yue, we finished all the operations that communicate with Realtime Database.
 We commit our code to Master branch.
@@ -67,7 +68,7 @@ Caleb Zhang and Runyu Yue thoroughly debugged all the bugs.
 ```
 
 
-### Front-end Contributions: 
+## Front-end Contributions: 
 ```
 Front-end, is handled by Felix Lee and Like Wang, we finished implementing login, signup, user, and admin activity pages for user stories.
 
@@ -83,10 +84,24 @@ in the front-end while Like assists Felix while he is implementing the Activity 
 We spent 2 days carefully finding out all of the unexpected behaviour, and bugs through massive testing with back-end developers and Scrum master. 
 Felix Lee and Like Wang thoroughly debugged all the bugs in the front-end. 
 ```
-### UI and Scrum Master Contributions:
+## UI and Scrum Master Contributions:
 ```
-Ruichen Sun Github username: Ruichen-Sun
+Ruichen Sun's Github username: Ruichen-Sun
 
-As the scrum master and UI designer for this project. I ha
+As the scrum master and UI designer for this project. I monitored and engage this project from start to finish. 
 
+For the UI part, I did all the xml page design by myself. And successfully implement various components 
+for Android page view to display. And I code AllEventActivity.java and co-code with Felix and Ricky for 
+all other frond-end Activities in order to accomplish the interface. I also co-code with Caleb and Runyu 
+about couple major method from the back-end code such as DeleteVenuce method and DeleteEvent method in order 
+for the program to successfully running.
+
+For the Scrum part, I will organize daily project meetings and take minutes of the main meetings. 
+During the meetings I will communicate with each group member about their progress. And coordinate the parts 
+that the group members need from other group members in order to complete the day's tasks.
+Because we divided the project into Front-end and Back-end, I'm able to master the code of both parts of the team. 
+And be the bridge between my team member.
+
+Overall, I was deeply involved in the entire production process of this project. 
+My code tied the whole project together and made this final version.
 ```
