@@ -105,8 +105,8 @@ all other frond-end Activities in order to accomplish the interface. I also co-c
 about couple major method from the back-end code such as DeleteVenuce method and DeleteEvent method in order 
 for the program to successfully running.
 
-For the Scrum part, I will organize daily project meetings and take minutes of the main meetings. 
-During the meetings I will communicate with each group member about their progress. And coordinate the parts 
+For the Scrum part, I organize daily project meetings and take minutes of the main meetings. 
+During the meetings I communicate with each group member about their progress. And coordinate the parts 
 that the group members need from other group members in order to complete the day's tasks.
 Because we divided the project into Front-end and Back-end, I'm able to master the code of both parts of the team. 
 And be the bridge between my team member.
