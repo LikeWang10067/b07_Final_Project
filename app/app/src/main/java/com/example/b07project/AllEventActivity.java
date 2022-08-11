@@ -65,7 +65,7 @@ public class AllEventActivity extends AppCompatActivity {
             all_event_view = (TextView) findViewById(R.id.all_event_view);
             if(allevent.size() == 0){
                 Log.d("Size", "0");
-                all_event_view.setText("No Activity Available!");
+                all_event_view.setText("No Event Available at " + venue_name);
             }
             else{
                 Log.d("Size", String.valueOf(allevent.size()));
