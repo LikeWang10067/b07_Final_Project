@@ -28,6 +28,12 @@ There are 2 types of Users, customers and admin.
     Password:   user1 
     
     Sample event that already joined by this user:      
+        Havn't joint any event yet.
+        
+    username:   user2
+    password:   user2
+    
+    Sample event that already joined by this user:      
         NBA event in New York
 
 ### Venue already in database:
